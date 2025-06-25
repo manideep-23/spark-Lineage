@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>com.yourcompany.sparklineage</id>
+    <name>Spark Lineage</name>
+    <version>1.0.0</version>
+    <vendor email="you@example.com" url="https://yourcompany.com">Your Name or Company</vendor>
+
+    <description>
+        Plugin to visualize Spark method lineage by clicking method names.
+    </description>
+
+    <!-- Core IntelliJ dependencies -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <actions>
+        <action id="LineageContextAction"
+                class="com.yourplugin.sparklineageplugin.LineageAction"
+                text="Run Lineage"
+                description="Trigger lineage for selected method">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="EditorCopy"/>
+        </action>
+    </actions>
+
+  <!--  <extensions defaultExtensionNs="com.intellij">
+
+        <lineMarkerProvider language="JAVA" implementationClass="com.yourplugin.sparklineageplugin.MethodLineMarkerProvider"/>
+    </extensions>-->
+</idea-plugin>
