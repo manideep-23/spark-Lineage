@@ -1,0 +1,148 @@
+
+1.Identify and list all source datasets/tables/files the job reads from.
+2.For each dataset,describe the schema and any filters applied on read.
+3.Trace every transformation applied on the datasets, including:
+- Filter, map, select, withColumn, drop,etc.
+- Joins (inner,outer, left,right), explaining join keys and types.
+- Aggregations (groupBy, reduceByKey), with details.
+- Any user-defined functions or custom transformations.
+4.Show how datasets are combined or split during the job.
+5.Identify the final output dataset (s) - where data is written or stored.
+6. Explain the lineage by mapping each output dataset back' to its source datasets and transformations.
+8.Provide code snippets or pseudo-code illustrating each step where applicable.
+9.If multiple Spark stages or actions are present (e.g., cache, checkpoint, repartition), explain their impact on data lineage.
+Summarize the entire data lineage in a
+*Mermaid diagram* format, showing datasets as nodes and transformations (including joins) as edges/arrows.
+10. Highlight any potential data quality or transformation risks observed in the code.
+Additional Rules:
+Use clear, simple language suitable for data engineers familiar with Spark.
+Avoid jargon unless defined.
+Number each step clearly.
+Include Spark code examples to support explanations.
+If the code uses external systems (Hive,
+Delta Lake,
+Kafka, etc.), explain their impact on lineage.
+Mention assumptions if the code is incomplete or ambiguous.
+Please provide the detailed data lineage report as instructed, including the Mermaid diagram for visualization.
+
+
+
+You are an expert PSpark code analyzer and a Mermaid.js diagram generator.
+Your task is to provide a comprehensive and accurate data lineage report for the given Spark code.
+
+Please follow these instructions carefully:
+
+1. Identify source datasets
+List all source datasets / tables / files the job reads from.
+Mention their path or name.
+If possible, describe their schema (or mark as unknown if schema is not in code).
+Describe any filters applied on read (e.g., .filter, .where, .option("filter", ...)).
+
+2. Trace transformations
+For each dataset, list all transformations applied in order:
+filter, map, select, withColumn, drop, etc.
+Joins: type (inner, outer, left, right), join keys, any conditions.
+Aggregations: groupBy, reduceByKey, agg — include group keys and agg functions.
+UDFs or custom logic — include code or pseudo-code.
+For each transformation, show code snippets where possible.
+
+3. Show dataset combinations / splits
+Describe where datasets are joined, unioned, or split into multiple outputs.
+
+4. Identify outputs
+List final output datasets / files / tables.
+Describe where data is written (path, table, format).
+
+5. Lineage mapping
+Map each output dataset back to its source datasets + transformations.
+Clearly trace the flow.
+
+6. Mermaid diagram
+Generate a Mermaid diagram to summarize the lineage:
+Show source datasets as nodes.
+Show transformations as edges/arrows.
+Show joins and splits clearly.
+
+7.Wrap the diagram in ```mermaid code fences so it renders properly.
+
+Example format:
+
+
+```mermaid
+graph TD
+A[Source: customers.csv] --> B[Filter: country = US]
+B --> C[Join: with orders.csv on customer_id]
+C --> D[Output: us_customer_orders.parquet]
+
+8. Additional Spark operations
+- Mention if there are actions like `cache`, `checkpoint`, `repartition`, and how they impact lineage.
+9. Assumptions + unknowns
+- If code is incomplete / ambiguous / missing details:
+  - **Mark details as *unknown*.**
+  - Do not guess values — state explicitly when data is not available.
+
+10. Validation
+- Ensure the **Mermaid diagram matches the transformations described**.
+- Cross-check for consistency before completing the response.
+
+11. Response length guidance
+-If the code is large, first provide a **high-level lineage summary**, then detail each transformation in a second section.
+
+ **IMPORTANT RULES:**  
+- Do not make up dataset names, schemas, or paths if not present in code.  
+- Use clear, simple language suitable for Spark data engineers.  
+- Number your steps clearly.
+- Include pseudo-code or code snippets where helpful.
+
+---
+
+Ready? Please produce the detailed lineage report following the instructions above.
+
+
+
+
+
+
+
++-----------------------+
+|  IntelliJ Plugin UI   | ← user selects method
++-----------------------+
+           |
+           v
++-----------------------+
+| PSI Analyzer (Direct) | ← finds method body + direct calls (same/diff class)
++-----------------------+
+           |
+           +------------------------------+
+           |                              |
+           v                              v
++--------------------+        +-----------------------------+
+| Embedding Request  | -----> | Embedding Service (REST API)|
+| (send selected fn) |        | - Stores vector DB (FAISS)   |
++--------------------+        | - Finds semantically close   |
+           |                  |   methods from any class     |
+           |                  +-----------------------------+
+           v
++------------------------------------------------------------+
+| Final Code Collector                                        |
+| - Selected method                                           |
+| - Directly referenced methods (via PSI)                     |
+| - Top-k semantically similar methods (via embeddings)       |
++------------------------------------------------------------+
+           |
+           v
++------------------------------+
+| LLM Prompt Builder           |
+| - Token optimizer            |
+| - Heuristic filter (comments, naming) |
++------------------------------+
+           |
+           v
++--------------------------+
+| OpenAI/GPT/Claude Call   |
++--------------------------+
+           |
+           v
++--------------------------+
+| IntelliJ UI Output (Tooltip / JavaDoc / Markdown popup) |
++--------------------------+
