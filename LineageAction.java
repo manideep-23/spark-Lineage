@@ -38,7 +38,13 @@ public class LineageAction extends AnAction {
 
         String prompt = PromptBuilder.buildPrompt(fullCode);
         String result = LLMClient.sendPrompt(prompt);
-        System.out.println(" result is : "+ result);
+        System.out.println("first result is : "+ result);
+        String secondPrompt = "This was the previous response:\n\n" + result +
+                "\n\n Mermaid should contain **all the column info** as well. \n" +
+                "Give me detailed columns of each dataset** and **mappings till the final dataset for all. \n"+
+                "Ensure all quotes are escaped, all column mappings are present, and syntax is correct for mermaid.";
+        result=LLMClient.sendPrompt(secondPrompt);
+        System.out.println("second result is : "+ result);
         LineageResultPanel.show(project, result);
     }
 

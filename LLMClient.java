@@ -5,7 +5,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class LLMClient {
 
@@ -39,7 +44,68 @@ public class LLMClient {
     private static final String API_URL = "http://localhost:11434/api/chat";
     private static final String MODEL_ID = "gemma3:4b";
 
+    public static String sendPrompt(String prompt) {
+        try {
+            System.out.println("Sending prompt:\n" + prompt);
+            String escapedPrompt = prompt
+                    .replace("\\", "\\\\") // escape backslashes
+                    .replace("\"", "\\\""); // escape quotes
 
+            System.out.println("Sending escapedPrompt:\n" + escapedPrompt);
+
+            String payload = "{ \"contents\": [ { \"parts\": [ { \"text\": \"" + escapedPrompt + "\" } ] } ] }";
+
+
+           String API_KEY = "AIzaSyAFsYbyXmjJWflfKXFUKXC8ZUGxn6C6hKo";
+            String MODEL = "gemma-3-4b-it";
+            String API_URL =
+                    "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL +
+                            ":generateContent?key=" + API_KEY;
+            URL url = new URL(API_URL);
+            System.out.println("url : "+url);
+            System.out.println("API_URL : "+API_URL);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000000);
+            conn.setReadTimeout(10000000);
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] data = payload.getBytes(StandardCharsets.UTF_8);
+                os.write(data);
+                os.flush();
+            }
+
+            InputStream in = (conn.getResponseCode() < 400) ? conn.getInputStream() : conn.getErrorStream();
+            StringBuilder jsonResponse = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    jsonResponse.append(line);
+                }
+            }
+
+            // Extract only the text from the JSON response
+            System.out.println("jsonResponse : "+jsonResponse);
+
+            JsonObject obj = JsonParser.parseString(jsonResponse.toString()).getAsJsonObject();
+            String text = obj
+                    .getAsJsonArray("candidates").get(0).getAsJsonObject()
+                    .getAsJsonObject("content")
+                    .getAsJsonArray("parts").get(0).getAsJsonObject()
+                    .get("text").getAsString();
+
+            return text;
+
+        } catch (IOException e) {
+            return "Error: " + e.getMessage();
+        }
+    }
+
+
+    /*
     public static String sendPrompt(String prompt) {
         System.out.println("Sending prompt:\n" + prompt);
 
@@ -65,10 +131,12 @@ public class LLMClient {
                 "  \"stream\": false\n" +
                 "}";
 
-        Request request = new Request.Builder()
+     Request request = new Request.Builder()
                 .url(API_URL)
                 .post(RequestBody.create(json, MediaType.parse("application/json")))
                 .build();
+
+
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
@@ -86,7 +154,9 @@ public class LLMClient {
         }
 
         return "LLM Error: No response received.";
-    }
+    } */
+
+
 
     private static String escape(String prompt) {
         return prompt.replace("\\", "\\\\")

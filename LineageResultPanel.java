@@ -32,7 +32,7 @@ public class LineageResultPanel extends DialogWrapper {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(800, 400));
 
-        JButton copyButton = new JButton("Copy Mermaid Diagram");
+       /* JButton copyButton = new JButton("Copy Mermaid Diagram");
         copyButton.addActionListener(e -> {
             String mermaid = extractMermaid(content);
             if (mermaid != null) {
@@ -41,6 +41,18 @@ public class LineageResultPanel extends DialogWrapper {
                 JOptionPane.showMessageDialog(panel, "Mermaid diagram copied to clipboard.");
             } else {
                 JOptionPane.showMessageDialog(panel, "No Mermaid diagram found.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        });*/
+
+        JButton copyButton = new JButton("Copy Mermaid Diagram");
+        copyButton.addActionListener(e -> {
+            String validatedMermaid = MermaidValidator.extractAndRepair(content);
+            if (validatedMermaid != null && !validatedMermaid.isEmpty()) {
+                Toolkit.getDefaultToolkit().getSystemClipboard()
+                        .setContents(new java.awt.datatransfer.StringSelection(validatedMermaid), null);
+                JOptionPane.showMessageDialog(panel, "✅ Validated Mermaid diagram copied to clipboard.");
+            } else {
+                JOptionPane.showMessageDialog(panel, "❌ No valid Mermaid diagram found or repair failed.", "Warning", JOptionPane.WARNING_MESSAGE);
             }
         });
 
