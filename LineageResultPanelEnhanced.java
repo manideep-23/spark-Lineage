@@ -1,0 +1,795 @@
+package com.yourplugin.sparklineageplugin;
+
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.components.JBTabbedPane;
+import com.intellij.util.ui.JBUI;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class LineageResultPanelEnhanced extends DialogWrapper {
+    private String content;
+    private JTextArea mermaidTextArea;
+    private JTextArea descriptionArea;
+    private JEditorPane htmlPreviewPane;
+    private String extractedMermaid;
+    private String extractedDescription;
+    private boolean isEditing = false;
+    private JButton editButton;
+    private JButton saveButton;
+    private JButton cancelButton;
+    private String originalMermaid; // Store original for cancel functionality
+
+    // Modern color scheme
+    private static final Color PRIMARY_COLOR = new Color(34, 139, 34);      // Forest Green
+    private static final Color SECONDARY_COLOR = new Color(25, 118, 210);   // Blue
+    private static final Color ACCENT_COLOR = new Color(255, 87, 34);       // Deep Orange
+    private static final Color BACKGROUND_COLOR = new Color(248, 249, 250); // Light Gray
+    private static final Color CARD_COLOR = new Color(255, 255, 255);       // White
+    private static final Color TEXT_COLOR = new Color(33, 37, 41);          // Dark Gray
+    private static final Color EDIT_COLOR = new Color(255, 193, 7);         // Amber
+    private static final Color SUCCESS_COLOR = new Color(40, 167, 69);      // Success Green
+    private static final Color WARNING_COLOR = new Color(220, 53, 69);      // Warning Red
+
+    protected LineageResultPanelEnhanced(Project project, String content) {
+        super(project);
+        this.content = content;
+        this.extractedMermaid = MermaidValidator.extractAndRepair(content);
+        this.originalMermaid = this.extractedMermaid; // Store original
+        this.extractedDescription = extractDescription(content);
+        init();
+        setTitle("Spark Lineage Report - Data Flow Visualization");
+        setSize(1400, 900);
+    }
+
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(JBUI.Borders.empty(15));
+        mainPanel.setBackground(BACKGROUND_COLOR);
+
+        // Create sidebar with three sections
+        JPanel sidebarPanel = createSidebarPanel();
+
+        // Create main content area with HTML preview
+        JPanel contentPanel = createContentPanel();
+
+        // Split pane for sidebar and content
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setLeftComponent(sidebarPanel);
+        splitPane.setRightComponent(contentPanel);
+        splitPane.setDividerLocation(450);
+        splitPane.setResizeWeight(0.35);
+        splitPane.setBorder(null);
+        splitPane.setBackground(BACKGROUND_COLOR);
+
+        mainPanel.add(splitPane, BorderLayout.CENTER);
+        mainPanel.add(createButtonPanel(), BorderLayout.SOUTH);
+
+        return mainPanel;
+    }
+
+    private JPanel createSidebarPanel() {
+        JPanel sidebarPanel = new JPanel(new BorderLayout());
+        sidebarPanel.setPreferredSize(new Dimension(450, 700));
+        sidebarPanel.setBackground(BACKGROUND_COLOR);
+
+        // Modern title panel
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(PRIMARY_COLOR);
+        titlePanel.setBorder(new EmptyBorder(15, 20, 15, 20));
+
+        JLabel titleLabel = new JLabel("Lineage Analysis Dashboard");
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        titleLabel.setForeground(Color.WHITE);
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+
+        sidebarPanel.add(titlePanel, BorderLayout.NORTH);
+
+        // Create tabbed pane for organized sections
+        JBTabbedPane tabbedPane = new JBTabbedPane();
+        tabbedPane.setBackground(CARD_COLOR);
+        tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        // 1. Mermaid Code Section
+        JPanel mermaidPanel = createMermaidPanel();
+        tabbedPane.addTab("Mermaid Code", mermaidPanel);
+
+        // 2. Description Section
+        JPanel descriptionPanel = createDescriptionPanel();
+        tabbedPane.addTab("Description", descriptionPanel);
+
+        // 3. Raw Output Section
+        JPanel rawPanel = createRawOutputPanel();
+        tabbedPane.addTab("Raw Output", rawPanel);
+
+        sidebarPanel.add(tabbedPane, BorderLayout.CENTER);
+        return sidebarPanel;
+    }
+
+    private JPanel createMermaidPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        panel.setBackground(CARD_COLOR);
+
+        // Header with styled info and edit status
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(232, 245, 233));
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
+
+        JLabel headerLabel = new JLabel("Extracted Mermaid Diagram Code");
+        headerLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        headerLabel.setForeground(PRIMARY_COLOR);
+        headerPanel.add(headerLabel, BorderLayout.WEST);
+
+        // Edit status indicator
+        JLabel editStatusLabel = new JLabel("READ-ONLY");
+        editStatusLabel.setFont(new Font("Segoe UI", Font.BOLD, 10));
+        editStatusLabel.setForeground(new Color(108, 117, 125));
+        headerPanel.add(editStatusLabel, BorderLayout.EAST);
+
+        panel.add(headerPanel, BorderLayout.NORTH);
+
+        // Mermaid text area with modern styling
+        mermaidTextArea = new JTextArea(extractedMermaid != null ? extractedMermaid : "No Mermaid diagram found");
+        mermaidTextArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 11));
+        mermaidTextArea.setLineWrap(true);
+        mermaidTextArea.setWrapStyleWord(true);
+        mermaidTextArea.setEditable(false);
+        mermaidTextArea.setBackground(new Color(248, 249, 250));
+        mermaidTextArea.setForeground(TEXT_COLOR);
+        mermaidTextArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        // Add document listener for real-time validation
+        mermaidTextArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (isEditing) {
+                    validateMermaidSyntax();
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (isEditing) {
+                    validateMermaidSyntax();
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (isEditing) {
+                    validateMermaidSyntax();
+                }
+            }
+        });
+
+        JBScrollPane scrollPane = new JBScrollPane(mermaidTextArea);
+        scrollPane.setPreferredSize(new Dimension(400, 250));
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(222, 226, 230)));
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Edit controls panel
+        JPanel editControlsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        editControlsPanel.setBackground(CARD_COLOR);
+
+        // Edit button
+        editButton = createStyledButton("Edit", EDIT_COLOR);
+        editButton.setToolTipText("Edit Mermaid diagram code");
+        editButton.addActionListener(e -> toggleEditMode());
+        editControlsPanel.add(editButton);
+
+        // Save button (initially hidden)
+        saveButton = createStyledButton("Save", SUCCESS_COLOR);
+        saveButton.setToolTipText("Save changes to Mermaid diagram");
+        saveButton.addActionListener(e -> saveMermaidChanges());
+        saveButton.setVisible(false);
+        editControlsPanel.add(saveButton);
+
+        // Cancel button (initially hidden)
+        cancelButton = createStyledButton("Cancel", WARNING_COLOR);
+        cancelButton.setToolTipText("Cancel editing and revert changes");
+        cancelButton.addActionListener(e -> cancelMermaidEditing());
+        cancelButton.setVisible(false);
+        editControlsPanel.add(cancelButton);
+
+        // Copy button
+        JButton copyCodeBtn = createStyledButton("Copy Code", SECONDARY_COLOR);
+        copyCodeBtn.setToolTipText("Copy Mermaid code to clipboard");
+        copyCodeBtn.addActionListener(e -> copyMermaidToClipboard());
+        editControlsPanel.add(copyCodeBtn);
+
+        // Validation button
+        JButton validateBtn = createStyledButton("Validate", new Color(111, 66, 193));
+        validateBtn.setToolTipText("Validate Mermaid syntax");
+        validateBtn.addActionListener(e -> validateMermaidSyntax());
+        editControlsPanel.add(validateBtn);
+
+        panel.add(editControlsPanel, BorderLayout.SOUTH);
+
+        // Store reference to edit status label for updates
+        panel.putClientProperty("editStatusLabel", editStatusLabel);
+
+        return panel;
+    }
+
+    private void toggleEditMode() {
+        isEditing = !isEditing;
+        mermaidTextArea.setEditable(isEditing);
+
+        // Get the edit status label
+        JLabel editStatusLabel = (JLabel) ((JPanel) mermaidTextArea.getParent().getParent().getParent())
+                .getClientProperty("editStatusLabel");
+
+        if (isEditing) {
+            // Enter edit mode
+            mermaidTextArea.setBackground(Color.WHITE);
+            mermaidTextArea.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(EDIT_COLOR, 2),
+                    new EmptyBorder(8, 8, 8, 8)
+            ));
+            editButton.setText("Editing...");
+            editButton.setBackground(new Color(108, 117, 125));
+            editButton.setEnabled(false);
+            saveButton.setVisible(true);
+            cancelButton.setVisible(true);
+
+            if (editStatusLabel != null) {
+                editStatusLabel.setText("EDITING");
+                editStatusLabel.setForeground(EDIT_COLOR);
+            }
+
+            // Focus on text area
+            mermaidTextArea.requestFocus();
+        } else {
+            // Exit edit mode
+            exitEditMode();
+        }
+
+        // Revalidate the parent panel
+        mermaidTextArea.getParent().getParent().revalidate();
+        mermaidTextArea.getParent().getParent().repaint();
+    }
+
+    private void exitEditMode() {
+        isEditing = false;
+        mermaidTextArea.setEditable(false);
+        mermaidTextArea.setBackground(new Color(248, 249, 250));
+        mermaidTextArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        editButton.setText("Edit");
+        editButton.setBackground(EDIT_COLOR);
+        editButton.setEnabled(true);
+        saveButton.setVisible(false);
+        cancelButton.setVisible(false);
+
+        // Get the edit status label
+        JLabel editStatusLabel = (JLabel) ((JPanel) mermaidTextArea.getParent().getParent().getParent())
+                .getClientProperty("editStatusLabel");
+
+        if (editStatusLabel != null) {
+            editStatusLabel.setText("READ-ONLY");
+            editStatusLabel.setForeground(new Color(108, 117, 125));
+        }
+    }
+
+    private void saveMermaidChanges() {
+        String newMermaidCode = mermaidTextArea.getText().trim();
+
+        if (newMermaidCode.isEmpty()) {
+            JOptionPane.showMessageDialog(getContentPane(),
+                    "Mermaid code cannot be empty.",
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Basic syntax validation
+        if (!isValidMermaidSyntax(newMermaidCode)) {
+            int result = JOptionPane.showConfirmDialog(getContentPane(),
+                    "The Mermaid syntax appears to have issues. Do you want to save anyway?",
+                    "Syntax Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (result != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+
+        // Save the changes
+        extractedMermaid = newMermaidCode;
+        originalMermaid = newMermaidCode; // Update original for future cancels
+
+        // Exit edit mode
+        exitEditMode();
+
+        // Show success message
+        JOptionPane.showMessageDialog(getContentPane(),
+                "Mermaid diagram updated successfully! Click 'Refresh' to see changes in the preview.",
+                "Changes Saved", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void cancelMermaidEditing() {
+        // Revert to original
+        mermaidTextArea.setText(originalMermaid);
+        extractedMermaid = originalMermaid;
+
+        // Exit edit mode
+        exitEditMode();
+
+        JOptionPane.showMessageDialog(getContentPane(),
+                "Changes cancelled. Reverted to original diagram.",
+                "Changes Cancelled", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void validateMermaidSyntax() {
+        String mermaidCode = mermaidTextArea.getText().trim();
+
+        if (mermaidCode.isEmpty()) {
+            return;
+        }
+
+        boolean isValid = isValidMermaidSyntax(mermaidCode);
+
+        // Update border color based on validation
+        if (isEditing) {
+            Color borderColor = isValid ? SUCCESS_COLOR : WARNING_COLOR;
+            mermaidTextArea.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(borderColor, 2),
+                    new EmptyBorder(8, 8, 8, 8)
+            ));
+        }
+    }
+
+    private boolean isValidMermaidSyntax(String mermaidCode) {
+        // Basic Mermaid syntax validation
+        if (mermaidCode == null || mermaidCode.trim().isEmpty()) {
+            return false;
+        }
+
+        // Check for common Mermaid diagram types
+        String[] validTypes = {"graph", "flowchart", "sequenceDiagram", "classDiagram",
+                "stateDiagram", "gantt", "pie", "gitgraph", "erDiagram"};
+
+        String firstLine = mermaidCode.split("\n")[0].trim().toLowerCase();
+
+        for (String type : validTypes) {
+            if (firstLine.startsWith(type.toLowerCase())) {
+                return true;
+            }
+        }
+
+        // If no valid type found, it might still be valid (basic check)
+        return mermaidCode.contains("-->") || mermaidCode.contains("->") ||
+                mermaidCode.contains("---") || mermaidCode.contains("==");
+    }
+
+    private JPanel createDescriptionPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        panel.setBackground(CARD_COLOR);
+
+        // Header
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(227, 242, 253));
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
+
+        JLabel headerLabel = new JLabel("Analysis Description");
+        headerLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        headerLabel.setForeground(SECONDARY_COLOR);
+        headerPanel.add(headerLabel, BorderLayout.CENTER);
+
+        panel.add(headerPanel, BorderLayout.NORTH);
+
+        descriptionArea = new JTextArea(extractedDescription != null ? extractedDescription : "No description available");
+        descriptionArea.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        descriptionArea.setLineWrap(true);
+        descriptionArea.setWrapStyleWord(true);
+        descriptionArea.setEditable(false);
+        descriptionArea.setBackground(new Color(252, 253, 254));
+        descriptionArea.setForeground(TEXT_COLOR);
+        descriptionArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JBScrollPane scrollPane = new JBScrollPane(descriptionArea);
+        scrollPane.setPreferredSize(new Dimension(400, 250));
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(222, 226, 230)));
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    private JPanel createRawOutputPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        panel.setBackground(CARD_COLOR);
+
+        // Header
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(255, 243, 224));
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
+
+        JLabel headerLabel = new JLabel("Complete Raw Output");
+        headerLabel.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        headerLabel.setForeground(ACCENT_COLOR);
+        headerPanel.add(headerLabel, BorderLayout.CENTER);
+
+        panel.add(headerPanel, BorderLayout.NORTH);
+
+        JTextArea rawArea = new JTextArea(content);
+        rawArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 10));
+        rawArea.setLineWrap(true);
+        rawArea.setWrapStyleWord(true);
+        rawArea.setEditable(false);
+        rawArea.setBackground(new Color(245, 245, 245));
+        rawArea.setForeground(TEXT_COLOR);
+        rawArea.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JBScrollPane scrollPane = new JBScrollPane(rawArea);
+        scrollPane.setPreferredSize(new Dimension(400, 250));
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(222, 226, 230)));
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    private JPanel createContentPanel() {
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(BACKGROUND_COLOR);
+
+        // Modern title panel
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(SECONDARY_COLOR);
+        titlePanel.setBorder(new EmptyBorder(15, 20, 15, 20));
+
+        JLabel titleLabel = new JLabel("Diagram Preview");
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        titleLabel.setForeground(Color.WHITE);
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+
+        contentPanel.add(titlePanel, BorderLayout.NORTH);
+
+        // HTML preview pane with modern styling
+        htmlPreviewPane = new JEditorPane("text/html", generateHtmlContent());
+        htmlPreviewPane.setEditable(false);
+        htmlPreviewPane.setBackground(Color.WHITE);
+        htmlPreviewPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JBScrollPane htmlScrollPane = new JBScrollPane(htmlPreviewPane);
+        htmlScrollPane.setPreferredSize(new Dimension(700, 600));
+        htmlScrollPane.setBorder(BorderFactory.createLineBorder(new Color(222, 226, 230)));
+        htmlScrollPane.setBackground(CARD_COLOR);
+
+        JPanel previewContainer = new JPanel(new BorderLayout());
+        previewContainer.setBackground(CARD_COLOR);
+        previewContainer.setBorder(new EmptyBorder(15, 15, 15, 15));
+        previewContainer.add(htmlScrollPane, BorderLayout.CENTER);
+
+        contentPanel.add(previewContainer, BorderLayout.CENTER);
+
+        // Preview controls
+        JPanel previewControls = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 10));
+        previewControls.setBackground(CARD_COLOR);
+
+        JButton refreshBtn = createStyledButton("Refresh", PRIMARY_COLOR);
+        refreshBtn.setToolTipText("Refresh preview with current Mermaid code");
+        refreshBtn.addActionListener(e -> refreshPreview());
+        previewControls.add(refreshBtn);
+
+        contentPanel.add(previewControls, BorderLayout.SOUTH);
+        return contentPanel;
+    }
+
+    private JPanel createButtonPanel() {
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        buttonPanel.setBackground(BACKGROUND_COLOR);
+        buttonPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(222, 226, 230)),
+                new EmptyBorder(10, 10, 10, 10)
+        ));
+
+        JButton exportHtmlBtn = createStyledButton("Export HTML", PRIMARY_COLOR);
+        exportHtmlBtn.setToolTipText("Export diagram as HTML file");
+        exportHtmlBtn.addActionListener(e -> exportToHtml());
+
+        JButton copyMermaidBtn = createStyledButton("Copy Mermaid", SECONDARY_COLOR);
+        copyMermaidBtn.setToolTipText("Copy current Mermaid code");
+        copyMermaidBtn.addActionListener(e -> copyMermaidToClipboard());
+
+        JButton openInBrowserBtn = createStyledButton("Open in Browser", ACCENT_COLOR);
+        openInBrowserBtn.setToolTipText("Open diagram in default browser");
+        openInBrowserBtn.addActionListener(e -> openInBrowser());
+
+        buttonPanel.add(exportHtmlBtn);
+        buttonPanel.add(copyMermaidBtn);
+        buttonPanel.add(openInBrowserBtn);
+
+        return buttonPanel;
+    }
+
+    private JButton createStyledButton(String text, Color color) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Add hover effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                if (button.isEnabled()) {
+                    button.setBackground(color.darker());
+                }
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                if (button.isEnabled()) {
+                    button.setBackground(color);
+                }
+            }
+        });
+
+        return button;
+    }
+
+    private String generateHtmlContent() {
+        if (extractedMermaid == null || extractedMermaid.isEmpty()) {
+            return "<html><body style='font-family: Segoe UI, Arial, sans-serif; padding: 30px; text-align: center; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh;'>" +
+                    "<div style='background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto;'>" +
+                    "<h2 style='color: #d32f2f; margin-bottom: 20px;'>No Mermaid Diagram Found</h2>" +
+                    "<p style='color: #666; line-height: 1.6;'>Unable to extract or validate Mermaid diagram from the content.</p>" +
+                    "</div></body></html>";
+        }
+        //String string1 = "```mermaid";
+        // String string3 = "```";
+        //String finalMermaid = string1 + "\n" + extractedMermaid + "\n" + string3;
+
+        //extractedMermaid=finalMermaid;
+
+        String result = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <title>Spark Lineage Diagram</title>\n" +
+                "    <script src=\"https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js\"></script>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n" +
+                "            margin: 0;\n" +
+                "            padding: 0;\n" +
+                "            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n" +
+                "            min-height: 100vh;\n" +
+                "            display: flex;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "        }\n" +
+                "        .container {\n" +
+                "            width: 95%;\n" +
+                "            max-width: 1400px;\n" +
+                "            background: white;\n" +
+                "            border-radius: 20px;\n" +
+                "            box-shadow: 0 20px 40px rgba(0,0,0,0.1);\n" +
+                "            overflow: hidden;\n" +
+                "            animation: slideIn 0.6s ease-out;\n" +
+                "        }\n" +
+                "        @keyframes slideIn {\n" +
+                "            from { opacity: 0; transform: translateY(30px); }\n" +
+                "            to { opacity: 1; transform: translateY(0); }\n" +
+                "        }\n" +
+                "        .header {\n" +
+                "            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);\n" +
+                "            color: white;\n" +
+                "            padding: 30px;\n" +
+                "            text-align: center;\n" +
+                "            position: relative;\n" +
+                "            overflow: hidden;\n" +
+                "        }\n" +
+                "        .header::before {\n" +
+                "            content: '';\n" +
+                "            position: absolute;\n" +
+                "            top: 0;\n" +
+                "            left: -100%;\n" +
+                "            width: 100%;\n" +
+                "            height: 100%;\n" +
+                "            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);\n" +
+                "            animation: shimmer 2s infinite;\n" +
+                "        }\n" +
+                "        @keyframes shimmer {\n" +
+                "            0% { left: -100%; }\n" +
+                "            100% { left: 100%; }\n" +
+                "        }\n" +
+                "        .header h1 {\n" +
+                "            margin: 0;\n" +
+                "            font-size: 2.5em;\n" +
+                "            font-weight: 700;\n" +
+                "            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);\n" +
+                "        }\n" +
+                "        .header p {\n" +
+                "            margin: 10px 0 0 0;\n" +
+                "            font-size: 1.1em;\n" +
+                "            opacity: 0.9;\n" +
+                "        }\n" +
+                "        .content {\n" +
+                "            padding: 40px;\n" +
+                "            text-align: center;\n" +
+                "            background: #fafafa;\n" +
+                "        }\n" +
+                "        .mermaid {\n" +
+                "            background: white;\n" +
+                "            border-radius: 15px;\n" +
+                "            padding: 30px;\n" +
+                "            margin: 30px 0;\n" +
+                "            box-shadow: 0 8px 25px rgba(0,0,0,0.1);\n" +
+                "            border: 1px solid #e0e0e0;\n" +
+                "            transition: transform 0.3s ease;\n" +
+                "        }\n" +
+                "        .mermaid:hover {\n" +
+                "            transform: translateY(-5px);\n" +
+                "            box-shadow: 0 15px 35px rgba(0,0,0,0.15);\n" +
+                "        }\n" +
+                "        .info {\n" +
+                "            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);\n" +
+                "            border-left: 5px solid #2196F3;\n" +
+                "            padding: 20px;\n" +
+                "            margin: 30px 0;\n" +
+                "            border-radius: 0 15px 15px 0;\n" +
+                "            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);\n" +
+                "        }\n" +
+                "        .info strong {\n" +
+                "            color: #1976D2;\n" +
+                "            font-weight: 600;\n" +
+                "        }\n" +
+                "        .footer {\n" +
+                "            background: #f5f5f5;\n" +
+                "            padding: 20px;\n" +
+                "            text-align: center;\n" +
+                "            color: #666;\n" +
+                "            font-size: 0.9em;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <div class=\"container\">\n" +
+                "        <div class=\"header\">\n" +
+                "            <h1>Spark Data Lineage Visualization</h1>\n" +
+                "            <p>Interactive diagram showing data flow and transformations</p>\n" +
+                "        </div>\n" +
+                "        <div class=\"content\">\n" +
+                "            <div class=\"info\">\n" +
+                "                <strong>Analysis Tip:</strong> This diagram shows the complete data lineage flow. " +
+                "Hover over elements for more details and click to explore connections.\n" +
+                "            </div>\n" +
+                "            <div class=\"mermaid\">\n" +
+                extractedMermaid + "\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"footer\">\n" +
+                "            Generated by Spark Lineage Plugin - Data Flow Analysis Tool\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "    <script>\n" +
+                "        mermaid.initialize({ \n" +
+                "            startOnLoad: true,\n" +
+                "            theme: 'default',\n" +
+                "            themeVariables: {\n" +
+                "                primaryColor: '#4CAF50',\n" +
+                "                primaryTextColor: '#333',\n" +
+                "                primaryBorderColor: '#2196F3',\n" +
+                "                lineColor: '#666',\n" +
+                "                secondaryColor: '#f8f9fa',\n" +
+                "                tertiaryColor: '#e3f2fd',\n" +
+                "                background: '#ffffff',\n" +
+                "                mainBkg: '#ffffff',\n" +
+                "                secondaryBkg: '#f0f0f0'\n" +
+                "            },\n" +
+                "            flowchart: {\n" +
+                "                useMaxWidth: true,\n" +
+                "                htmlLabels: true\n" +
+                "            }\n" +
+                "        });\n" +
+                "    </script>\n" +
+                "</body>\n" +
+                "</html>";
+
+        return result;
+    }
+
+    private void refreshPreview() {
+        htmlPreviewPane.setText(generateHtmlContent());
+        htmlPreviewPane.revalidate();
+        htmlPreviewPane.repaint();
+    }
+
+    private void copyMermaidToClipboard() {
+        if (extractedMermaid != null && !extractedMermaid.isEmpty()) {
+            Toolkit.getDefaultToolkit().getSystemClipboard()
+                    .setContents(new java.awt.datatransfer.StringSelection(extractedMermaid), null);
+            JOptionPane.showMessageDialog(getContentPane(),
+                    "Validated Mermaid diagram copied to clipboard!",
+                    "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(getContentPane(),
+                    "No valid Mermaid diagram found or repair failed.",
+                    "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void exportToHtml() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Export Lineage Diagram");
+        fileChooser.setSelectedFile(new File("spark_lineage_diagram.html"));
+
+        int result = fileChooser.showSaveDialog(getContentPane());
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(generateHtmlContent());
+                JOptionPane.showMessageDialog(getContentPane(),
+                        "HTML file exported successfully to: " + file.getAbsolutePath(),
+                        "Export Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(getContentPane(),
+                        "Error exporting file: " + e.getMessage(),
+                        "Export Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void openInBrowser() {
+        try {
+            File tempFile = File.createTempFile("spark_lineage_", ".html");
+            tempFile.deleteOnExit();
+
+            try (FileWriter writer = new FileWriter(tempFile)) {
+                writer.write(generateHtmlContent());
+            }
+
+            Desktop.getDesktop().browse(tempFile.toURI());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(getContentPane(),
+                    "Error opening in browser: " + e.getMessage(),
+                    "Browser Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private String extractDescription(String text) {
+        // Extract description from the content (customize based on your format)
+        String[] lines = text.split("\n");
+        StringBuilder description = new StringBuilder();
+        boolean inDescription = false;
+
+        for (String line : lines) {
+            if (line.toLowerCase().contains("description:") ||
+                    line.toLowerCase().contains("analysis:") ||
+                    line.toLowerCase().contains("summary:")) {
+                inDescription = true;
+                continue;
+            }
+            if (inDescription && !line.trim().isEmpty() && !line.contains("```")) {
+                description.append(line).append("\n");
+                if (description.length() > 500) break; // Limit description length
+            }
+        }
+
+        return description.toString().trim();
+    }
+
+    public static void show(Project project, String result) {
+        LineageResultPanelEnhanced panel = new LineageResultPanelEnhanced(project, result);
+        panel.show();
+    }
+}
+
