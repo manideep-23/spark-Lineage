@@ -1,0 +1,99 @@
+        return "        * {\n" +
+                "            margin: 0;\n" +
+                "            padding: 0;\n" +
+                "            box-sizing: border-box;\n" +
+                "        }\n" +
+                "        body {\n" +
+                "            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n" +
+                "            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n" +
+                "            min-height: 100vh;\n" +
+                "            display: flex;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "            padding: 20px;\n" +
+                "        }\n" +
+                "        .enterprise-container {\n" +
+                "            width: 100%;\n" +
+                "            max-width: 1400px;\n" +
+                "            background: #ffffff;\n" +
+                "            border-radius: 12px;\n" +
+                "            box-shadow: 0 20px 40px rgba(0,0,0,0.1);\n" +
+                "            overflow: hidden;\n" +
+                "            padding: 30px;\n" +
+                "        }\n" +
+                "        .diagram-header {\n" +
+                "            display: flex;\n" +
+                "            justify-content: space-between;\n" +
+                "            align-items: center;\n" +
+                "            margin-bottom: 20px;\n" +
+                "        }\n" +
+                "        .diagram-header h1 {\n" +
+                "            font-size: 24px;\n" +
+                "            color: #333;\n" +
+                "        }\n" +
+                "        .header-info {\n" +
+                "            display: flex;\n" +
+                "            gap: 10px;\n" +
+                "        }\n" +
+                "        .badge {\n" +
+                "            background-color: #1976d2;\n" +
+                "            color: white;\n" +
+                "            padding: 6px 12px;\n" +
+                "            border-radius: 20px;\n" +
+                "            font-size: 12px;\n" +
+                "        }\n" +
+                "        .badge.secondary {\n" +
+                "            background-color: #607d8b;\n" +
+                "        }\n" +
+                "        .diagram-container {\n" +
+                "            background-color: #f5f5f5;\n" +
+                "            padding: 20px;\n" +
+                "            border-radius: 8px;\n" +
+                "        }\n" +
+                "        .diagram-footer {\n" +
+                "            text-align: center;\n" +
+                "            margin-top: 20px;\n" +
+                "            font-size: 12px;\n" +
+                "            color: #888;\n" +
+                "        }";
+
+
+
+    private String generateProfessionalMermaidConfig() {
+        return "mermaid.initialize({\n" +
+               "  startOnLoad: true,\n" +
+               "  theme: 'default',\n" +
+               "  flowchart: { useMaxWidth: true },\n" +
+               "  securityLevel: 'loose'\n" +
+               "});";
+    }
+
+
+    private void exportToHtml() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Export Mermaid Diagram as HTML");
+        fileChooser.setSelectedFile(new File("lineage_diagram.html"));
+
+        int userSelection = fileChooser.showSaveDialog(getContentPane());
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try (FileWriter writer = new FileWriter(fileToSave)) {
+                writer.write(generateEnhancedHtmlContent());
+                showProfessionalMessage("Export Successful", "Diagram exported to:\n" + fileToSave.getAbsolutePath(), JOptionPane.INFORMATION_MESSAGE);
+                updateStatus("Diagram exported successfully", SUCCESS_COLOR);
+            } catch (IOException ex) {
+                showProfessionalMessage("Export Failed", "Could not write file:\n" + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+                updateStatus("Export failed", ERROR_COLOR);
+            }
+        }
+    }
+
+
+    private String extractDescription(String content) {
+        Pattern pattern = Pattern.compile("(?s)###\\s*Description\\s*[:\\-]*\\s*(.*?)\\n(?:###|$)");
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            return matcher.group(1).trim();
+        }
+        return "No description available.";
+    }
