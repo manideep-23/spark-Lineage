@@ -62,3 +62,66 @@ action/services
                 //}
             }
         }
+
+
+
+
+
+public static String getPrompt(String javaVersion,
+                                   String sparkVersion,
+                                   String mockitoVersion,
+                                   String language,
+                                   String framework,
+                                   String fullCode,
+                                   String className,
+                                   String TestClassName,
+                                   String packageName
+                                   )
+    {
+
+
+        String javaSparkPrompt = "You are a highly experienced software engineer with 30+ years of professional background at Google and Microsoft. You are an expert in Java and Apache Spark.\n" +
+                "\n" +
+                "I will provide you a block of Java code containing a method chain starting from an entry point method, with all dependent methods concatenated. Your job is to:\n" +
+                "\n" +
+                "---\n" +
+                "\n" +
+                " Objective:\n" +
+                "- Generate high-quality, production-ready unit tests using JUnit \n" +
+                "- Use SharedJavaSparkContext to test Spark logic like transformations, actions, and Dataset operations.\n" +
+                "- Use the specified mocking library version .\n" +
+                "- Do not assume or invent logic – test only what's explicitly visible.\n" +
+                "create @Before and @After and create spark session in @Before "+
+                "Aslo put @RunWith on top top of class if supported syntactically"+
+
+                "\n" +
+                "---\n" +
+                "\n" +
+                " Constraints:\n" +
+                "- Java version: "+javaVersion+"\n" +
+                "- Spark version: "+sparkVersion+"\n" +
+                "- Mockito version:"+mockitoVersion+"\n" +
+                "\n" +
+                " Input:\n" +
+                "```java\n" +
+                fullCode+
+                "\n" +
+                "```\n" +
+                "\n" +
+                " Return only:\n" +
+                "- A complete unit test class with mocking and Spark setup\n" +
+               "Also return entire java unit test ```java code ```"+"\n" +
+                "Generate TestClassName as : " +TestClassName+
+                "Generate Test package is : "+packageName
+                ;
+
+        if(language.equalsIgnoreCase("Java") && framework.equalsIgnoreCase("Java-Spark"))
+        {
+
+            return javaSparkPrompt;
+        }
+
+      return javaSparkPrompt;
+
+    }
+
