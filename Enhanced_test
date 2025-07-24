@@ -1,0 +1,64 @@
+Other extra plugin.xml
+action/services
+
+<action id="TestContextAction"
+                class="com.yourplugin.sparklineageplugin.LineageAction"
+                text="Generate Test"
+                description="Trigger lineage for selected method">
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="LineageContextAction"/>
+        </action>
+        <action id="ShowSettingsDialogAction"
+                class="com.yourplugin.sparklineageplugin.ShowSettingsDialogAction"
+                text="Unit Test Settings"
+                description="Edit Unit Test generation settings">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.yourplugin.sparklineageplugin.settings.UnitTestSettingsState"/>
+    </extensions>
+
+
+ if(actionContext.equalsIgnoreCase("Generate Test")) {
+
+            System.out.println("Inside Generate Test");
+            if (psiFile instanceof PsiJavaFile && project != null) {
+
+                PsiClass psiClass = PsiTreeUtil.getParentOfType(element, PsiClass.class);
+
+                //  PsiClass[] classes = ((PsiJavaFile) file).getClasses();
+                //if (classes.length > 0) {
+                //PsiClass targetClass = classes[0];
+                // String classCode = targetClass.getText();
+
+                UnitTestSettingsDialog dialog = new UnitTestSettingsDialog();
+                if (!dialog.showAndGet()) return;
+
+                UnitTestSettingsState settings = dialog.getVersionSettings();
+                String fullCode = new SparkCodeCollector().collectFullMethodContext(method);
+
+                if (fullCode == null || fullCode.isEmpty()) {
+                    Messages.showErrorDialog("Could not collect method context.", "Collection Failed");
+                    return;
+                }
+
+                String className = psiClass.getName();
+                String testClassName = className + "Test";
+                String packageName = ((PsiJavaFile) psiFile).getPackageName();
+                String promptBuilder = PromptBuilder.getPrompt(settings.javaVersion,
+                        settings.sparkVersion, settings.mockitoVersion, settings.language,
+                        settings.framework, fullCode, className, testClassName, packageName);
+
+                String result = LLMClient.sendPrompt(promptBuilder);
+                System.out.println(result);
+                String TestCodeGenerated=CodeExtractor.extractJavaCode(result);
+                WriteCommandAction.runWriteCommandAction(project, () -> {
+                    String path = TestFileWriter.writeTestFile(project, psiFile, packageName, testClassName, TestCodeGenerated);
+                    Messages.showInfoMessage("JUnit Java file created at location:\n" + path, "Unit Test Generated");
+                });
+
+                return;
+                //}
+            }
+        }
