@@ -1,0 +1,78 @@
+package com.yourplugin.sparklineageplugin.settings;
+
+import com.intellij.openapi.components.*;
+
+@State(
+        name = "UnitTestSettingsState",
+        storages = {@Storage("UnitTestSettings.xml")}
+)
+public class UnitTestSettingsState implements PersistentStateComponent<UnitTestSettingsState> {
+
+    // Enums for type safety
+    public enum Language { JAVA, SCALA }
+    public enum Framework { NONE, SPARK, SPRING_BOOT, SPARK_WITH_SPRING }
+    public enum TestFramework { JUNIT, TESTNG }
+
+    // Settings with default values
+    public Language language = Language.JAVA;
+    public String languageVersion = "11";
+    public Framework framework = Framework.SPARK;
+    public String sparkVersion = "3.4.0";
+    public String springBootVersion = "3.2.0";
+    public TestFramework testFramework = TestFramework.JUNIT;
+    public String mockitoVersion = "4.11.0";
+    public String testFrameworkVersion = "5.9.2";
+
+    public static UnitTestSettingsState getInstance() {
+        return ServiceManager.getService(UnitTestSettingsState.class);
+    }
+
+    @Override
+    public UnitTestSettingsState getState() {
+        return this;
+    }
+
+   /* @Override
+    public void loadState(UnitTestSettingsState state) {
+        this.language = state.language;
+        this.languageVersion = state.languageVersion;
+        this.framework = state.framework;
+        this.sparkVersion = state.sparkVersion;
+        this.springBootVersion = state.springBootVersion;
+        this.testFramework = state.testFramework;
+        this.mockitoVersion = state.mockitoVersion;
+        this.testFrameworkVersion = state.testFrameworkVersion;
+    }*/
+   @Override
+   public void loadState(UnitTestSettingsState state) {
+       this.language = state.language != null ? state.language : Language.JAVA;
+       this.languageVersion = state.languageVersion != null ? state.languageVersion : "11";
+       this.framework = state.framework != null ? state.framework : Framework.SPARK;
+       this.sparkVersion = state.sparkVersion != null ? state.sparkVersion : "3.4.0";
+       this.springBootVersion = state.springBootVersion != null ? state.springBootVersion : "3.2.0";
+       this.testFramework = state.testFramework != null ? state.testFramework : TestFramework.JUNIT;
+       this.mockitoVersion = state.mockitoVersion != null ? state.mockitoVersion : "4.11.0";
+       this.testFrameworkVersion = state.testFrameworkVersion != null ? state.testFrameworkVersion : "5.9.2";
+   }
+
+
+
+    // Helper methods for UI display
+    public String getLanguageDisplayName() {
+        return language.toString().charAt(0) + language.toString().substring(1).toLowerCase();
+    }
+
+    public String getFrameworkDisplayName() {
+        switch (framework) {
+            case NONE: return "Pure " + getLanguageDisplayName();
+            case SPARK: return getLanguageDisplayName() + " + Spark";
+            case SPRING_BOOT: return getLanguageDisplayName() + " + Spring Boot";
+            case SPARK_WITH_SPRING: return getLanguageDisplayName() + " + Spark + Spring Boot";
+            default: return framework.toString();
+        }
+    }
+
+    public String getTestFrameworkDisplayName() {
+        return testFramework.toString().charAt(0) + testFramework.toString().substring(1).toLowerCase();
+    }
+}
