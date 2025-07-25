@@ -1,0 +1,35 @@
+package com.yourplugin.sparklineageplugin;
+
+import com.yourplugin.sparklineageplugin.settings.UnitTestSettingsState;
+import com.yourplugin.sparklineageplugin.ui.UnitTestSettingsDialog;
+import com.intellij.openapi.actionSystem.*;
+
+public class ShowSettingsDialogAction extends AnAction {
+
+    @Override
+    public void actionPerformed(AnActionEvent e) {
+        UnitTestSettingsDialog dialog = new UnitTestSettingsDialog();
+        
+        if (dialog.showAndGet()) {
+            // Settings are automatically saved in doOKAction()
+            UnitTestSettingsState settings = UnitTestSettingsState.getInstance();
+            
+            // Optional: Show confirmation or perform additional actions
+            System.out.println("Configuration updated:");
+            System.out.println("Language: " + settings.getLanguageDisplayName() + " " + settings.languageVersion);
+            System.out.println("Framework: " + settings.getFrameworkDisplayName());
+            System.out.println("Test Framework: " + settings.getTestFrameworkDisplayName() + " " + settings.testFrameworkVersion);
+            System.out.println("Mockito: " + settings.mockitoVersion);
+            
+            if (settings.framework == UnitTestSettingsState.Framework.SPARK || 
+                settings.framework == UnitTestSettingsState.Framework.SPARK_WITH_SPRING) {
+                System.out.println("Spark Version: " + settings.sparkVersion);
+            }
+            
+            if (settings.framework == UnitTestSettingsState.Framework.SPRING_BOOT || 
+                settings.framework == UnitTestSettingsState.Framework.SPARK_WITH_SPRING) {
+                System.out.println("Spring Boot Version: " + settings.springBootVersion);
+            }
+        }
+    }
+}
