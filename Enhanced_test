@@ -125,3 +125,23 @@ public static String getPrompt(String javaVersion,
 
     }
 
+
+
+
+
+
+               UnitTestSettingsState settings = dialog.getSettings();
+
+
+
+
+
+
+  DynamicTestPromptGenerator.TestConfig  testConfig=new DynamicTestPromptGenerator.
+                        TestConfig(settings.language,settings.languageVersion,
+                        settings.framework,settings.sparkVersion
+                        ,settings.springBootVersion,settings.testFramework,
+                        settings.mockitoVersion, settings.testFrameworkVersion,packageName,testClassName,fullCode);
+
+                String promptBuilderGeneric=DynamicTestPromptGenerator.generatePrompt(testConfig);
+                System.out.println("promptBuilderGeneric : "+promptBuilderGeneric);
