@@ -1,0 +1,303 @@
+package com.yourplugin.sparklineageplugin.ui;
+
+import com.intellij.openapi.ui.DialogWrapper;
+import com.yourplugin.sparklineageplugin.settings.UnitTestSettingsState;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
+public class UnitTestSettingsDialog extends DialogWrapper {
+    
+    private UnitTestSettingsState state;
+    private JPanel contentPane;
+    
+    // UI Components
+    private JComboBox<String> languageCombo;
+    private JComboBox<String> languageVersionCombo;
+    private JComboBox<String> frameworkCombo;
+    private JComboBox<String> sparkVersionCombo;
+    private JComboBox<String> springBootVersionCombo;
+    private JComboBox<String> testFrameworkCombo;
+    private JComboBox<String> mockitoVersionCombo;
+    private JComboBox<String> testFrameworkVersionCombo;
+    
+    // Labels for conditional visibility
+    private JLabel sparkVersionLabel;
+    private JLabel springBootVersionLabel;
+
+    // Version mappings
+    private final Map<String, String[]> javaVersions = new HashMap<String, String[]>() {{
+        put("Java", new String[]{"8", "11", "17", "21"});
+        put("Scala", new String[]{"2.12", "2.13", "3.0", "3.3"});
+    }};
+
+    private final String[] sparkVersions = {"2.4.8", "3.1.2", "3.3.2", "3.4.0", "3.5.0"};
+    private final String[] springBootVersions = {"2.7.0", "3.0.0", "3.1.0", "3.2.0"};
+    private final String[] mockitoVersions = {"3.12.4", "4.6.1", "4.11.0", "5.1.0"};
+    
+    private final Map<String, String[]> testFrameworkVersions = new HashMap<String, String[]>() {{
+        put("JUnit", new String[]{"4.13.2", "5.8.2", "5.9.2", "5.10.0"});
+        put("TestNG", new String[]{"6.14.3", "7.7.0", "7.8.0"});
+    }};
+
+    public UnitTestSettingsDialog() {
+        super(true);
+        setTitle("Unit Test Configuration");
+        
+        state = UnitTestSettingsState.getInstance();
+        if (state == null) {
+            state = new UnitTestSettingsState();
+        }
+        
+        initUI();
+        setupEventListeners();
+        loadCurrentSettings();
+        updateVisibility();
+        
+        init();
+    }
+
+    private void initUI() {
+        contentPane = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        int row = 0;
+
+        // Language Selection
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Language:"), gbc);
+        gbc.gridx = 1;
+        languageCombo = new JComboBox<>(new String[]{"Java", "Scala"});
+        contentPane.add(languageCombo, gbc);
+
+        // Language Version
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Language Version:"), gbc);
+        gbc.gridx = 1;
+        languageVersionCombo = new JComboBox<>();
+        contentPane.add(languageVersionCombo, gbc);
+
+        // Framework Selection
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Framework:"), gbc);
+        gbc.gridx = 1;
+        frameworkCombo = new JComboBox<>(new String[]{
+            "Pure Language", "Spark", "Spring Boot", "Spark + Spring Boot"
+        });
+        contentPane.add(frameworkCombo, gbc);
+
+        // Spark Version (conditional)
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        sparkVersionLabel = new JLabel("Spark Version:");
+        contentPane.add(sparkVersionLabel, gbc);
+        gbc.gridx = 1;
+        sparkVersionCombo = new JComboBox<>(sparkVersions);
+        contentPane.add(sparkVersionCombo, gbc);
+
+        // Spring Boot Version (conditional)
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        springBootVersionLabel = new JLabel("Spring Boot Version:");
+        contentPane.add(springBootVersionLabel, gbc);
+        gbc.gridx = 1;
+        springBootVersionCombo = new JComboBox<>(springBootVersions);
+        contentPane.add(springBootVersionCombo, gbc);
+
+        // Test Framework
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Test Framework:"), gbc);
+        gbc.gridx = 1;
+        testFrameworkCombo = new JComboBox<>(new String[]{"JUnit", "TestNG"});
+        contentPane.add(testFrameworkCombo, gbc);
+
+        // Test Framework Version
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Test Framework Version:"), gbc);
+        gbc.gridx = 1;
+        testFrameworkVersionCombo = new JComboBox<>();
+        contentPane.add(testFrameworkVersionCombo, gbc);
+
+        // Mockito Version
+        row++;
+        gbc.gridx = 0; gbc.gridy = row;
+        contentPane.add(new JLabel("Mockito Version:"), gbc);
+        gbc.gridx = 1;
+        mockitoVersionCombo = new JComboBox<>(mockitoVersions);
+        contentPane.add(mockitoVersionCombo, gbc);
+    }
+
+    private void setupEventListeners() {
+        // Language change listener
+        languageCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateLanguageVersions();
+            }
+        });
+
+        // Framework change listener
+        frameworkCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateVisibility();
+            }
+        });
+
+        // Test Framework change listener
+        testFrameworkCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTestFrameworkVersions();
+            }
+        });
+    }
+
+    private void updateLanguageVersions() {
+        String selectedLanguage = (String) languageCombo.getSelectedItem();
+        String[] versions = javaVersions.get(selectedLanguage);
+        
+        languageVersionCombo.removeAllItems();
+        for (String version : versions) {
+            languageVersionCombo.addItem(version);
+        }
+    }
+
+    private void updateTestFrameworkVersions() {
+        String selectedFramework = (String) testFrameworkCombo.getSelectedItem();
+        String[] versions = testFrameworkVersions.get(selectedFramework);
+        
+        testFrameworkVersionCombo.removeAllItems();
+        for (String version : versions) {
+            testFrameworkVersionCombo.addItem(version);
+        }
+    }
+
+    private void updateVisibility() {
+        String selectedFramework = (String) frameworkCombo.getSelectedItem();
+        boolean showSpark = selectedFramework.contains("Spark");
+        boolean showSpringBoot = selectedFramework.contains("Spring Boot");
+
+        sparkVersionLabel.setVisible(showSpark);
+        sparkVersionCombo.setVisible(showSpark);
+        springBootVersionLabel.setVisible(showSpringBoot);
+        springBootVersionCombo.setVisible(showSpringBoot);
+
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+
+    private void loadCurrentSettings() {
+        // Load language
+        languageCombo.setSelectedItem(state.getLanguageDisplayName());
+        updateLanguageVersions();
+        languageVersionCombo.setSelectedItem(state.languageVersion);
+
+        // Load framework
+        frameworkCombo.setSelectedItem(getFrameworkDisplayText(state.framework));
+        
+        // Load versions
+        sparkVersionCombo.setSelectedItem(state.sparkVersion);
+        springBootVersionCombo.setSelectedItem(state.springBootVersion);
+        testFrameworkCombo.setSelectedItem(state.getTestFrameworkDisplayName());
+        updateTestFrameworkVersions();
+        testFrameworkVersionCombo.setSelectedItem(state.testFrameworkVersion);
+        mockitoVersionCombo.setSelectedItem(state.mockitoVersion);
+    }
+
+    private String getFrameworkDisplayText(UnitTestSettingsState.Framework framework) {
+        switch (framework) {
+            case NONE: return "Pure Language";
+            case SPARK: return "Spark";
+            case SPRING_BOOT: return "Spring Boot";
+            case SPARK_WITH_SPRING: return "Spark + Spring Boot";
+            default: return "Pure Language";
+        }
+    }
+
+    private UnitTestSettingsState.Framework getFrameworkFromDisplayText(String displayText) {
+        switch (displayText) {
+            case "Pure Language": return UnitTestSettingsState.Framework.NONE;
+            case "Spark": return UnitTestSettingsState.Framework.SPARK;
+            case "Spring Boot": return UnitTestSettingsState.Framework.SPRING_BOOT;
+            case "Spark + Spring Boot": return UnitTestSettingsState.Framework.SPARK_WITH_SPRING;
+            default: return UnitTestSettingsState.Framework.NONE;
+        }
+    }
+
+    @Override
+    protected @Nullable JComponent createCenterPanel() {
+        return contentPane;
+    }
+
+    @Override
+    protected void doOKAction() {
+        // Save settings to state
+        String selectedLanguage = (String) languageCombo.getSelectedItem();
+        state.language = selectedLanguage.equals("Java") ? 
+            UnitTestSettingsState.Language.JAVA : UnitTestSettingsState.Language.SCALA;
+        
+        state.languageVersion = (String) languageVersionCombo.getSelectedItem();
+        state.framework = getFrameworkFromDisplayText((String) frameworkCombo.getSelectedItem());
+        state.sparkVersion = (String) sparkVersionCombo.getSelectedItem();
+        state.springBootVersion = (String) springBootVersionCombo.getSelectedItem();
+        
+        String selectedTestFramework = (String) testFrameworkCombo.getSelectedItem();
+        state.testFramework = selectedTestFramework.equals("JUnit") ? 
+            UnitTestSettingsState.TestFramework.JUNIT : UnitTestSettingsState.TestFramework.TESTNG;
+        
+        state.testFrameworkVersion = (String) testFrameworkVersionCombo.getSelectedItem();
+        state.mockitoVersion = (String) mockitoVersionCombo.getSelectedItem();
+
+        System.out.println("Settings saved: " + state.getFrameworkDisplayName());
+        super.doOKAction();
+    }
+
+    // Getter methods for backward compatibility and external access
+    public UnitTestSettingsState getSettings() {
+        return state;
+    }
+
+    public String getLanguage() {
+        return (String) languageCombo.getSelectedItem();
+    }
+
+    public String getLanguageVersion() {
+        return (String) languageVersionCombo.getSelectedItem();
+    }
+
+    public String getFramework() {
+        return (String) frameworkCombo.getSelectedItem();
+    }
+
+    public String getSparkVersion() {
+        return (String) sparkVersionCombo.getSelectedItem();
+    }
+
+    public String getSpringBootVersion() {
+        return (String) springBootVersionCombo.getSelectedItem();
+    }
+
+    public String getTestFramework() {
+        return (String) testFrameworkCombo.getSelectedItem();
+    }
+
+    public String getTestFrameworkVersion() {
+        return (String) testFrameworkVersionCombo.getSelectedItem();
+    }
+
+    public String getMockitoVersion() {
+        return (String) mockitoVersionCombo.getSelectedItem();
+    }
+}
