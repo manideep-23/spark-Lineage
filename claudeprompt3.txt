@@ -1,0 +1,109 @@
+BUSINESS REQUIREMENTS EXTRACTION FOR BIG DATA PROJECT
+
+I want to understand WHAT this system does for the business, NOT HOW it's technically implemented.
+
+Think like a Product Owner or Business Analyst, not a developer.
+
+PROJECT CONTEXT:
+Analyze this Big Data codebase and extract business-level requirements.
+
+EXTRACTION FOCUS (Business Perspective Only):
+
+1. BUSINESS CAPABILITIES
+   - What business problems does this solve?
+   - Who benefits? (business users, customers)
+   - What business value is delivered?
+   - What business decisions are enabled?
+
+2. BUSINESS FEATURES
+   - Express as user stories: "As a [role], I want [goal], so that [benefit]"
+   - What can users DO with this system?
+   - What business scenarios are supported?
+
+3. BUSINESS RULES
+   - In plain English, no code
+   - Example: "Customers over 18 qualify for credit" NOT "WHERE age >= 18"
+   - Why does each rule exist? (business rationale)
+   - What business impact?
+
+4. BUSINESS WORKFLOWS
+   - What business processes are automated/supported?
+   - Step-by-step in business terms
+   - Decision points and outcomes
+   - Who does what?
+
+5. BUSINESS METRICS
+   - What business KPIs are calculated?
+   - Why do these metrics matter?
+   - Who uses them and for what decisions?
+   - What are targets/thresholds?
+
+6. BUSINESS DATA
+   - What business entities? (Customers, Orders, Products - NOT tables)
+   - What business attributes matter?
+   - What business relationships?
+   - Business meaning of each data element
+
+7. BUSINESS INTEGRATIONS
+   - What business systems exchange data?
+   - What business data flows between them?
+   - Why is integration needed?
+   - Business impact of integration failure
+
+OUTPUT STRUCTURE - JIRA-STYLE:
+Create /business-requirements-output/:
+
+1. 01-business-capabilities-catalog.md (Epics)
+2. 02-business-features-catalog.md (User Stories)
+3. 03-business-rules-catalog.md (Acceptance Criteria)
+4. 04-business-workflows.md (Process Flows)
+5. 05-business-metrics-kpis.md (Success Metrics)
+6. 06-business-data-dictionary.md (Business Entities)
+7. 07-business-integrations-map.md (System Landscape)
+8. 08-business-glossary.md (Terms & Definitions)
+9. BUSINESS-REQUIREMENTS-SPEC.md (Master Document - JIRA Epic/Story Format)
+
+TRANSLATION RULES (CRITICAL):
+
+NEVER say: "Spark job processes data from S3"
+INSTEAD say: "Customer purchase data is analyzed daily to identify buying patterns"
+
+NEVER say: "Kafka streams events to topic"
+INSTEAD say: "Customer actions are captured in real-time to detect fraud"
+
+NEVER say: "Join fact_orders with dim_customer"
+INSTEAD say: "Combine customer profile with purchase history to calculate loyalty score"
+
+NEVER say: "WHERE date >= current_date - 90"
+INSTEAD say: "Consider only customers active in the last 90 days"
+
+NEVER say: "GROUP BY customer_id, SUM(amount)"
+INSTEAD say: "Calculate total spending per customer"
+
+FOCUS ON:
+✓ Business value and outcomes
+✓ User needs and goals
+✓ Business decisions enabled
+✓ Business processes supported
+✓ Business metrics tracked
+✓ Business rules enforced
+✓ Business entities and relationships
+
+AVOID:
+✗ Technology stack mentions
+✗ Implementation details
+✗ Code snippets (except for traceability reference)
+✗ Database schemas
+✗ API endpoints
+✗ Technical architecture
+
+TARGET AUDIENCE:
+- Business stakeholders
+- Product managers
+- Business analysts
+- C-level executives
+- Domain experts
+
+Should be understandable by someone with ZERO technical background.
+
+Start by identifying the main business capabilities, then drill into features and rules.

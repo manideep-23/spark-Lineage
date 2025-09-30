@@ -1,0 +1,103 @@
+COMPREHENSIVE BIG DATA FDS GENERATION
+
+Analyze this Big Data project codebase and generate complete functional design specification.
+
+PROJECT CONTEXT:
+This is a Big Data project involving [describe: data pipelines, streaming, batch processing, data lake, warehouse, etc.]
+
+EXTRACTION REQUIREMENTS:
+
+1. ARCHITECTURE ANALYSIS
+   - Map entire data architecture
+   - Identify all technology components
+   - Document data flow end-to-end
+   - Create architecture diagrams
+
+2. PIPELINE ANALYSIS
+   - Catalog every data pipeline/job/DAG
+   - Extract business purpose of each
+   - Document data sources and destinations
+   - Map dependencies between pipelines
+   - Extract scheduling logic
+
+3. BUSINESS LOGIC EXTRACTION
+   - Extract transformation rules from:
+     * Spark/DataFrame operations
+     * SQL queries
+     * UDFs
+     * Map-Reduce logic
+     * Stream processing operations
+   - Document validation rules
+   - Extract data quality checks
+   - Catalog business metrics calculations
+   - Identify aggregation logic
+
+4. DATA MODEL ANALYSIS
+   - Extract all schemas (raw, processed, curated)
+   - Document field-level data lineage
+   - Map entity relationships
+   - Document partitioning strategies
+   - Identify business keys
+
+5. INTEGRATION ANALYSIS
+   - Document all data sources
+   - Document all data sinks
+   - Extract API integration logic
+   - Map streaming topics and message flows
+
+6. OPERATIONAL LOGIC
+   - Extract monitoring rules
+   - Document alerting logic
+   - Identify SLA requirements
+   - Extract error handling patterns
+   - Document retry logic
+
+7. CONFIGURATION ANALYSIS
+   - Extract environment-specific configs
+   - Document business parameters
+   - Identify feature flags
+   - Extract security configurations
+
+OUTPUT STRUCTURE:
+Create directory /bigdata-fds-output/ with:
+
+1. 00-bigdata-architecture-overview.md
+2. 01-data-pipelines-inventory.md
+3. 01a-pipeline-[name]-details.md (for each major pipeline)
+4. 02-orchestration-dags.md
+5. 03-transformation-business-rules.md
+6. 04-data-quality-rules.md
+7. 05-business-metrics-catalog.md
+8. 06-data-schemas-[layer].md (raw/processed/curated)
+9. 06-data-lineage.md
+10. 07-data-storage-strategy.md
+11. 08-performance-optimization.md
+12. 09-data-integrations.md
+13. 10-monitoring-alerting.md
+14. 11-configuration-management.md
+15. 12-bigdata-diagrams.md
+16. 13-traceability-matrix.md
+17. BIG-DATA-FDS.md (Master comprehensive document)
+18. validation-report.md
+
+CRITICAL REQUIREMENTS:
+✓ Extract EXACT business logic from code (not assumptions)
+✓ Include code references (file:line) for every rule
+✓ Create visual Mermaid diagrams for data flows and architectures
+✓ Document field-level data lineage
+✓ Make it understandable for both technical and business stakeholders
+✓ Ensure complete traceability from business rule to implementation
+✓ Focus on WHY (business purpose) not just WHAT (technical implementation)
+
+SPECIAL FOCUS AREAS FOR BIG DATA:
+- Data quality and validation logic
+- Performance optimization decisions
+- Scalability patterns
+- Cost optimization logic
+- Data retention and archival rules
+- Incremental processing logic
+- Stream windowing and aggregation
+- Business metric calculations
+- SLA and monitoring thresholds
+
+Start with architecture overview, then systematically analyze each component type.

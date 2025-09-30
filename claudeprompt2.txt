@@ -1,0 +1,43 @@
+Review the generated Big Data FDS and validate:
+
+COMPLETENESS CHECK:
+□ All data pipelines documented?
+□ All data sources identified?
+□ All data sinks documented?
+□ All transformation logic extracted?
+□ All business metrics cataloged?
+□ All data quality rules captured?
+□ All schemas documented (all layers)?
+□ Data lineage complete?
+□ All integrations mapped?
+□ Monitoring and alerting rules documented?
+
+ACCURACY CHECK:
+□ Cross-verify transformation rules against actual code
+□ Validate data lineage by tracing sample fields
+□ Confirm pipeline schedules match configuration
+□ Verify business metric formulas
+□ Check schema accuracy against actual data
+
+TRACEABILITY CHECK:
+□ Every transformation has code reference?
+□ Every business rule linked to implementation?
+□ Every metric has calculation location?
+□ Pipeline dependencies are complete?
+
+BIG DATA SPECIFIC CHECK:
+□ Partitioning strategies explained?
+□ Performance optimizations documented?
+□ Scalability considerations captured?
+□ Resource allocation logic documented?
+□ Incremental processing logic clear?
+□ Data retention policies documented?
+□ Disaster recovery procedures included?
+
+CLARITY CHECK:
+□ Business stakeholders can understand the purpose?
+□ Data flow is visualized clearly?
+□ Technical jargon is explained?
+□ Business impact is clear for each component?
+
+Generate bigdata-fds-validation-report.md with findings, gaps, and recommendations.
