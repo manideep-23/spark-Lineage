@@ -1,0 +1,84 @@
+ULTIMATE BIG DATA FUNCTIONAL DESIGN SPECIFICATION GENERATOR
+
+I want you to act as a Senior Business Analyst and Technical Architect who can bridge the gap between code and business stakeholders.
+
+═══════════════════════════════════════════════════════════════
+
+PROJECT CONTEXT:
+Analyze this Big Data codebase and create documentation that:
+✓ A CEO can understand the business value
+✓ A Product Manager can write user stories from
+✓ A Business Analyst can validate requirements
+✓ A Developer can trace business rules to code
+✓ A Data Steward can understand data flows
+
+═══════════════════════════════════════════════════════════════
+
+GUIDING PRINCIPLES:
+
+1. BUSINESS-FIRST THINKING
+   - Every technical component must have a "Business Purpose" section
+   - Use business language, not technical jargon
+   - Example: "Customer Segmentation for Targeted Marketing" NOT "Spark job with groupBy aggregation"
+
+2. VISUAL-FIRST DOCUMENTATION
+   - Every workflow needs a visual diagram
+   - Complex flows get step-by-step illustrations
+   - Use icons, colors, and annotations in diagrams
+   - Create both technical AND simplified business views
+
+3. STORY-DRIVEN FORMAT
+   - Start with "The Story" - why does this exist?
+   - Include real-world scenarios and examples
+   - Use personas (Marketing Manager, Data Analyst, etc.)
+
+4. LAYERED COMPLEXITY
+   - Level 1: Executive Summary (2-minute read)
+   - Level 2: Business View (15-minute read)
+   - Level 3: Technical Details (deep dive)
+   - Each document starts with the simplest view
+
+═══════════════════════════════════════════════════════════════
+
+ENHANCED OUTPUT STRUCTURE:
+
+📁 /fds-output/
+├── 📊 /executive-summary/
+│   ├── 00-one-page-overview.md (Single page with key visuals)
+│   ├── business-value-dashboard.md (ROI, KPIs, impact)
+│   └── quick-reference-guide.md (Cheat sheet)
+│
+├── 🎯 /business-view/
+│   ├── 01-business-capabilities-map.md (What can the system do?)
+│   ├── 02-user-journeys.md (How do users interact?)
+│   ├── 03-business-rules-playbook.md (Rules in plain English)
+│   ├── 04-business-glossary.md (Terms everyone should know)
+│   └── 05-success-metrics-dashboard.md (How we measure success)
+│
+├── 🏗️ /architecture-view/
+│   ├── 10-architecture-story.md (The "why" behind architecture)
+│   ├── 11-data-flow-journey.md (Follow data from source to insight)
+│   ├── 12-component-catalog.md (What each component does)
+│   └── 13-integration-landscape.md (How systems connect)
+│
+├── ⚙️ /technical-details/
+│   ├── 20-pipeline-encyclopedia.md (Every pipeline documented)
+│   ├── 21-transformation-rulebook.md (Every transformation explained)
+│   ├── 22-data-dictionary-complete.md (Every field documented)
+│   ├── 23-api-reference.md (Every integration point)
+│   └── 24-configuration-guide.md (Every config explained)
+│
+├── 🔍 /deep-dives/
+│   ├── 30-critical-pipeline-details/ (One file per major pipeline)
+│   ├── 31-business-rule-details/ (Deep dive into each rule)
+│   └── 32-data-lineage-maps/ (Field-level lineage)
+│
+├── 📈 /visual-assets/
+│   ├── diagrams-simplified/ (Business-friendly diagrams)
+│   ├── diagrams-technical/ (Technical architecture diagrams)
+│   ├── flowcharts-interactive/ (HTML interactive flows)
+│   └── infographics/ (Visual summaries)
+│
+└── 📋 MASTER-FDS.md (Comprehensive document with navigation)
+
+═══════════════════════════════════════════════════════════════
