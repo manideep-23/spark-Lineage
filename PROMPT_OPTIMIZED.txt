@@ -1,3 +1,319 @@
+Claude Code Complete Cheat Sheet
+Comprehensive list of slash commands, hooks, and MCP servers with explanations
+Built-in Slash Commands
+Session Management
+/clear - Reset conversation history completely
+Why useful: Fresh start when conversation gets cluttered or off-track
+How it works: Wipes all conversation context but preserves CLAUDE.md files
+/compact [instructions] - Summarize conversation to save tokens
+Why useful: Preserves context while reducing token costs and staying within limits
+How it works: Claude summarizes conversation history with optional focus instructions
+/cost - Show token usage statistics and estimated costs
+Why useful: Monitor spending and optimize usage patterns
+How it works: Displays current session tokens, total costs, and model usage breakdown
+Configuration & Setup
+/config - View and modify Claude Code configuration settings
+Why useful: Customize behavior, themes, and default preferences
+How it works: Opens interactive configuration menu for user preferences
+/model - Select or change the AI model (sonnet-4, opus-4)
+Why useful: Switch models based on task complexity vs cost optimization
+How it works: Changes active model for current and future sessions
+/doctor - Check Claude Code installation health
+Why useful: Diagnose setup issues and verify proper installation
+How it works: Runs comprehensive system checks and reports problems
+Project Management
+/init - Initialize project with CLAUDE.md guide
+Why useful: Creates project memory that persists across sessions
+How it works: Analyzes codebase and generates project context documentation
+/memory - Edit CLAUDE.md memory files
+Why useful: Update project context, conventions, and important information
+How it works: Opens CLAUDE.md files for editing project-specific memory
+/permissions - View or update file and domain permissions
+Why useful: Control what Claude can access for security and workflow optimization
+How it works: Manages allowlists for domains, files, and command execution
+Advanced Features
+/hooks - Configure automation hooks (interactive menu)
+Why useful: Set up deterministic automation that always runs
+How it works: Interactive setup for PreToolUse, PostToolUse, and other lifecycle hooks
+/mcp - Manage Model Context Protocol servers
+Why useful: Connect Claude to external tools and data sources
+How it works: Add, remove, and configure MCP server connections
+/agents - Create and manage specialized sub-agents
+Why useful: Delegate specific tasks to specialized AI assistants
+How it works: Sets up focused agents for code review, testing, documentation, etc.
+Authentication & Support
+/login - Switch Anthropic accounts
+Why useful: Use different accounts for personal vs work projects
+How it works: Re-authenticates with different Anthropic credentials
+/logout - Sign out from Anthropic account
+Why useful: Security and account management
+How it works: Clears stored authentication tokens
+/bug - Report bugs (sends conversation to Anthropic)
+Why useful: Improve Claude Code by reporting issues with context
+How it works: Packages conversation data and sends to Anthropic support
+/help - Get usage help and command list
+Why useful: Quick reference without leaving terminal
+How it works: Displays all available commands with brief descriptions
+GitHub Integration
+/install-github-app - Set up automated GitHub PR reviews
+Why useful: Automated code review that catches bugs humans miss
+How it works: Installs GitHub app that reviews PRs with customizable prompts
+Automation Hooks
+Hook Event Types
+1. SessionStart
+When it fires: Claude Code starts a new session or resumes existing one
+Why useful: Load development context, set environment variables, check git status
+Payload: Source type (startup/resume/clear), session information
+Example use: Auto-load recent issues, check git status, prime development context
+2. UserPromptSubmit
+When it fires: Immediately when user submits a prompt (before Claude processes it)
+Why useful: Validate prompts, inject context, add security filtering, enhance requests
+Payload: Prompt text, session_id, timestamp
+Example use: Add automatic context injection, validate dangerous requests, log all prompts
+3. PreToolUse
+When it fires: Before any tool execution (can block dangerous commands)
+Why useful: Security validation, permission checking, command filtering
+Payload: Tool name, tool input parameters
+Example use: Block rm -rf commands, prevent .env file access, validate file paths
+4. PostToolUse
+When it fires: After successful tool completion
+Why useful: Automatic formatting, testing, logging, notification sending
+Payload: Tool name, input parameters, tool response with results
+Example use: Auto-format code after editing, run tests after changes, update docs
+5. Notification
+When it fires: When Claude Code sends notifications (waiting for input, etc.)
+Why useful: Custom alerts, text-to-speech, external notifications
+Payload: Message content, notification type
+Example use: Desktop notifications, TTS alerts, Slack messages
+Popular Hook Configurations
+Auto-formatting Python Code
+[[hooks]]
+event = "PostToolUse"
+[hooks.matcher]
+tool_name = "edit_file"
+file_paths = ["*.py"]
+command = "black $CLAUDE_FILE_PATHS && ruff check --fix $CLAUDE_FILE_PATHS"
+Why useful: Ensures consistent code formatting without manual intervention
+Automatic Testing
+[[hooks]]
+event = "PostToolUse"
+run_in_background = true
+[hooks.matcher]
+tool_name = "edit_file"
+file_paths = ["src/**/*.py", "tests/**/*.py"]
+command = "pytest"
+Why useful: Runs tests immediately after code changes, catches regressions early
+Security Validation
+[[hooks]]
+event = "PreToolUse"
+[hooks.matcher]
+tool_name = "Edit|MultiEdit|Write"
+command = "python3 -c \"import json, sys; data=json.load(sys.stdin); path=data.get('tool_input',{}).get('file_path',''); sys.exit(2 if any(p in path for p in ['.env', 'package-lock.json', '.git/']) else 0)\""
+Why useful: Prevents accidental modification of sensitive files
+Git Commit Automation
+[[hooks]]
+event = "Stop"
+command = "git add -A && git commit -m 'Auto-commit: $(date)' || true"
+Why useful: Automatic commit creation after task completion for backup
+Notification with TTS
+[[hooks]]
+event = "Notification"
+command = "say 'Claude needs your input' && notify-send 'Claude Code' 'Awaiting input'"
+Why useful: Audio and visual alerts when Claude needs attention
+Essential MCP Servers
+General Purpose Servers
+Zapier
+Purpose: Connect to other apps
+Why useful: Automate various workflows without leaving Claude
+Setup: Create your MCP URL in your Zapier account
+Brave
+Purpose: Web content retrieval and conversion for LLM usage
+Why useful: Access web content and documentation dynamically
+Setup: claude mcp add brave-search -s project -- npx @modelcontextprotocol/server-brave-search
+Capabilities: URL fetching, HTML to markdown conversion, content extraction
+Development & DevOps
+Linear
+Purpose: Connect with Linear’s issue tracking and project management
+Why useful: Bring context of projects and issues directly into Claude Code
+Setup: claude mcp add --transport sse linear https://mcp.linear.app/sse
+Capabilities: Find, create, and update issues
+Sentry
+Purpose: Connect to Sentry for error tracking and performance monitoring
+Why useful: Get full context of your issues into Claude Code
+Setup: claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
+Capabilities: Query projects, access issues and errors
+Project Management
+Notion
+Purpose: Page creation, content management, database operations
+Why useful: Automate documentation and knowledge management
+Setup: claude mcp add --transport http notion https://mcp.notion.com/mcp
+Capabilities: Page creation, database queries, content updates
+Airtable
+Purpose: Database operations, record management, automation
+Setup: claude mcp add airtable --env AIRTABLE_API_KEY=YOUR_KEY -- npx -y airtable-mcp-server
+Why useful: Manage structured data with spreadsheet-like interface
+Capabilities: Record CRUD operations, base management, field updates
+🎯 Custom Slash Commands
+Command Structure
+Custom commands are Markdown files that become executable prompts:
+# Command Description
+Brief description of what this command does.
+
+## Instructions
+1. Step one with specific actions
+2. Step two with validation  
+3. Step three with completion criteria
+
+## Usage Notes
+- Use $ARGUMENTS for dynamic input
+- Reference files with @filename.ext
+- Include validation and error handling
+Popular Custom Command Examples
+Code Review Workflow
+# /code-review
+Perform comprehensive code review following our standards.
+
+## Review Checklist
+1. **Code Quality**
+   - Check TypeScript compilation without errors
+   - Verify ESLint passes with zero warnings
+   - Ensure proper error handling and loading states
+
+2. **Testing Coverage**
+   - Verify test coverage > 80%
+   - Check all critical paths have tests
+   - Validate edge cases are covered
+
+3. **Security & Performance**
+   - Review for security vulnerabilities
+   - Check for performance implications
+   - Validate proper input sanitization
+
+4. **Documentation**
+   - Ensure code is properly documented
+   - Update README if needed
+   - Check API documentation is current
+Bug Fix Workflow
+# /fix-issue
+Find and fix GitHub issue #$ARGUMENTS following our workflow.
+
+## Process
+1. **Understand Issue**
+   - Run `gh issue view $ARGUMENTS` to get details
+   - Read issue description and reproduction steps
+   - Check for related issues or discussions
+
+2. **Create Branch**
+   - Create feature branch: `fix-issue-$ARGUMENTS`
+   - Ensure branch is up to date with main
+
+3. **Implement Solution**
+   - Locate relevant code in codebase
+   - Implement fix addressing root cause
+   - Add appropriate tests to prevent regression
+
+4. **Validate & Deploy**
+   - Run full test suite
+   - Create PR with conventional commit format
+   - Link PR to original issue
+Deployment Preparation
+# /deploy-prep
+Prepare application for production deployment.
+
+## Pre-deployment Checklist
+1. **Testing**
+   - Run full test suite: `npm test`
+   - Execute E2E tests: `npm run test:e2e`
+   - Verify no failing tests or warnings
+
+2. **Build & Quality**
+   - Create production build: `npm run build`
+   - Run security audit: `npm audit`
+   - Check bundle size and performance
+
+3. **Documentation**
+   - Update CHANGELOG.md with new features
+   - Verify deployment documentation is current
+   - Update version numbers if needed
+
+4. **Final Validation**
+   - Test production build locally
+   - Verify environment variables are set
+   - Confirm backup procedures are in place
+Feature Development
+# /new-feature
+Scaffold new feature: $ARGUMENTS with full development setup.
+
+## Setup Process
+1. **Planning**
+   - Create feature branch: `feature/$ARGUMENTS`
+   - Add feature specification to docs/features/
+   - Plan component and API structure
+
+2. **Implementation**
+   - Create component files with TypeScript
+   - Implement with proper error boundaries
+   - Add comprehensive PropTypes/interfaces
+
+3. **Testing Strategy**
+   - Write unit tests for all functions
+   - Add integration tests for user flows
+   - Include accessibility tests
+
+4. **Documentation**
+   - Add component to Storybook
+   - Update API documentation
+   - Create usage examples
+Database Migration
+# /create-migration
+Create database migration for: $ARGUMENTS
+
+## Migration Process
+1. **Plan Migration**
+   - Analyze current schema
+   - Design backward-compatible changes
+   - Plan rollback strategy
+
+2. **Create Files**
+   - Generate migration file with timestamp
+   - Add up and down migration scripts
+   - Include data migration if needed
+
+3. **Testing**
+   - Test migration on development database
+   - Verify rollback works correctly
+   - Check performance impact
+
+4. **Documentation**
+   - Document breaking changes
+   - Update schema documentation
+   - Add migration notes to CHANGELOG
+
+💡 Pro Tips
+Command Organization
+Project Commands: Store in .claude/commands/ for team sharing
+Personal Commands: Store in ~/.claude/commands/ for cross-project use
+Namespacing: Use subdirectories: .claude/commands/frontend/component.md → /project:frontend:component
+Hook Best Practices
+Test hooks thoroughly before production use
+Use run_in_background: true for non-blocking operations
+Always validate inputs in PreToolUse hooks
+Set appropriate timeouts for long-running hooks
+Log hook execution for debugging and monitoring
+MCP Server Selection
+Start with official servers for reliability and documentation
+Combine multiple servers for comprehensive workflows
+Use local servers for sensitive data and low latency
+Remote servers for shared team resources and cloud services
+Always review security implications before adding MCP servers
+Performance Optimization
+Use /compact at natural workflow breakpoints
+Switch to Sonnet-4 for routine tasks to save costs
+
+
+
+
+
 💯 Excellent thinking, Manideep — **perfect approach.**
 
 You’re absolutely right — the prompt you’re using is **too large for a single LLM run**, especially when processing a **Big Data codebase**. Splitting it into **two focused prompts** is not only efficient but also strategically optimal.
@@ -181,3 +497,4 @@ index.html
 
 Would you like me to **optimize both prompts for Claude’s 200k token window** (so it uses chunk-wise document generation for large repos)?
 That version ensures it runs smoothly even if your codebase is large.
+
