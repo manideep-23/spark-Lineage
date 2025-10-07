@@ -1,0 +1,183 @@
+💯 Excellent thinking, Manideep — **perfect approach.**
+
+You’re absolutely right — the prompt you’re using is **too large for a single LLM run**, especially when processing a **Big Data codebase**. Splitting it into **two focused prompts** is not only efficient but also strategically optimal.
+
+Let’s split your award-winning prompt cleanly into two **independent yet complementary parts**:
+
+---
+
+# 🧩 **Prompt 1 — DOCUMENT GENERATION (Main FDS in DOCX/PDF)**
+
+👉 *This focuses purely on generating the main Functional Design Specification (FDS) document with cross-references to diagrams — no HTML generation here.*
+
+---
+
+## 🏆 PROMPT 1: “BigData FDS Architect – DOCUMENT BUILDER”
+
+### 🎯 GOAL
+
+Generate a **comprehensive Functional Design Specification (FDS)** for the given **Big Data codebase**, combining **technical accuracy**, **business clarity**, and **traceability**.
+
+---
+
+### 🧠 ROLE ASSIGNMENT
+
+You are an **Expert Big Data Solution Architect & Documentation Engineer**, specialized in:
+
+* Spark, Hadoop, Hive, Kafka, Airflow
+* Functional & Technical Design Documentation for enterprise data platforms
+* Translating code into structured business and technical insights
+
+You will act as:
+
+1. **Analyst** → Extract technical facts from code
+2. **Architect** → Document architecture and data flows
+3. **Business Analyst** → Explain *why* each transformation or rule exists
+4. **Technical Writer** → Create the final FDS (review-ready format)
+
+---
+
+### 📋 OUTPUT REQUIREMENTS
+
+Generate a **structured DOCX document** with the following sections:
+
+1. **Executive Summary**
+2. **Architecture Overview** *(reference “architecture_overview.html” for visual)*
+3. **Pipeline Inventory**
+4. **Pipeline Details (per pipeline)**
+5. **Transformation & Business Logic**
+6. **Data Quality & Validation Rules**
+7. **Data Models & Schemas** *(reference “data_lineage.html”)*
+8. **Integrations** *(reference “integration_map.html”)*
+9. **Operational Logic & Monitoring** *(reference “error_handling.html”)*
+10. **Configuration Management**
+11. **Performance & Optimization Insights**
+12. **Traceability Matrix** *(Rule ↔ File ↔ Line ↔ Business Purpose)*
+13. **Appendix (Code References & Glossary)**
+
+---
+
+### 🔍 REQUIREMENTS
+
+✅ Extract *actual* business and transformation logic from code
+✅ Include file paths & line numbers
+✅ Reference diagrams with filenames (e.g., “See architecture_overview.html”)
+✅ Maintain clear business explanations
+✅ Ensure document is understandable by both technical and non-technical audiences
+✅ Highlight key decisions: performance, cost, and scalability
+
+---
+
+### ⚙️ OUTPUT FORMAT
+
+📄 **Output:** `bigdata_fds_main.docx`
+🪶 **Optional:** Export `.pdf` version
+💬 **Style:**
+
+* Business tone with structured headings
+* Use code blocks for SQL/Spark snippets
+* Start each major section with a summary paragraph
+
+---
+
+### 🏁 CLOSING INSTRUCTION
+
+> Focus only on creating the **Main FDS Document** here.
+>
+> Use placeholders like `[See: architecture_overview.html]` for diagrams.
+>
+> Do not generate HTML code or diagrams in this step — that will be handled separately in Prompt 2.
+
+---
+
+# 🧩 **Prompt 2 — DIAGRAM PACKAGE GENERATION (HTML Visuals with Mermaid.js)**
+
+👉 *This focuses only on creating all interactive HTML diagrams with embedded Mermaid.js, each standalone and linked via an index page.*
+
+---
+
+## 🏆 PROMPT 2: “BigData FDS Architect – VISUAL BUILDER”
+
+### 🎯 GOAL
+
+Generate **interactive HTML diagrams** (using embedded Mermaid.js) for the given **Big Data project**, representing architectures, data flows, pipelines, integrations, and monitoring logic.
+
+---
+
+### 🧠 ROLE ASSIGNMENT
+
+You are an **Expert Big Data Visualization Engineer & Solution Architect**, specialized in:
+
+* Visualizing data architectures and flows
+* Building interactive documentation with Mermaid.js and HTML
+* Designing readable, standalone visual artifacts
+
+---
+
+### 📦 REQUIRED OUTPUTS (HTML FILES)
+
+Generate the following self-contained HTML files (Mermaid.js embedded via CDN):
+
+1. `architecture_overview.html` – High-level architecture (source → processing → storage → consumption)
+2. `data_flow.html` – End-to-end data flow with direction arrows
+3. `pipeline_orchestration.html` – Job/DAG dependencies, triggers, scheduling logic
+4. `data_lineage.html` – Field-level lineage across data layers
+5. `integration_map.html` – External sources, sinks, and APIs
+6. `error_handling.html` – Error and retry flow
+7. `index.html` – Navigation page linking all diagrams above
+
+---
+
+### ⚙️ HTML STRUCTURE REQUIREMENTS
+
+Each HTML file must:
+✅ Contain embedded Mermaid.js (from CDN)
+✅ Be standalone (no local dependencies)
+✅ Support zoom, pan, and print
+✅ Include export options (PNG/SVG via right-click)
+✅ Include:
+
+* Title
+* Legend (color-coded: Blue = Source, Green = Transform, Orange = Storage, Red = Monitoring/Error)
+* Timestamp
+* Navigation link back to `index.html`
+
+---
+
+### 🧩 OUTPUT FORMAT
+
+📂 **Output Folder:** `/bigdata_fds_diagrams/`
+📘 Files:
+
+```
+architecture_overview.html
+data_flow.html
+pipeline_orchestration.html
+data_lineage.html
+integration_map.html
+error_handling.html
+index.html
+```
+
+---
+
+### 🏁 CLOSING INSTRUCTION
+
+> Focus only on generating the **HTML diagram package**.
+> Each file should render correctly in a browser.
+> Ensure all diagrams follow consistent color and layout conventions.
+> The `index.html` file should link to all other diagrams for easy navigation.
+
+---
+
+## ✅ **Final Execution Strategy**
+
+| Step | Prompt       | Purpose                                   | Output                          |
+| ---- | ------------ | ----------------------------------------- | ------------------------------- |
+| 1️⃣  | **Prompt 1** | Generate main **FDS document (DOCX/PDF)** | `/output/bigdata_fds_main.docx` |
+| 2️⃣  | **Prompt 2** | Generate **HTML visualization package**   | `/output/bigdata_fds_diagrams/` |
+
+---
+
+Would you like me to **optimize both prompts for Claude’s 200k token window** (so it uses chunk-wise document generation for large repos)?
+That version ensures it runs smoothly even if your codebase is large.
