@@ -1,0 +1,76 @@
+Generate a complete Functional Specification Document (FSD) for a big data project in a single, well-structured markdown file.
+
+PROJECT CONTEXT:
+- Project Name: [Your Project Name]
+- Domain: Big Data / Data Engineering
+- Tech Stack: [e.g., Spark, Kafka, Airflow, Snowflake, AWS/Azure/GCP]
+- Data Volume: [e.g., TB/PB scale, real-time/batch]
+- Key Stakeholders: [Data Engineers, Architects, Business Analysts, QA]
+
+DOCUMENT REQUIREMENTS:
+
+1. EXECUTIVE SUMMARY (1 page)
+   - Business objective, scope, success metrics
+   - High-level architecture diagram (ASCII/Mermaid)
+
+2. SYSTEM OVERVIEW
+   - Data sources (types, formats, frequency, volume)
+   - Target systems and consumers
+   - Integration points and dependencies
+
+3. FUNCTIONAL REQUIREMENTS
+   - Data ingestion: methods, schedules, validation rules
+   - Transformation logic: business rules, aggregations, cleansing
+   - Storage: partitioning, retention, archival policies
+   - Output: formats, delivery mechanisms, SLAs
+
+4. TECHNICAL ARCHITECTURE
+   - Component diagram with data flow
+   - Technology rationale (why each tool chosen)
+   - Scalability and performance considerations
+
+5. DATA SPECIFICATIONS
+   - Source schema (sample: top 10 critical fields)
+   - Target schema (sample: top 10 fields)
+   - Mapping rules (source → target transformations)
+   - Data quality rules and thresholds
+
+6. NON-FUNCTIONAL REQUIREMENTS
+   - Performance: throughput, latency targets
+   - Reliability: SLA, fault tolerance, disaster recovery
+   - Security: encryption, access control, compliance (GDPR/HIPAA)
+   - Monitoring: KPIs, alerting thresholds
+
+7. IMPLEMENTATION PLAN
+   - Phases with milestones (table format)
+   - Risk matrix (top 5 risks with mitigation)
+   - Resource requirements
+
+8. APPENDICES
+   - Glossary (big data terms)
+   - Sample data flow (1 end-to-end example)
+   - Testing strategy overview
+
+OPTIMIZATION CONSTRAINTS:
+- Use tables for schemas, mappings, and comparisons
+- Use bullet points for lists (no verbose paragraphs)
+- Include code snippets ONLY for critical transformation logic (max 3 examples, 15 lines each)
+- Diagrams: ASCII art or Mermaid (no image placeholders)
+- Page target: 15-25 pages equivalent
+- Prioritize: What, Why, How (in that order)
+
+OUTPUT FORMAT:
+Single markdown file with clear section headers (##), subsection (###), and consistent formatting.
+
+FOCUS AREAS FOR BIG DATA:
+- Data lineage and governance
+- Incremental processing strategies
+- Schema evolution handling
+- Cost optimization techniques
+- Monitoring and observability
+
+Now generate the FSD based on this template for: 
+
+Generate FSD for my repo for sales margin module of EPMS . 
+
+Expected Output: 18-22 page FSD covering all sections, ready for stakeholder review.
