@@ -1,0 +1,105 @@
+Generate a production-ready Functional Specification Document (FSD) for an enterprise big data solution. Deliver as a single, professionally formatted markdown document suitable for executive review and technical implementation.
+
+=== PROJECT PARAMETERS ===
+
+Project Name: [Specify project name]
+Business Domain: [e.g., Financial Analytics, Customer Intelligence, Supply Chain Optimization]
+Technology Stack: [e.g., Apache Spark, Kafka, Airflow, Snowflake, AWS/Azure/GCP]
+Data Scale: [Volume, velocity, variety - e.g., 50TB daily, real-time streaming]
+Primary Stakeholders: Data Engineering, Enterprise Architecture, Business Analytics, QA, InfoSec
+
+=== DOCUMENT STRUCTURE ===
+
+1. EXECUTIVE SUMMARY
+   Objective: Articulate business value, strategic alignment, and expected ROI
+   Content: Problem statement, proposed solution, success criteria, risk overview
+   Length: 1-2 pages
+   Include: High-level architecture visualization (Mermaid diagram preferred)
+
+2. BUSINESS CONTEXT & REQUIREMENTS
+   - Strategic drivers and business justification
+   - Functional requirements mapped to business objectives
+   - Stakeholder analysis and RACI matrix
+   - Compliance and regulatory considerations
+
+3. SYSTEM ARCHITECTURE
+   - Conceptual architecture with component interactions
+   - Data flow diagrams (end-to-end pipeline)
+   - Technology selection rationale and alternatives considered
+   - Integration patterns and API contracts
+   - Scalability and performance architecture
+
+4. DATA SPECIFICATIONS
+   - Source system inventory (format, frequency, volume, ownership)
+   - Target data model (logical and physical design principles)
+   - Data mapping matrix (source-to-target transformations)
+   - Data quality framework (validation rules, cleansing procedures, SLA thresholds)
+   - Master data management and reference data strategy
+
+5. TECHNICAL REQUIREMENTS
+   - Processing logic and transformation rules
+   - Batch and real-time processing specifications
+   - Error handling and recovery procedures
+   - Logging, monitoring, and alerting requirements
+   - Performance benchmarks and optimization strategies
+
+6. NON-FUNCTIONAL REQUIREMENTS
+   - Availability and reliability targets (SLA definitions)
+   - Security architecture (authentication, authorization, encryption, audit)
+   - Disaster recovery and business continuity
+   - Capacity planning and resource optimization
+   - Compliance adherence (GDPR, HIPAA, SOX as applicable)
+
+7. IMPLEMENTATION ROADMAP
+   - Phased delivery approach with milestones
+   - Dependencies and critical path analysis
+   - Resource allocation and team structure
+   - Risk register with mitigation strategies
+   - Change management and training plan
+
+8. OPERATIONAL CONSIDERATIONS
+   - Support model and runbook overview
+   - Maintenance and upgrade procedures
+   - Cost model and TCO analysis
+   - Success metrics and KPI dashboard design
+
+9. APPENDICES
+   - Technical glossary
+   - Reference architecture patterns
+   - Sample data transformations (illustrative examples only)
+   - Testing strategy summary
+
+=== FORMATTING STANDARDS ===
+
+- Use markdown with consistent heading hierarchy (## for sections, ### for subsections)
+- Present tabular data in markdown tables (schemas, mappings, comparisons)
+- Employ bullet points for lists; limit prose to essential narratives
+- Include Mermaid diagrams for architecture and flows (no placeholder images)
+- Code snippets: Include only when illustrating complex transformations (max 3 examples, <20 lines each)
+- Length: Target 20-30 pages equivalent; prioritize depth over breadth
+
+=== OPTIMIZATION DIRECTIVES ===
+
+To ensure efficient token utilization:
+- Focus on architectural decisions and business-critical specifications
+- Use representative samples for schemas (10-15 key fields rather than exhaustive catalogs)
+- Summarize standard practices; detail only custom or complex implementations
+- Reference industry frameworks where applicable (TOGAF, DAMA-DMBOK)
+
+If token limits are approached, prioritize sections 1-5 with full detail; provide executive summaries for sections 6-8 with notation "detailed specifications available upon request."
+
+=== BIG DATA SPECIFIC REQUIREMENTS ===
+
+Address the following enterprise big data concerns:
+- Data lineage and metadata management strategy
+- Schema evolution and backward compatibility approach
+- Incremental processing and change data capture mechanisms
+- Cost optimization techniques (compute, storage, network)
+- Data governance framework and stewardship model
+- Observability and operational intelligence capabilities
+
+=== PROJECT DETAILS ===
+
+[Provide 3-5 sentences describing the specific initiative, including business problem, data sources, processing requirements, expected outcomes, and key constraints]
+
+Generate the FSD adhering to enterprise documentation standards and technical rigor expected for executive and architect review.
