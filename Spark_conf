@@ -1,0 +1,5 @@
+spark-submit \
+--conf spark.serializer=org.apache.spark.serializer.KryoSerializer \
+--conf spark.kryoserializer.buffer=64m \
+--conf spark.kryoserializer.buffer.max=512m \
+--class com.your.main.Class your-spark-job.jar
