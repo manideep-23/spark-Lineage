@@ -1,0 +1,242 @@
+Excellent, Manideep 👏
+
+Since you now want a **final curated list of 40 questions** that are:
+
+* ❗For **L2 Big Data Support Engineers** (around 5–8 years exp)
+* 🧠 **Not too deeply technical** (i.e., operational + scenario + troubleshooting focused)
+* 🏗️ Real-world, practical, and conversation-style (not syntax-heavy or code-oriented)
+
+This version is perfect for **interviewer panels**, **HR tech screening**, or **project lead evaluations** — where you want to assess the person’s **thinking, ownership, and production understanding** rather than deep developer coding.
+
+---
+
+# 🧩 FINAL SET — 40 PRACTICAL L2 BIG DATA SUPPORT INTERVIEW QUESTIONS
+
+*(Not too technical, but strong in practical and RCA depth)*
+
+---
+
+## 🔹 SECTION 1: HDFS & CLUSTER BASICS (5)
+
+**1.** What happens when one of the DataNodes in a Hadoop cluster goes down?
+
+> *Expected:* Data replication handles fault tolerance automatically; HDFS re-replicates missing blocks.
+
+**2.** How do you check if the HDFS cluster is healthy?
+
+> *Expected:* `hdfs dfsadmin -report`, NameNode UI, or monitoring dashboards.
+
+**3.** What steps do you take when the cluster goes into **safe mode**?
+
+> *Expected:* Check disk usage, complete replication, exit safe mode once healthy.
+
+**4.** What could cause HDFS space to fill up suddenly, and how would you identify the culprit?
+
+> *Expected:* Temporary files, failed job logs, small files — use `du -sh` and `hdfs dfs -du -h`.
+
+**5.** How would you handle “permission denied” while accessing HDFS paths?
+
+> *Expected:* Check HDFS ACLs, file ownership, Kerberos ticket validity.
+
+---
+
+## 🔹 SECTION 2: HIVE OPERATIONS (5)
+
+**6.** What’s the difference between an **Internal** and **External** Hive table?
+
+> *Expected:* Internal → Hive owns data; External → data managed outside Hive.
+
+**7.** How do you refresh metadata after new partitions are added in HDFS?
+
+> *Expected:* Run `MSCK REPAIR TABLE` or `ALTER TABLE ADD PARTITION`.
+
+**8.** What causes “NULL” values in Hive output when data exists in the file?
+
+> *Expected:* Wrong delimiter, schema mismatch, or SerDe issue.
+
+**9.** How would you check why a Hive query is running slowly?
+
+> *Expected:* Review job stages, file format, skewed data, or large joins.
+
+**10.** What happens when you drop an **External** table in Hive?
+
+> *Expected:* Metadata removed; actual data in HDFS remains.
+
+---
+
+## 🔹 SECTION 3: SPARK / JOB EXECUTION (4)
+
+**11.** Your Spark job failed due to `OutOfMemoryError`. What would you check first?
+
+> *Expected:* Input size, skewed data, executor memory, or shuffle size.
+
+**12.** How do you check the status or logs of a failed Spark job?
+
+> *Expected:* Spark History Server, YARN Resource Manager UI, or `yarn logs -applicationId`.
+
+**13.** What are some common reasons Spark jobs fail intermittently?
+
+> *Expected:* Network latency, driver/executor failure, temporary resource shortage.
+
+**14.** If a Spark job runs fine for small data but fails for larger input, what could be wrong?
+
+> *Expected:* Insufficient memory, improper partitioning, or unoptimized joins.
+
+---
+
+## 🔹 SECTION 4: OOZIE / AIRFLOW JOBS (4)
+
+**15.** How do you identify a failed Oozie workflow quickly?
+
+> *Expected:* Oozie console, job logs, email alerts, or checking status via CLI.
+
+**16.** What could cause an Oozie coordinator job to skip a day’s run?
+
+> *Expected:* Missing input data, frequency mismatch, or late data availability.
+
+**17.** How do you rerun only failed nodes in an Oozie workflow?
+
+> *Expected:* Use `-rerun` option with failed node list.
+
+**18.** How do you monitor Airflow DAG health daily?
+
+> *Expected:* DAG run status, task failures, retry counts, SLA misses.
+
+---
+
+## 🔹 SECTION 5: DATA QUALITY & VALIDATION (3)
+
+**19.** How do you validate data completeness after ingestion?
+
+> *Expected:* Compare source vs. target record count; checksum; reconciliation tables.
+
+**20.** How do you ensure partition-level data validation?
+
+> *Expected:* Check partition counts, data ranges, and expected file counts.
+
+**21.** How do you detect duplicates or missing records in Hive?
+
+> *Expected:* Run `GROUP BY` and count check, or compare against control totals.
+
+---
+
+## 🔹 SECTION 6: MONITORING & RCA (5)
+
+**22.** What tools do you use for cluster or job monitoring?
+
+> *Expected:* Cloudera Manager, Ambari, Grafana, Kibana, CloudWatch.
+
+**23.** What steps do you take when a P1 incident occurs in production?
+
+> *Expected:* Acknowledge, analyze logs, check dependencies, escalate with RCA summary.
+
+**24.** How do you differentiate between an application issue and an infrastructure issue?
+
+> *Expected:* If failures are random → infra; consistent logic failure → app/config issue.
+
+**25.** How do you find which jobs are consuming more resources?
+
+> *Expected:* Check YARN Resource Manager, top apps in queue, or Cloudera metrics.
+
+**26.** What is your approach to root cause analysis (RCA)?
+
+> *Expected:* Define issue → collect logs → identify cause → implement fix → document preventive measure.
+
+---
+
+## 🔹 SECTION 7: CLOUD & STORAGE (3)
+
+**27.** How do you integrate Hive tables with S3?
+
+> *Expected:* Set S3 path as location and configure AWS credentials.
+
+**28.** What causes access denied while writing to S3 bucket from Hadoop?
+
+> *Expected:* IAM role missing permissions or bucket policy restrictions.
+
+**29.** How do you ensure data is not partially written to S3 after job failure?
+
+> *Expected:* Use temporary staging path, atomic rename, or checkpoint mechanism.
+
+---
+
+## 🔹 SECTION 8: LINUX & AUTOMATION (4)
+
+**30.** What Linux commands do you use for checking logs or resource usage?
+
+> *Expected:* `tail -f`, `grep`, `df -h`, `top`, `ps -ef`, `du -sh`.
+
+**31.** How do you automate daily job health checks?
+
+> *Expected:* Shell script scheduled via cron or Airflow; validate logs, row counts.
+
+**32.** How do you identify which process is consuming most memory on a node?
+
+> *Expected:* `top`, `ps aux --sort=-%mem`, or `free -m`.
+
+**33.** How do you monitor disk space usage in Hadoop edge or data nodes?
+
+> *Expected:* `df -h` on OS and `hdfs dfsadmin -report` for cluster.
+
+---
+
+## 🔹 SECTION 9: INCIDENT / PROCESS HANDLING (5)
+
+**34.** What’s your approach when a downstream system reports missing data?
+
+> *Expected:* Check if upstream jobs succeeded, partitions loaded, data paths valid.
+
+**35.** What information do you capture before raising a P1 ticket?
+
+> *Expected:* Job name, time, error snippet, logs, impacted systems, and steps tried.
+
+**36.** How do you handle recurring production issues?
+
+> *Expected:* Maintain RCA tracker, automate detection, escalate pattern to L3.
+
+**37.** How do you ensure smooth handover between shifts?
+
+> *Expected:* Maintain daily shift log, update ticket status, pending actions summary.
+
+**38.** What’s the most common cause of SLAs being missed, and how do you prevent it?
+
+> *Expected:* Job delays, upstream dependency, resource shortage; fix via retries and monitoring alerts.
+
+---
+
+## 🔹 SECTION 10: GENERAL & BEHAVIORAL (2)
+
+**39.** How do you prioritize incidents during high workload periods?
+
+> *Expected:* Based on severity (P1–P4), business impact, SLA, and dependency chain.
+
+**40.** What do you think differentiates an L2 engineer from L1 and L3 roles?
+
+> *Expected:* L2 focuses on RCA, automation, and coordination between L1 ops and L3 devs.
+
+---
+
+# ✅ QUICK SUMMARY TABLE
+
+| Topic              | # Questions | Focus                      |
+| ------------------ | ----------- | -------------------------- |
+| HDFS / Cluster     | 5           | Basic troubleshooting      |
+| Hive               | 5           | Data operations & metadata |
+| Spark              | 4           | Job monitoring & RCA       |
+| Oozie / Airflow    | 4           | Scheduling & reruns        |
+| Data Validation    | 3           | Completeness checks        |
+| Monitoring / RCA   | 5           | Incident analysis          |
+| Cloud / S3         | 3           | Access & integration       |
+| Linux / Automation | 4           | Daily ops, resource        |
+| Incident / Process | 5           | Escalation & ownership     |
+| General            | 2           | Behavior & prioritization  |
+
+---
+
+Would you like me to now:
+
+* 📄 **Format these 40 Q&A into a clean interview PDF sheet** (panel-friendly, 2-column layout),
+  or
+* 🧾 **Prepare them as an Excel sheet** (columns: Topic | Question | Expected Answer | Remarks | Rating)?
+
+Choose your preferred output — I’ll generate it right away for your interview use.
