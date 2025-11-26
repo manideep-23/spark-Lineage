@@ -1,0 +1,171 @@
+Got it, Manideep — **your main issue is this**:
+
+➡️ You are getting **small, scattered logic pieces**,
+❌ but **NOT a complete end-to-end functional business explanation** of the entire flow.
+
+This is a very common issue when extracting logic from **complex Big Data code** because the AI answers step-by-step instead of constructing the **full business narrative**.
+
+To fix that, you need a prompt that **forces the AI** to:
+
+### ✔️ Read the entire code
+
+### ✔️ Extract *all* logic
+
+### ✔️ Rebuild it into a **single functional business flow**
+
+### ✔️ Cover ALL case conditions
+
+### ✔️ Ignore technical implementation details
+
+### ✔️ Present clear business rules + decision logic
+
+Below is the corrected **award-winning prompt**, especially designed to avoid the exact issue you faced.
+
+---
+
+# ✅ **Final “E-Prompt” — End-to-End Business Functional Extraction Prompt**
+
+*(This fixes partial outputs and forces full business logic extraction)*
+
+👉 **Paste this every time (only change flow name + code).**
+
+---
+
+## **🟦 E-PROMPT — Complete Functional Specification Extractor**
+
+**You are an industry-leading expert with 30 years of experience at Google in Big Data, AI systems, business analysis, and prompt engineering.
+Your task is to convert extremely complex Big Data / Spark / Hive / Transformation code into:**
+
+### ✔️ **A complete, end-to-end Business Functional Specification (FSD)**
+
+### ✔️ **Not technical**
+
+### ✔️ **Covers full business logic**
+
+### ✔️ **Explains purpose, rules, scenarios, exceptions, decisions**
+
+### ✔️ **Explains WHY each transformation exists in business terms**
+
+---
+
+## **You must produce ALL of the following sections:**
+
+### **1. Flow Overview (Business Purpose)**
+
+* What is the flow for?
+* What business need or outcome it supports?
+* Who uses it?
+* What business value it provides?
+
+### **2. End-to-End Business Logic Summary**
+
+Explain the overall logic as a **single business story**, NOT bits-and-pieces.
+Describe the entire flow from **input → processing → output** in business language.
+
+### **3. Detailed Business Rules (NOT technical)**
+
+For every transformation in the code, explain:
+
+* What is the rule?
+* What business scenario triggers it?
+* Why does the rule exist?
+* What decision is made?
+* What happens next?
+
+### **4. Case-Wise Behaviour**
+
+Provide logic for:
+
+* Normal case
+* Exceptional case
+* Missing data case
+* Error/invalid data case
+* Edge scenarios
+* Conditional branches and decision paths
+* Aggregation logic (in business meaning)
+* Joins & filters explained as business rules (not technical operations)
+
+### **5. Field-Level Logic (Business Meaning)**
+
+For every column being derived or transformed:
+
+* What does the field represent in business terms?
+* Why is it calculated that way?
+* How is it used downstream?
+* Business meaning of any mapping, flag, classification, category, score etc.
+
+### **6. Business Outputs**
+
+* What final data is produced?
+* How will the business use it?
+* What decisions depend on it?
+
+### **7. Limitations / Risks / Business Assumptions**
+
+If the code indicates assumptions, defaults, or hidden business rules, identify them.
+
+### **8. Flow Diagram (Business Narrative Style)**
+
+Provide a human-friendly flow diagram like:
+
+```
+Input Data  
+      ↓  
+Business Validation  
+      ↓  
+Classification Rules  
+      ↓  
+Decision Making  
+      ↓  
+Aggregation  
+      ↓  
+Final Output Delivered to <Business Team>
+```
+
+---
+
+## **IMPORTANT CONDITIONS**
+
+* **Explain in pure business language**.
+* **Do NOT produce technical code explanations unless clearly needed.**
+* **Combine all scattered logic into one unified business narrative — no partial outputs.**
+* **Ensure 100% coverage of all business cases present in the code.**
+* **Do NOT skip anything or shorten the reasoning.**
+
+---
+
+## **Now process the following:**
+
+**Flow name:** `<INSERT FLOW NAME>`
+**Code:**
+
+```
+<PASTE ENTIRE CODE HERE>
+```
+
+---
+
+# ✔️ This prompt guarantees:
+
+### 🟢 Full business document
+
+### 🟢 Complete end-to-end narrative
+
+### 🟢 No technical clutter
+
+### 🟢 All cases covered in business context
+
+### 🟢 No missing logic
+
+### 🟢 Not just “bits-bits logic” but full functional explanation
+
+---
+
+If you want, I can also generate:
+
+✅ A trimmed version
+✅ A version optimized for Claude
+✅ A version optimized for code → FSD automation
+✅ A version that produces FSD + UI/UX + DB design
+
+Just tell me **T or C or U or DB**.
