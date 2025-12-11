@@ -1,0 +1,102 @@
+Create file: rules/sample.drl
+package test
+
+import test.Transaction;
+
+rule "HighValue"
+when
+    $t : Transaction(amount > 1000)
+then
+    $t.setBucket("HIGH");
+    System.out.println("Rule fired for " + $t.getId());
+end
+
+
+🟢 STEP 2 — Create a simple Java POJO
+package test;
+
+public class Transaction {
+    private String id;
+    private double amount;
+    private String bucket;
+
+    public Transaction(String id, double amount) {
+        this.id = id;
+        this.amount = amount;
+    }
+
+    public String getId() { return id; }
+    public double getAmount() { return amount; }
+
+    public String getBucket() { return bucket; }
+    public void setBucket(String bucket) { this.bucket = bucket; }
+
+    @Override
+    public String toString() {
+        return "[" + id + ", amount=" + amount + ", bucket=" + bucket + "]";
+    }
+}
+🟢 STEP 3 — Java program that reuses ONE StatelessKieSession
+
+⚠ This exactly replicates your Spark design, so it will fail randomly.
+
+package test;
+
+import org.kie.api.*;
+import org.kie.api.runtime.*;
+import org.kie.api.builder.*;
+
+public class DroolsConcurrencyTest {
+
+    public static void main(String[] args) throws Exception {
+
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kc = ks.getKieClasspathContainer();
+
+        // ❗ SHARED session (same as your Spark code)
+        StatelessKieSession session = kc.newStatelessKieSession();
+
+        Runnable task = () -> {
+            for (int i = 0; i < 100; i++) {
+                Transaction t = new Transaction("TX-" + i, 2000); // Should ALWAYS fire
+                session.execute(t);  // ❗ concurrent calls
+                if (!"HIGH".equals(t.getBucket())) {
+                    System.out.println("❌ WRONG RESULT: " + t);
+                }
+            }
+        };
+
+        // Run many threads in parallel
+        Thread t1 = new Thread(task);
+        Thread t2 = new Thread(task);
+        Thread t3 = new Thread(task);
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+
+
+🟢 STEP 5 — FIXED VERSION (for comparison)
+
+Replace:
+
+StatelessKieSession session = kc.newStatelessKieSession();
+
+
+with new session inside loop:
+
+StatelessKieSession newSession = kc.newStatelessKieSession();
+newSession.execute(t);
+
+OR synchronized:
+
+synchronized(session) {
+    session.execute(t);
+}
+
+
+➡️ ALL failures disappear
+➡️ Rules fire correctly
+➡️ Buckets never null
