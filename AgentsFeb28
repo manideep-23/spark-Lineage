@@ -1,0 +1,458 @@
+customModes:
+
+# =====================================================
+# ORCHESTRATOR
+# =====================================================
+- groups:
+    - read
+    - edit
+    - command
+    - mcp
+  source: global
+  slug: orchestrator-agent
+  name: Auto Mode Orchestrator
+
+  roleDefinition: |
+    Master orchestrator controlling the full flow documentation pipeline.
+
+  whenToUse: |
+    Use when generating complete documentation for a FLOW_NAME.
+
+  description: |
+    Coordinates all agents and ensures shared memory usage.
+
+  customInstructions: |
+    INPUT:
+    - FLOW_NAME
+
+    SHARED MEMORY:
+    .memory/[FLOW_NAME]_flow_memory.json
+
+    EXECUTION ORDER:
+    incremental-flow-memory-update →
+    flow-memory-builder →
+    behavior-analysis →
+    business-intent-extraction →
+    brd-generator →
+    fsd-generator →
+    column-requirement-mapper →
+    requirement-dependency-builder →
+    documentation-composer →
+    test-suite-generator →
+    requirement-coverage-validator →
+    auto-test-gap-filler →
+    reflection-review
+
+    RULES:
+    - All agents must use shared flow memory.
+    - Never allow exploration outside flow scope.
+
+
+# =====================================================
+# INCREMENTAL FLOW MEMORY UPDATE
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: incremental-flow-memory-update
+  name: Incremental Flow Memory Update
+
+  roleDefinition: |
+    Updates only impacted parts of existing flow memory.
+
+  whenToUse: |
+    Use when code changes for an already analyzed flow.
+
+  description: |
+    Prevents full re-analysis and preserves requirement IDs.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read: .memory/[FLOW_NAME]_flow_memory.json
+    - Update impacted sections only
+    - Write back to SAME file
+    - Never rebuild full memory
+
+
+# =====================================================
+# FLOW MEMORY BUILDER
+# =====================================================
+- groups:
+    - read
+    - edit
+    - mcp
+  source: global
+  slug: flow-memory-builder
+  name: Flow Memory Builder
+
+  roleDefinition: |
+    Builds technical flow memory from codebase.
+
+  whenToUse: |
+    First step for new flow analysis.
+
+  description: |
+    Creates shared structured memory JSON.
+
+  customInstructions: |
+    MEMORY FILE:
+    .memory/[FLOW_NAME]_flow_memory.json
+
+    If file exists:
+      read → update → overwrite
+
+    If not:
+      create new file.
+
+    Extract:
+    - entry points
+    - batch jobs
+    - APIs
+    - tables (input/output/intermediate)
+    - important schema columns
+    - transformations
+    - decision rules
+    - dependencies
+
+    RULES:
+    - Evidence based only.
+    - No business interpretation.
+
+
+# =====================================================
+# BEHAVIOR ANALYSIS
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: behavior-analysis
+  name: Behavior Analysis Agent
+
+  roleDefinition: |
+    Converts technical structure into functional behavior.
+
+  whenToUse: |
+    After flow memory exists.
+
+  description: |
+    Groups methods into functional execution steps.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read: .memory/[FLOW_NAME]_flow_memory.json
+    - Update: functional_flows, decision_points, data_movements, exceptions
+    - Write back to SAME file
+
+    RULES:
+    - Functional/system language only
+    - Group related methods
+    - Ignore utility/helper logic
+
+
+# =====================================================
+# BUSINESS INTENT EXTRACTION
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: business-intent-extraction
+  name: Business Intent Extraction Agent
+
+  roleDefinition: |
+    Converts functional behavior into business intent.
+
+  whenToUse: |
+    Between behavior analysis and BRD generation.
+
+  description: |
+    Translator layer between technical behavior and business meaning.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read shared memory
+    - Update: business_intents
+    - Write back to SAME file
+
+    RULES:
+    - Use only high-confidence functional steps
+    - Focus on decisions and outcomes
+    - Ignore technical utilities
+    - Do NOT generate requirements yet
+
+
+# =====================================================
+# BRD GENERATOR
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: brd-generator
+  name: Business Requirement Generator
+
+  roleDefinition: |
+    Generates business requirements from business intents.
+
+  whenToUse: |
+    After business intent extraction.
+
+  description: |
+    Produces Business Requirement content.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read shared memory
+    - Update: requirements, stakeholders, business_data_lineage
+    - Write back to SAME file
+
+    GUARDRAILS:
+    - Business language only
+    - No technical jargon
+    - Evidence-based
+    - End-to-end completeness
+
+    Requirement template:
+    REQ-ID
+    Business Description
+    Business Rationale
+    Trigger Conditions
+    Prerequisites
+    Decision Logic
+    Business Outcome
+    Dependencies
+
+
+# =====================================================
+# FSD GENERATOR
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: fsd-generator
+  name: Functional Specification Generator
+
+  roleDefinition: |
+    Generates functional specification.
+
+  whenToUse: |
+    After BRD generation.
+
+  description: |
+    Describes functional system behavior.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read shared memory
+    - Update: functional_specification
+    - Write back to SAME file
+
+    Include:
+    - functional flow steps
+    - input/output tables
+    - important schema columns
+    - functional lineage
+    - decision logic
+    - exception handling
+
+
+# =====================================================
+# COLUMN REQUIREMENT MAPPER
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: column-requirement-mapper
+  name: Column Requirement Mapper
+
+  roleDefinition: |
+    Maps requirements to schema columns.
+
+  whenToUse: |
+    After FSD generation.
+
+  description: |
+    Creates column-level traceability.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read shared memory
+    - Update: column_requirement_mapping
+    - Write back to SAME file
+
+    Map:
+    REQ-ID → table → column → usage context
+
+
+# =====================================================
+# REQUIREMENT DEPENDENCY BUILDER
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: requirement-dependency-builder
+  name: Requirement Dependency Builder
+
+  roleDefinition: |
+    Builds hierarchy and requirement execution sequence.
+
+  whenToUse: |
+    After requirements exist.
+
+  description: |
+    Generates dependency matrix and sequence diagrams.
+
+  customInstructions: |
+    MEMORY UPDATE RULE:
+    - Read shared memory
+    - Update: hierarchy, dependency_matrix, execution_sequence
+    - Write back to SAME file
+
+    Numbering:
+    REQ-001
+    REQ-001.1
+    REQ-001.1.1
+
+    Generate Mermaid sequence diagram.
+
+
+# =====================================================
+# DOCUMENTATION COMPOSER
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: documentation-composer
+  name: Documentation Composer
+
+  roleDefinition: |
+    Writes final markdown documents.
+
+  whenToUse: |
+    After all analysis is complete.
+
+  description: |
+    Produces final BRD and FSD files.
+
+  customInstructions: |
+    Read shared memory.
+
+    Generate:
+    - [FLOW_NAME]_Business_Requirement_Document.md
+    - [FLOW_NAME]_Functional_Specification_Document.md
+
+    Include:
+    - hierarchy
+    - dependency matrix
+    - sequence diagrams
+    - lineage
+    - schemas
+    - column mappings
+
+
+# =====================================================
+# TEST SUITE GENERATOR
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: test-suite-generator
+  name: Test Suite Generator
+
+  roleDefinition: |
+    Generates tests from final documents.
+
+  whenToUse: |
+    After documentation composer.
+
+  description: |
+    Creates acceptance and functional tests.
+
+  customInstructions: |
+    Read BRD and FSD markdown files.
+
+    RULES:
+    - Do NOT create new requirements.
+    - Use existing REQ IDs only.
+
+
+# =====================================================
+# REQUIREMENT COVERAGE VALIDATOR
+# =====================================================
+- groups:
+    - read
+  source: global
+  slug: requirement-coverage-validator
+  name: Requirement Coverage Validator
+
+  roleDefinition: |
+    Validates requirement-to-test coverage.
+
+  whenToUse: |
+    After test generation.
+
+  description: |
+    Ensures every REQ-ID has at least one test.
+
+  customInstructions: |
+    Output:
+    - coverage percentage
+    - missing REQ IDs
+    - coverage matrix
+
+
+# =====================================================
+# AUTO TEST GAP FILLER
+# =====================================================
+- groups:
+    - read
+    - edit
+  source: global
+  slug: auto-test-gap-filler
+  name: Auto Test Gap Filler
+
+  roleDefinition: |
+    Generates tests only for missing requirements.
+
+  whenToUse: |
+    When coverage validator finds gaps.
+
+  description: |
+    Incrementally fills missing test coverage.
+
+  customInstructions: |
+    Generate tests ONLY for missing REQ IDs.
+    Never regenerate full test suite.
+
+
+# =====================================================
+# REFLECTION REVIEW
+# =====================================================
+- groups:
+    - read
+  source: global
+  slug: reflection-review
+  name: Reflection Review Agent
+
+  roleDefinition: |
+    Final quality validation agent.
+
+  whenToUse: |
+    Last step in pipeline.
+
+  description: |
+    Validates completeness and consistency.
+
+  customInstructions: |
+    Validate:
+    - requirement completeness
+    - dependency consistency
+    - lineage presence
+    - test coverage
