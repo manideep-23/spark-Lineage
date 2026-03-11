@@ -1,0 +1,1167 @@
+Using username "ubuntu".
+Authenticating with public key "imported-openssh-key"
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.17.0-1007-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Mar 11 08:49:28 UTC 2026
+
+  System load:  0.8                Temperature:           -273.1 C
+  Usage of /:   34.2% of 28.02GB   Processes:             188
+  Memory usage: 7%                 Users logged in:       1
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.0.31
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+97 updates can be applied immediately.
+46 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Mar 11 08:47:47 2026 from 14.142.71.242
+ubuntu@ip-172-31-0-31:~$ ll
+total 148
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 08:49 ./
+drwxr-xr-x  3 root   root    4096 Mar 11 04:11 ../
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 07:15 .aws/
+-rw-------  1 ubuntu ubuntu 12278 Mar 11 08:49 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Mar 31  2024 .bashrc
+drwx------  2 ubuntu ubuntu  4096 Mar 11 04:16 .cache/
+drwx------  3 ubuntu ubuntu  4096 Mar 11 04:16 .config/
+drwx------  3 ubuntu ubuntu  4096 Mar 11 05:30 .docker/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Mar 11 07:17 .kube/
+-rw-r--r--  1 ubuntu ubuntu   807 Mar 31  2024 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar 11 04:11 .ssh/
+-rw-r--r--  1 ubuntu ubuntu     0 Mar 11 04:27 .sudo_as_admin_successful
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:42 .swp
+-rw-------  1 ubuntu ubuntu 11141 Mar 11 08:49 .viminfo
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:32 abinay/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 akshaya/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:44 goutham/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 gsk/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:44 manideep/
+-rw-rw-r--  1 ubuntu ubuntu   243 Mar 11 08:49 p1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   324 Mar 11 08:48 p1.yml
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:49 pravalika/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:55 pushpak/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 06:13 radhikav/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:49 raja/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:45 sahithi/
+d---------  2 ubuntu ubuntu  4096 Mar 11 05:42 saikiran/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 shakeelmundi/
+drwx------  4 ubuntu ubuntu  4096 Mar 11 07:14 snap/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:46 tejaswi/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 vivek/
+ubuntu@ip-172-31-0-31:~$ apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: trainer
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10Mc
+
+apiVersion:: command not found
+
+
+kind:: command not found
+metadata:: command not found
+Command 'name:' not found, did you mean:
+  command 'named' from deb bind9 (1:9.18.39-0ubuntu0.24.04.2)
+  command 'namei' from deb util-linux (2.39.3-9ubuntu6.4)
+Try: sudo apt install <deb name>
+cnamespace:: command not found
+labels:: command not found
+app:: command not found
+Command 'env:' not found, did you mean:
+  command 'envs' from snap envs (1.1.15)
+  command 'env' from deb coreutils (9.4-3ubuntu6.1)
+  command 'env2' from deb env2 (1.1.0-4)
+See 'snap info <snapname>' for additional versions.
+
+Command 'annotations:' not found, did you mean:
+  command 'annotations' from snap annotations (0.1)
+See 'snap info <snapname>' for additional versions.
+version:: command not found
+zspec:: command not found
+containers:: command not found
+-: command not found
+Command 'image:' not found, did you mean:
+  command 'imagej' from deb imagej (1.54g-1)
+  command 'imagen' from deb hevea (2.36-2)
+Try: sudo apt install <deb name>
+llresources:: command not found
+limits:: command not found
+Command 'cpu:' not found, did you mean:
+  command 'cpu' from deb cpu (1.4.3-13build2)
+Try: sudo apt install <deb name>
+memory:: command not found
+zrequests:: command not found
+Command 'cpu:' not found, did you mean:
+  command 'cpu' from deb cpu (1.4.3-13build2)
+Try: sudo apt install <deb name>
+memory:: command not found
+ubuntu@ip-172-31-0-31:~$
+ubuntu@ip-172-31-0-31:~$
+ubuntu@ip-172-31-0-31:~$
+ubuntu@ip-172-31-0-31:~$ c
+c: command not found
+ubuntu@ip-172-31-0-31:~$ zlll
+zlll: command not found
+ubuntu@ip-172-31-0-31:~$ ll
+total 148
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 08:49 ./
+drwxr-xr-x  3 root   root    4096 Mar 11 04:11 ../
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 07:15 .aws/
+-rw-------  1 ubuntu ubuntu 12278 Mar 11 08:49 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Mar 31  2024 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Mar 31  2024 .bashrc
+drwx------  2 ubuntu ubuntu  4096 Mar 11 04:16 .cache/
+drwx------  3 ubuntu ubuntu  4096 Mar 11 04:16 .config/
+drwx------  3 ubuntu ubuntu  4096 Mar 11 05:30 .docker/
+drwxrwxr-x  3 ubuntu ubuntu  4096 Mar 11 07:17 .kube/
+-rw-r--r--  1 ubuntu ubuntu   807 Mar 31  2024 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar 11 04:11 .ssh/
+-rw-r--r--  1 ubuntu ubuntu     0 Mar 11 04:27 .sudo_as_admin_successful
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:42 .swp
+-rw-------  1 ubuntu ubuntu 11141 Mar 11 08:49 .viminfo
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:32 abinay/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 akshaya/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:44 goutham/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 gsk/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:44 manideep/
+-rw-rw-r--  1 ubuntu ubuntu   243 Mar 11 08:49 p1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   324 Mar 11 08:48 p1.yml
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:49 pravalika/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:55 pushpak/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 06:13 radhikav/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:49 raja/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:45 sahithi/
+d---------  2 ubuntu ubuntu  4096 Mar 11 05:42 saikiran/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 shakeelmundi/
+drwx------  4 ubuntu ubuntu  4096 Mar 11 07:14 snap/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:46 tejaswi/
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:48 vivek/
+ubuntu@ip-172-31-0-31:~$ cd manideep/
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 40
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:44 ./
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 08:49 ../
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:44 .p1.yaml.swp
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 06:07 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ cat > p1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: trainer
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ cat p1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: trainer
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ vi p1.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ cat p1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: trainer
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ sed -i 's/trainer/manideepns/' p1.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ cat p1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: manideepns
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f p1.yaml
+pod/p1 created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE
+p1     1/1     Running   0          26s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl run dbs1 --image=httpd -n manideepns -                                                                             -dry-run=client -o json
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "dbs1",
+        "namespace": "manideepns",
+        "labels": {
+            "run": "dbs1"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "dbs1",
+                "image": "httpd",
+                "resources": {}
+            }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst"
+    },
+    "status": {}
+}
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl run dbs1 --image=httpd -n manideepns --dry-run=client -o yaml > dbs1.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl run dbs2 --image=httpd -n manideepns --dry-run=client -o json > dbs1.json
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f dbs1.yaml
+pod/dbs1 created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f dbs1.json
+pod/dbs2 created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment dbs3 --image=ngnix -n manideepns --dry-run=client -o yaml > dbs3.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ top
+top - 09:03:38 up  1:56, 18 users,  load average: 1.20, 1.11, 1.08
+Tasks: 183 total,   2 running, 170 sleeping,  11 stopped,   0 zombie
+%Cpu(s): 35.2 us,  5.2 sy,  0.0 ni, 58.1 id,  0.0 wa,  0.0 hi,  0.0 si,  1.5 st
+MiB Mem :   7818.2 total,   6448.9 free,    769.1 used,    853.7 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   7049.1 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 276157 ubuntu    20   0  154772  59712  16428 R  24.7   0.7   0:00.74 aws
+ 276131 ubuntu    20   0 1286916  47628  35752 S   5.7   0.6   0:00.17 kubectl
+     15 root      20   0       0      0      0 I   0.3   0.0   0:16.99 rcu_sched
+   2098 ubuntu    20   0   20360  11636   9484 S   0.3   0.1   0:28.74 systemd
+ 270466 ubuntu    20   0    9392   5852   3600 R   0.3   0.1   0:00.32 top
+      1 root      20   0   22756  13972   9564 S   0.0   0.2   0:05.77 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_workqueue_release
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-rcu_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-sync_wq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kvfree_rcu_reclaim
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-slub_flushwq
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-netns
+     11 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+     13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-mm_percpu_wq
+     14 root      20   0       0      0      0 S   0.0   0.0   0:02.65 ksoftirqd/0
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_par_gp_kthread_worker/0
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_gp_kthread_worker
+     18 root      rt   0       0      0      0 S   0.0   0.0   0:00.15 migration/0
+     19 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+     21 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+     22 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/1
+     23 root      rt   0       0      0      0 S   0.0   0.0   0:00.25 migration/1
+     24 root      20   0       0      0      0 S   0.0   0.0   0:02.62 ksoftirqd/1
+     26 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0H-events_highpri
+     27 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs
+     28 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-inet_frag_wq
+     29 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_rude_kthread
+     30 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_trace_kthread
+     31 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kauditd
+     32 root      20   0       0      0      0 S   0.0   0.0   0:00.00 khungtaskd
+     34 root      20   0       0      0      0 S   0.0   0.0   0:00.00 oom_reaper
+     35 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-writeback
+     36 root      20   0       0      0      0 S   0.0   0.0   0:00.25 kcompactd0
+     38 root      25   5       0      0      0 S   0.0   0.0   0:00.00 ksmd
+     39 root      39  19       0      0      0 S   0.0   0.0   0:00.00 khugepaged
+ubuntu@ip-172-31-0-31:~/manideep$ top
+top - 09:08:51 up  2:01, 18 users,  load average: 0.87, 1.02, 1.06
+Tasks: 181 total,   2 running, 168 sleeping,  11 stopped,   0 zombie
+%Cpu(s): 34.1 us,  5.7 sy,  0.0 ni, 55.4 id,  0.0 wa,  0.0 hi,  0.2 si,  4.7 st
+MiB Mem :   7818.2 total,   6470.9 free,    746.4 used,    854.4 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   7071.8 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 288073 ubuntu    20   0   47764  32736  11672 R  14.0   0.4   0:00.42 /snap/aws-cli/2011/bin/aws --region us-east-2 eks get-token --cluster-name dbscluste+
+ 288046 ubuntu    20   0 1286660  47432  35428 S   7.6   0.6   0:00.23 /snap/kubectl/3748/kubectl get pods -n akshaya
+     15 root      20   0       0      0      0 I   0.3   0.0   0:17.82 [rcu_sched]
+   2098 ubuntu    20   0   20360  11636   9484 S   0.3   0.1   0:29.86 /usr/lib/systemd/systemd --user
+ 287241 ubuntu    20   0    9392   5872   3620 R   0.3   0.1   0:00.07 top
+      1 root      20   0   22756  13972   9564 S   0.0   0.2   0:05.89 /sbin/init
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [kthreadd]
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [pool_workqueue_release]
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-rcu_gp]
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-sync_wq]
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-kvfree_rcu_reclaim]
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-slub_flushwq]
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-netns]
+     11 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/0:0H-events_highpri]
+     13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-mm_percpu_wq]
+     14 root      20   0       0      0      0 S   0.0   0.0   0:02.76 [ksoftirqd/0]
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [rcu_exp_par_gp_kthread_worker/0]
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [rcu_exp_gp_kthread_worker]
+     18 root      rt   0       0      0      0 S   0.0   0.0   0:00.16 [migration/0]
+     19 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 [idle_inject/0]
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [cpuhp/0]
+     21 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [cpuhp/1]
+     22 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 [idle_inject/1]
+     23 root      rt   0       0      0      0 S   0.0   0.0   0:00.26 [migration/1]
+     24 root      20   0       0      0      0 S   0.0   0.0   0:02.73 [ksoftirqd/1]
+     26 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/1:0H-events_highpri]
+     27 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [kdevtmpfs]
+     28 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-inet_frag_wq]
+     29 root      20   0       0      0      0 I   0.0   0.0   0:00.00 [rcu_tasks_rude_kthread]
+     30 root      20   0       0      0      0 I   0.0   0.0   0:00.00 [rcu_tasks_trace_kthread]
+     31 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [kauditd]
+     32 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [khungtaskd]
+     34 root      20   0       0      0      0 S   0.0   0.0   0:00.00 [oom_reaper]
+     35 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 [kworker/R-writeback]
+     36 root      20   0       0      0      0 S   0.0   0.0   0:00.26 [kcompactd0]
+     38 root      25   5       0      0      0 S   0.0   0.0   0:00.00 [ksmd]
+     39 root      39  19       0      0      0 S   0.0   0.0   0:00.00 [khugepaged]
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get deploy -n manideepns
+No resources found in manideepns namespace.
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE
+dbs1   1/1     Running   0          25m
+dbs2   1/1     Running   0          25m
+p1     1/1     Running   0          28m
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl delete pod p1 -n manideepns
+pod "p1" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+
+NAME   READY   STATUS    RESTARTS   AGE
+dbs1   1/1     Running   0          26m
+dbs2   1/1     Running   0          26m
+ubuntu@ip-172-31-0-31:~/manideep$
+ubuntu@ip-172-31-0-31:~/manideep$
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE
+dbs1   1/1     Running   0          26m
+dbs2   1/1     Running   0          26m
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl delete pod dbs2 -n manideepns
+pod "dbs2" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE
+dbs1   1/1     Running   0          26m
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get deploy -n manideepns
+No resources found in manideepns namespace.
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 56
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:58 ./
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 09:19 ../
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:44 .p1.yaml.swp
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   457 Mar 11 08:54 dbs1.json
+-rw-rw-r--  1 ubuntu ubuntu   227 Mar 11 08:54 dbs1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   348 Mar 11 08:58 dbs3.yaml
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   330 Mar 11 08:51 p1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 06:07 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ cat dbs1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: dbs1
+  name: dbs1
+  namespace: manideepns
+spec:
+  containers:
+  - image: httpd
+    name: dbs1
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+ubuntu@ip-172-31-0-31:~/manideep$ cat dbs3.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dbs3
+  name: dbs3
+  namespace: manideepns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbs3
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dbs3
+    spec:
+      containers:
+      - image: ngnix
+        name: ngnix
+        resources: {}
+status: {}
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 56
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:58 ./
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 09:19 ../
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:44 .p1.yaml.swp
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   457 Mar 11 08:54 dbs1.json
+-rw-rw-r--  1 ubuntu ubuntu   227 Mar 11 08:54 dbs1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   348 Mar 11 08:58 dbs3.yaml
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   330 Mar 11 08:51 p1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 06:07 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ cat p1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: manideepns
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f p1.yaml
+pod/p1 created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get deploy -n manideepns
+No resources found in manideepns namespace.
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE
+dbs1   1/1     Running   0          29m
+p1     1/1     Running   0          27s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get deploy -n manideepns
+No resources found in manideepns namespace.
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl expose deploy/dbs1 --name=nodePortService --type=NodePort --port=80 --target-port=80 -n manideepns
+Error from server (NotFound): deployments.apps "dbs1" not found
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 56
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 08:58 ./
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 09:19 ../
+-rw-------  1 ubuntu ubuntu 12288 Mar 11 08:44 .p1.yaml.swp
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   457 Mar 11 08:54 dbs1.json
+-rw-rw-r--  1 ubuntu ubuntu   227 Mar 11 08:54 dbs1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   348 Mar 11 08:58 dbs3.yaml
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   330 Mar 11 08:51 p1.yaml
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 06:07 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment grafana --image=grafana/grafana -n manideepns
+deployment.apps/grafana created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl expose deployment/grafana --name=grafanas1 --type=NodePort --port=80 --target-port=3000 -n manideepns
+service/grafanas1 exposed
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get svc -n manideepns
+NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+grafanas1   NodePort   10.100.134.138   <none>        80:30625/TCP   13s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get svc -n manideepns
+NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+grafanas1   NodePort   10.100.134.138   <none>        80:30625/TCP   20s
+ubuntu@ip-172-31-0-31:~/manideep$ top
+top - 09:52:03 up  2:44, 15 users,  load average: 0.92, 0.72, 0.87
+Tasks: 169 total,   2 running, 156 sleeping,  11 stopped,   0 zombie
+%Cpu(s): 34.7 us,  5.5 sy,  0.0 ni, 55.6 id,  0.0 wa,  0.0 hi,  0.0 si,  4.2 st
+MiB Mem :   7818.2 total,   6445.8 free,    765.7 used,    860.7 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   7052.5 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 384810 ubuntu    20   0   68532  47720  16112 R  20.3   0.6   0:00.61 aws
+ 384782 ubuntu    20   0 1286916  48716  36208 S   8.0   0.6   0:00.24 kubectl
+   2098 ubuntu    20   0   20360  11636   9484 S   0.7   0.1   0:39.24 systemd
+     15 root      20   0       0      0      0 I   0.3   0.0   0:24.17 rcu_sched
+    121 root      19  -1   91528  42600  41264 S   0.3   0.5   0:06.73 systemd-journal
+   2295 ubuntu    20   0    9432   5264   4772 S   0.3   0.1   0:15.26 dbus-daemon
+ 361146 ubuntu    20   0    9392   5872   3620 R   0.3   0.1   0:01.43 top
+ 381708 root      20   0       0      0      0 I   0.3   0.0   0:00.04 kworker/0:1-events
+      1 root      20   0   22756  13972   9564 S   0.0   0.2   0:06.91 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_workqueue_release
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-rcu_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-sync_wq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kvfree_rcu_reclaim
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-slub_flushwq
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-netns
+     11 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+     13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-mm_percpu_wq
+     14 root      20   0       0      0      0 S   0.0   0.0   0:03.64 ksoftirqd/0
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_par_gp_kthread_worker/0
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_gp_kthread_worker
+     18 root      rt   0       0      0      0 S   0.0   0.0   0:00.22 migration/0
+     19 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+     21 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+     22 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/1
+     23 root      rt   0       0      0      0 S   0.0   0.0   0:00.32 migration/1
+     24 root      20   0       0      0      0 S   0.0   0.0   0:03.61 ksoftirqd/1
+     26 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0H-events_highpri
+     27 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs
+     28 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-inet_frag_wq
+     29 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_rude_kthread
+     30 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_trace_kthread
+     31 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kauditd
+     32 root      20   0       0      0      0 S   0.0   0.0   0:00.00 khungtaskd
+     34 root      20   0       0      0      0 S   0.0   0.0   0:00.00 oom_reaper
+     35 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-writeback
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get svc -n manideepns
+NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+grafanas1   NodePort   10.100.134.138   <none>        80:30625/TCP   23m
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl delete svc grafanas1 -n manideepns
+service "grafanas1" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get svc -n manideepns
+No resources found in manideepns namespace.
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get all
+NAME     READY   STATUS    RESTARTS   AGE
+pod/p1   1/1     Running   0          152m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   3h2m
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment pavbhaji --image=kharatramesh/vadapavimages:pavbhaji --replicas=2 -n manideepns
+deployment.apps/pavbhaji created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment biryani --image=kharatramesh/vadapavimages:biryani --replicas=2 -n manideepns
+deployment.apps/biryani created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment vadapav  --image=kharatramesh/vadapavimages:vadapav --replicas=2 -n manideepns
+deployment.apps/vadapav created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME                        READY   STATUS              RESTARTS   AGE
+biryani-58cb5c9898-pqrbx    1/1     Running             0          112s
+biryani-58cb5c9898-qnc7h    1/1     Running             0          112s
+grafana-54b95847f9-wq6tr    1/1     Running             0          30m
+p1                          1/1     Running             0          34m
+pavbhaji-5fdb9dfd94-8d4k8   1/1     Running             0          2m23s
+pavbhaji-5fdb9dfd94-nqjlz   1/1     Running             0          2m23s
+vadapav-9f648f9f6-blc9f     0/1     ContainerCreating   0          23s
+vadapav-9f648f9f6-ccm4p     0/1     ContainerCreating   0          23s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME                        READY   STATUS    RESTARTS   AGE
+biryani-58cb5c9898-pqrbx    1/1     Running   0          2m
+biryani-58cb5c9898-qnc7h    1/1     Running   0          2m
+grafana-54b95847f9-wq6tr    1/1     Running   0          31m
+p1                          1/1     Running   0          34m
+pavbhaji-5fdb9dfd94-8d4k8   1/1     Running   0          2m31s
+pavbhaji-5fdb9dfd94-nqjlz   1/1     Running   0          2m31s
+vadapav-9f648f9f6-blc9f     1/1     Running   0          31s
+vadapav-9f648f9f6-ccm4p     1/1     Running   0          31s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME                        READY   STATUS    RESTARTS   AGE
+biryani-58cb5c9898-pqrbx    1/1     Running   0          2m4s
+biryani-58cb5c9898-qnc7h    1/1     Running   0          2m4s
+grafana-54b95847f9-wq6tr    1/1     Running   0          31m
+p1                          1/1     Running   0          34m
+pavbhaji-5fdb9dfd94-8d4k8   1/1     Running   0          2m35s
+pavbhaji-5fdb9dfd94-nqjlz   1/1     Running   0          2m35s
+vadapav-9f648f9f6-blc9f     1/1     Running   0          35s
+vadapav-9f648f9f6-ccm4p     1/1     Running   0          35s
+ubuntu@ip-172-31-0-31:~/manideep$
+kubectl expose deployment/pavbhaji --name=pavbhaji --type=ClusterIP --port=80 --target-port=80 -n manideepns
+service/pavbhaji exposed
+
+ubuntu@ip-172-31-0-31:~/manideep$
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl expose deployment/pavbhaji --name=pavbhaji --type=ClusterIP --port=80 --target-port=80 -n manideepnskubectl get service -n manideepns
+error: there is no need to specify a resource type as a separate argument when passing arguments in resource/name form (e.g. 'kubectl get resource/<resource_name>' instead of 'kubectl get resource resource/<resource_name>'
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get service -n manideepns
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+pavbhaji   ClusterIP   10.100.185.141   <none>        80/TCP    39s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl expose deployment/biryani --name=biryani --type=ClusterIP --port=80 --target-port=80 -n manideepns
+service/biryani exposed
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl expose deployment/vadapav --name=vadapav --type=ClusterIP --port=80 --target-port=80 -n manideepns
+service/vadapav exposed
+ubuntu@ip-172-31-0-31:~/manideep$ top
+top - 10:32:26 up  3:25, 15 users,  load average: 1.11, 0.67, 0.63
+Tasks: 156 total,   1 running, 155 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 47.7 us,  6.8 sy,  0.0 ni, 43.9 id,  0.0 wa,  0.0 hi,  0.0 si,  1.7 st
+MiB Mem :   7818.2 total,   6562.1 free,    646.4 used,    864.0 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   7171.8 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 root      20   0       0      0      0 I   0.3   0.0   0:28.13 rcu_sched
+   2098 ubuntu    20   0   20360  11636   9484 S   0.3   0.1   0:45.06 systemd
+ 440175 root      20   0       0      0      0 I   0.3   0.0   0:00.06 kworker/1:0-events
+ 440948 ubuntu    20   0    6208   5448   3692 S   0.3   0.1   0:00.04 bash
+      1 root      20   0   22756  13972   9564 S   0.0   0.2   0:07.57 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_workqueue_release
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-rcu_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-sync_wq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kvfree_rcu_reclaim
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-slub_flushwq
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-netns
+     11 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+     13 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-mm_percpu_wq
+     14 root      20   0       0      0      0 S   0.0   0.0   0:04.28 ksoftirqd/0
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_par_gp_kthread_worker/0
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_exp_gp_kthread_worker
+     18 root      rt   0       0      0      0 S   0.0   0.0   0:00.26 migration/0
+     19 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+     21 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+     22 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/1
+     23 root      rt   0       0      0      0 S   0.0   0.0   0:00.36 migration/1
+     24 root      20   0       0      0      0 S   0.0   0.0   0:04.14 ksoftirqd/1
+     26 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0H-events_highpri
+     27 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs
+     28 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-inet_frag_wq
+     29 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_rude_kthread
+     30 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_trace_kthread
+     31 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kauditd
+     32 root      20   0       0      0      0 S   0.0   0.0   0:00.00 khungtaskd
+     34 root      20   0       0      0      0 S   0.0   0.0   0:00.00 oom_reaper
+     35 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-writeback
+     36 root      20   0       0      0      0 S   0.0   0.0   0:00.47 kcompactd0
+     38 root      25   5       0      0      0 S   0.0   0.0   0:00.00 ksmd
+     39 root      39  19       0      0      0 S   0.0   0.0   0:00.00 khugepaged
+     40 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/R-kblockd
+ubuntu@ip-172-31-0-31:~/manideep$ vi ingressrules.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ cat > ingressrules.yaml
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+
+metadata:
+
+  name: app1
+
+spec:
+
+  ingressClassName: nginx
+
+  rules:
+
+  - host: www.vadapav_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: vadapav  # Points to your frontend/vadapav service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.pavbhaji_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: pavbhaji # Points to your backend/pavbhaji service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.biryani_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix  # Corrected from 'biryani' to 'Prefix'
+
+        backend:
+
+          service:
+
+            name: biryani-svc
+
+            port:
+
+              number: 80
+
+^[:wq
+^Z
+[1]+  Stopped                 cat > ingressrules.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ cat > ingressrules.yaml
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+
+metadata:
+
+  name: app1
+
+spec:
+
+  ingressClassName: nginx
+
+  rules:
+
+  - host: www.vadapav_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: vadapav  # Points to your frontend/vadapav service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.pavbhaji_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: pavbhaji # Points to your backend/pavbhaji service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.biryani_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix  # Corrected from 'biryani' to 'Prefix'
+
+        backend:
+
+          service:
+
+            name: biryani-svc
+
+            port:
+
+              number: 80
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ cat ingressrules.yaml
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+
+metadata:
+
+  name: app1
+
+spec:
+
+  ingressClassName: nginx
+
+  rules:
+
+  - host: www.vadapav_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: vadapav  # Points to your frontend/vadapav service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.pavbhaji_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix
+
+        backend:
+
+          service:
+
+            name: pavbhaji # Points to your backend/pavbhaji service
+
+            port:
+
+              number: 80
+
+
+
+  - host: www.biryani_manideep.com
+
+    http:
+
+      paths:
+
+      - path: "/"
+
+        pathType: Prefix  # Corrected from 'biryani' to 'Prefix'
+
+        backend:
+
+          service:
+
+            name: biryani-svc
+
+            port:
+
+              number: 80
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ cat > ingressrules.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1
+  namespace: manideepns
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.vadapav_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: vadapav
+            port:
+              number: 80
+
+  - host: www.pavbhaji_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: pavbhaji
+            port:
+              number: 80
+
+  - host: www.biryani_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: biryani-svc
+            port:
+              number: 80
+
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ vi ingressrules.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f ingressrules.yaml -n manideepns
+The Ingress "app1" is invalid:
+* spec.rules[0].host: Invalid value: "www.vadapav_manideep.com": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+* spec.rules[1].host: Invalid value: "www.pavbhaji_manideep.com": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+* spec.rules[2].host: Invalid value: "www.biryani_manideep.com": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+ubuntu@ip-172-31-0-31:~/manideep$ vi ingressrules.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f ingressrules.yaml -n manideepns
+ingress.networking.k8s.io/app1 created
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get ingress -n manideepns
+NAME   CLASS   HOSTS                                                                      ADDRESS                                                                         PORTS   AGE
+app1   nginx   www.vadapavmanideep.com,www.pavbhajimanideep.com,www.biryanimanideep.com   k8s-ingressn-ingressn-d96981aa04-0679d2aa27dd462f.elb.us-east-2.amazonaws.com   80      4m34s
+ubuntu@ip-172-31-0-31:~/manideep$ top
+Tasks: 176 total,   5 running, 170 sleeping,   1 stopped,   0 zombie
+%Cpu(s):  93.6/6.4   100[||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||]
+MiB Mem :   7818.2 total,   6415.6 free,    782.3 used,    875.2 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   7035.9 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+ 556904 ubuntu    20   0  166.0m  74.8m  17.4m R  50.0   1.0   0:01.82 /snap/aws-cli/2011/bin/aws --region us-east-2 eks get-token --cluster-name dbscluste+
+ 556997 ubuntu    20   0  158.4m  66.2m  16.6m R  50.0   0.8   0:01.37 /snap/aws-cli/2011/bin/aws --region us-east-2 eks get-token --cluster-name dbscluste+
+ 557036 ubuntu    20   0   74.6m  53.4m  16.1m R  50.0   0.7   0:01.08 /snap/aws-cli/2011/bin/aws --region us-east-2 eks get-token --cluster-name dbscluste+
+ 557119 ubuntu    20   0   59.9m  40.7m  15.1m R  50.0   0.5   0:00.82 /snap/aws-cli/2011/bin/aws --region us-east-2 eks get-token --cluster-name dbscluste+
+      1 root      20   0   22.2m  13.6m   9.3m S   0.0   0.2   0:08.84 /sbin/init
+      2 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [kthreadd]
+      3 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [pool_workqueue_release]
+      4 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-rcu_gp]
+      5 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-sync_wq]
+      6 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-kvfree_rcu_reclaim]
+      7 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-slub_flushwq]
+      8 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-netns]
+     11 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/0:0H-events_highpri]
+     13 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-mm_percpu_wq]
+     14 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:05.60 [ksoftirqd/0]
+     15 root      20   0    0.0m   0.0m   0.0m I   0.0   0.0   0:35.28 [rcu_sched]
+     16 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [rcu_exp_par_gp_kthread_worker/0]
+     17 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [rcu_exp_gp_kthread_worker]
+     18 root      rt   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.33 [migration/0]
+     19 root     -51   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [idle_inject/0]
+     20 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [cpuhp/0]
+     21 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [cpuhp/1]
+     22 root     -51   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [idle_inject/1]
+     23 root      rt   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.43 [migration/1]
+     24 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:05.28 [ksoftirqd/1]
+     26 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/1:0H-events_highpri]
+     27 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [kdevtmpfs]
+     28 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-inet_frag_wq]
+     29 root      20   0    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [rcu_tasks_rude_kthread]
+     30 root      20   0    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [rcu_tasks_trace_kthread]
+     31 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [kauditd]
+     32 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [khungtaskd]
+     34 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [oom_reaper]
+     35 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-writeback]
+     36 root      20   0    0.0m   0.0m   0.0m S   0.0   0.0   0:00.56 [kcompactd0]
+     38 root      25   5    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [ksmd]
+     39 root      39  19    0.0m   0.0m   0.0m S   0.0   0.0   0:00.00 [khugepaged]
+     40 root       0 -20    0.0m   0.0m   0.0m I   0.0   0.0   0:00.00 [kworker/R-kblockd]
+ubuntu@ip-172-31-0-31:~/manideep$ ^C
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get all -n manideepns
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/biryani-58cb5c9898-pqrbx    1/1     Running   0          75m
+pod/biryani-58cb5c9898-qnc7h    1/1     Running   0          75m
+pod/grafana-54b95847f9-wq6tr    1/1     Running   0          105m
+pod/p1                          1/1     Running   0          108m
+pod/pavbhaji-5fdb9dfd94-srz75   1/1     Running   0          33m
+pod/pavbhaji-5fdb9dfd94-tdxmq   1/1     Running   0          33m
+pod/vadapav-9f648f9f6-blc9f     1/1     Running   0          74m
+pod/vadapav-9f648f9f6-ccm4p     1/1     Running   0          74m
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/biryani    ClusterIP   10.100.198.200   <none>        80/TCP    69m
+service/pavbhaji   ClusterIP   10.100.185.141   <none>        80/TCP    71m
+service/vadapav    ClusterIP   10.100.75.84     <none>        80/TCP    69m
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/biryani    2/2     2            2           75m
+deployment.apps/grafana    1/1     1            1           105m
+deployment.apps/pavbhaji   2/2     2            2           76m
+deployment.apps/vadapav    2/2     2            2           74m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/biryani-58cb5c9898    2         2         2       75m
+replicaset.apps/grafana-54b95847f9    1         1         1       105m
+replicaset.apps/pavbhaji-5fdb9dfd94   2         2         2       76m
+replicaset.apps/vadapav-9f648f9f6     2         2         2       74m
+ubuntu@ip-172-31-0-31:~/manideep$ touch sts.com
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment db1 --image=mysql -n manideepns --dry-run=client -o yaml > sts.com
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl create deployment db1 --image=mysql -n manideepns --dry-run=client -o yaml > sts.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ cat sts.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db1
+  name: db1
+  namespace: manideepns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: db1
+    spec:
+      containers:
+      - image: mysql
+        name: mysql
+        resources: {}
+status: {}
+ubuntu@ip-172-31-0-31:~/manideep$ cat > sts.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db1
+  namespace: trainer
+  labels:
+    app: db1
+spec:
+  # StatefulSets require a headless service to control the domain of the pods
+  serviceName: "db1-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db1
+  template:
+    metadata:
+      labels:
+        app: db1
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123"
+        ports:
+        - containerPort: 3306
+          name: mysql
+
+ubuntu@ip-172-31-0-31:~/manideep$ vi sts.yaml
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl apply -f sts.yaml -n manideepns
+statefulset.apps/db1 created
+ubuntu@ip-172-31-0-31:~/manideep$ kunectl get pods -n manideepns
+Command 'kunectl' not found, did you mean:
+  command 'kubectl' from snap kubectl (1.34.5)
+See 'snap info <snapname>' for additional versions.
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME                       READY   STATUS              RESTARTS   AGE
+db1-0                      1/1     Running             0          27s
+grafana-54b95847f9-n4rjf   0/1     ContainerCreating   0          6s
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get pods -n manideepns
+NAME                       READY   STATUS    RESTARTS   AGE
+db1-0                      1/1     Running   0          37s
+grafana-54b95847f9-n4rjf   1/1     Running   0          16s
+ubuntu@ip-172-31-0-31:~/manideep$

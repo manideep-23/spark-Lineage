@@ -1,0 +1,98 @@
+
+https://github.com/kharatramesh/bosch
+
+kubectl create deployment pavbhaji --image=kharatramesh/vadapavimages:pavbhaji --replicas=2 -n manideepns
+deployment.apps/pavbhaji 
+ kubectl create deployment biryani --image=kharatramesh/vadapavimages:biryani --replicas=2 -n manideepns
+deployment.apps/biryani 
+ kubectl create deployment vadapav  --image=kharatramesh/vadapavimages:vadapav --replicas=2 -n manideepns
+deployment.apps/vadapav 
+
+
+
+
+
+kubectl expose deployment/pavbhaji --name=pavbhaji --type=ClusterIP --port=80 --target-port=80 -n manideepns
+kubectl expose deployment/biryani --name=biryani --type=ClusterIP --port=80 --target-port=80 -n manideepns
+kubectl expose deployment/vadapav --name=vadapav --type=ClusterIP --port=80 --target-port=80 -n manideepns
+
+
+
+my yaml
+
+ubuntu@ip-172-31-0-31:~/manideep$ cat > ingressrules.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1
+  namespace: manideepns
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.vadapav_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: vadapav
+            port:
+              number: 80
+
+  - host: www.pavbhaji_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: pavbhaji
+            port:
+              number: 80
+
+  - host: www.biryani_manideep.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: biryani-svc
+            port:
+              number: 80
+
+
+
+ubuntu@ip-172-31-0-31:~/manideep$ kubectl get all -n manideepns
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/biryani-58cb5c9898-pqrbx    1/1     Running   0          75m
+pod/biryani-58cb5c9898-qnc7h    1/1     Running   0          75m
+pod/grafana-54b95847f9-wq6tr    1/1     Running   0          105m
+pod/p1                          1/1     Running   0          108m
+pod/pavbhaji-5fdb9dfd94-srz75   1/1     Running   0          33m
+pod/pavbhaji-5fdb9dfd94-tdxmq   1/1     Running   0          33m
+pod/vadapav-9f648f9f6-blc9f     1/1     Running   0          74m
+pod/vadapav-9f648f9f6-ccm4p     1/1     Running   0          74m
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/biryani    ClusterIP   10.100.198.200   <none>        80/TCP    69m
+service/pavbhaji   ClusterIP   10.100.185.141   <none>        80/TCP    71m
+service/vadapav    ClusterIP   10.100.75.84     <none>        80/TCP    69m
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/biryani    2/2     2            2           75m
+deployment.apps/grafana    1/1     1            1           105m
+deployment.apps/pavbhaji   2/2     2            2           76m
+deployment.apps/vadapav    2/2     2            2           74m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/biryani-58cb5c9898    2         2         2       75m
+replicaset.apps/grafana-54b95847f9    1         1         1       105m
+replicaset.apps/pavbhaji-5fdb9dfd94   2         2         2       76m
+replicaset.apps/vadapav-9f648f9f6     2         2         2       74m
+ubuntu@ip-172-31-0-31:~/manideep$
+
+

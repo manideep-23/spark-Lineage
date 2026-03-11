@@ -1,0 +1,1139 @@
+Using username "ubuntu".
+Authenticating with public key "imported-openssh-key"
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.14.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Mar 11 04:29:37 UTC 2026
+
+  System load:  0.34              Temperature:           -273.1 C
+  Usage of /:   8.4% of 28.02GB   Processes:             142
+  Memory usage: 35%               Users logged in:       1
+  Swap usage:   0%                IPv4 address for ens5: 172.31.0.31
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+106 updates can be applied immediately.
+55 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Mar 11 04:29:38 2026 from 14.142.71.242
+ubuntu@ip-172-31-0-31:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-0-31:~$ docker info
+Client: Docker Engine - Community
+ Version:    29.3.0
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.31.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.1.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 29.3.0
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: dea7da592f5d1d2b7755e3a161be07f43fad8f75
+ runc version: v1.3.4-0-gd6d73eb8
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.14.0-1018-aws
+ Operating System: Ubuntu 24.04.3 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 914.2MiB
+ Name: ip-172-31-0-31
+ ID: 2c6d6069-9835-4461-bed7-20ce76c4178b
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+
+ubuntu@ip-172-31-0-31:~$ sudo docker pull httpd
+Using default tag: latest
+latest: Pulling from library/httpd
+47a6bbb8d6d8: Pull complete
+4f4fb700ef54: Pull complete
+206356c42440: Pull complete
+242bb693a1d3: Pull complete
+7079f4501db6: Pull complete
+80414dfb8f15: Pull complete
+44fabeaa234c: Download complete
+ea9cd2f459bd: Download complete
+Digest: sha256:96b1e8f69ee3adde956e819f7a7c3e706edef7ad88a26a491734015e5c595333
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+ubuntu@ip-172-31-0-31:~$ sudo dockers image
+sudo: dockers: command not found
+ubuntu@ip-172-31-0-31:~$ sudo docker images
+                                                            i Info →   U  In Use
+IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
+httpd:latest   96b1e8f69ee3        177MB         47.6MB
+ubuntu@ip-172-31-0-31:~$ sudo docker search openjdk
+NAME                      DESCRIPTION                                     STARS                                                    OFFICIAL
+openjdk                   Pre-release / non-production builds of OpenJ…   4109                                                     [OK]
+circleci/openjdk          CircleCI images for OpenJDK                     12                                                   
+cimg/openjdk              The CircleCI OpenJDK (Java) Docker Convenien…   8                                                    
+rootpublic/openjdk                                                        0                                                    
+jenkins4eval/openjdk      More information on https://github.com/jenki…   0                                                    
+jenkins/openjdk            Docker Images based on various AdoptOpenJDK…   1                                                    
+vulhub/openjdk            This image is deprecating.                      1                                                    
+clarinpl/openjdk                                                          0                                                    
+openeuler/openjdk                                                         0                                                    
+cfje/openjdk              OpenJDK Builder Image                           0                                                    
+amd64/openjdk             Pre-release / non-production builds of OpenJ…   18                                                   
+arm64v8/openjdk           Pre-release / non-production builds of OpenJ…   75                                                   
+winamd64/openjdk          Pre-release / non-production builds of OpenJ…   90                                                   
+arm32v7/openjdk           Pre-release / non-production builds of OpenJ…   18                                                   
+springcloud/openjdk       OpenJDK Docker image                            4                                                    
+shipilev/openjdk          OpenJDK development builds                      14                                                   
+ccitest/openjdk           CircleCI test images for OpenJDK                1                                                    
+colstrom/openjdk                                                          0                                                    
+i386/openjdk              Pre-release / non-production builds of OpenJ…   1                                                    
+titicacadev/openjdk       Triple Official OpenJDK Repository              0                                                    
+splatform/openjdk                                                         0                                                    
+s390x/openjdk             Pre-release / non-production builds of OpenJ…   0                                                    
+trollin/openjdk                                                           0                                                    
+ppc64le/openjdk           Pre-release / non-production builds of OpenJ…   0                                                    
+philipssoftware/openjdk   https://github.com/philips-software/docker-o…   1                                                    
+ubuntu@ip-172-31-0-31:~$ sudo docker search openjdk
+NAME                      DESCRIPTION                                     STARS     OFFICIAL
+openjdk                   Pre-release / non-production builds of OpenJ…   4109      [OK]
+circleci/openjdk          CircleCI images for OpenJDK                     12
+cimg/openjdk              The CircleCI OpenJDK (Java) Docker Convenien…   8
+rootpublic/openjdk                                                        0
+jenkins4eval/openjdk      More information on https://github.com/jenki…   0
+jenkins/openjdk            Docker Images based on various AdoptOpenJDK…   1
+vulhub/openjdk            This image is deprecating.                      1
+clarinpl/openjdk                                                          0
+openeuler/openjdk                                                         0
+cfje/openjdk              OpenJDK Builder Image                           0
+amd64/openjdk             Pre-release / non-production builds of OpenJ…   18
+arm64v8/openjdk           Pre-release / non-production builds of OpenJ…   75
+winamd64/openjdk          Pre-release / non-production builds of OpenJ…   90
+springcloud/openjdk       OpenJDK Docker image                            4
+arm32v7/openjdk           Pre-release / non-production builds of OpenJ…   18
+shipilev/openjdk          OpenJDK development builds                      14
+ccitest/openjdk           CircleCI test images for OpenJDK                1
+colstrom/openjdk                                                          0
+i386/openjdk              Pre-release / non-production builds of OpenJ…   1
+titicacadev/openjdk       Triple Official OpenJDK Repository              0
+splatform/openjdk                                                         0
+s390x/openjdk             Pre-release / non-production builds of OpenJ…   0
+ppc64le/openjdk           Pre-release / non-production builds of OpenJ…   0
+trollin/openjdk                                                           0
+philipssoftware/openjdk   https://github.com/philips-software/docker-o…   1
+ubuntu@ip-172-31-0-31:~$ sudo docker pull openjdk
+Using default tag: latest
+Error response from daemon: failed to resolve reference "docker.io/library/openjdk:latest": docker.io/library/openjdk:latest: not found
+ubuntu@ip-172-31-0-31:~$ sudo docker search mariadb
+NAME                                         DESCRIPTION                                     STARS     OFFICIAL
+mariadb                                      MariaDB Server is a high performing open sou…   6080      [OK]
+mariadb/maxscale                             MariaDB MaxScale - The world's most advanced…   38
+mariadb/columnstore                          MariaDB ColumnStore Engine for Analytics        4
+mariadb/mariadb-operator-enterprise          For use with MariaDB Operator https://github…   0
+mariadb/mariadb-prometheus-exporter-ubi      For use with MariaDB Operator https://github…   1
+mariadb/maxscale-prometheus-exporter-ubi                                                     0
+bitnami/mariadb                              Bitnami Secure Image for mariadb                208
+mariadb/mariadb-enterprise-operator-bundle                                                   0
+mariadb/mariadb-enterprise-operator-index                                                    0
+circleci/mariadb                             CircleCI images for MariaDB                     5
+bitnamicharts/mariadb                        Bitnami Helm chart for MariaDB                  0
+mariadb/cloud-native-runner                  Cloud Native Runner is used in the internal …   0
+linuxserver/mariadb                          A Mariadb container, brought to you by Linux…   412
+mariadb/developers                           Docker demo images to support sample code an…   0
+cimg/mariadb                                                                                 0
+elestio/mariadb                              Mariadb, verified and packaged by Elestio       2
+chainguard/mariadb                           Build, ship and run secure software with Cha…   0
+docksal/mariadb                              MariaDB service images for Docksal - https:/…   0
+uselagoon/mariadb                                                                            0
+islandora/mariadb                            Open source relational database.                0
+corpusops/mariadb                            https://github.com/corpusops/docker-images/     0
+alpinelinux/mariadb                                                                          0
+alpine/mariadb                                                                               4
+openeuler/mariadb                                                                            0
+webhippie/mariadb                            Docker image for MariaDB                        24
+ubuntu@ip-172-31-0-31:~$ sudo docker pull mariadb
+Using default tag: latest
+latest: Pulling from library/mariadb
+2d6698bfc424: Pull complete
+ab1b7f466f6e: Pull complete
+35c935f50ac0: Pull complete
+15bc38add3f6: Pull complete
+01d7766a2e4a: Pull complete
+899bae0d402d: Pull complete
+633047087aaf: Pull complete
+a4dd30b1fad7: Pull complete
+bd30ebc16046: Download complete
+80ccd992d3a2: Download complete
+Digest: sha256:b1cb255a9939d28a1856815f0de6046c20c28c21b92a9f2696bc782b247a47ee
+Status: Downloaded newer image for mariadb:latest
+docker.io/library/mariadb:latest
+ubuntu@ip-172-31-0-31:~$ sudo docker images
+                                                                                                           i Info →   U  In Use
+IMAGE            ID             DISK USAGE   CONTENT SIZE   EXTRA
+httpd:latest     96b1e8f69ee3        177MB         47.6MB
+mariadb:latest   b1cb255a9939        467MB          111MB
+mysql:latest     e5dc14f6e01c       1.27GB          283MB
+ubuntu@ip-172-31-0-31:~$ sudo docker run -d --name=manideep httpd:latest
+10933d59d7a43214bd6032d17f30565f8d7078a7d3db4322914a21104d18694e
+ubuntu@ip-172-31-0-31:~$ echo "above is container creation"
+above is container creation
+ubuntu@ip-172-31-0-31:~$ sudo docker ps
+CONTAINER ID   IMAGE          COMMAND              CREATED          STATUS          PORTS     NAMES
+c7baea2f9c0a   httpd:latest   "httpd-foreground"   12 seconds ago   Up 10 seconds   80/tcp    saikiran
+d137cdf7c827   httpd:latest   "httpd-foreground"   22 seconds ago   Up 21 seconds   80/tcp    akshaya
+14c123b66aa2   httpd:latest   "httpd-foreground"   24 seconds ago   Up 23 seconds   80/tcp    rajasekharc
+99f0d167ff16   httpd          "httpd-foreground"   26 seconds ago   Up 25 seconds   80/tcp    pravalika
+10933d59d7a4   httpd:latest   "httpd-foreground"   27 seconds ago   Up 26 seconds   80/tcp    manideep
+3101843b3fa6   httpd:latest   "httpd-foreground"   27 seconds ago   Up 26 seconds   80/tcp    shakeelmundi
+2db03adefd99   httpd:latest   "httpd-foreground"   28 seconds ago   Up 27 seconds   80/tcp    abinay
+755a285570d1   httpd:latest   "httpd-foreground"   30 seconds ago   Up 29 seconds   80/tcp    tejaswik
+39e20e59514a   httpd:latest   "httpd-foreground"   34 seconds ago   Up 33 seconds   80/tcp    dbs_test
+4edc783d0fee   httpd          "httpd-foreground"   34 seconds ago   Up 33 seconds   80/tcp    pushpak
+ubuntu@ip-172-31-0-31:~$ sudo docker inspect manideepmadhu | grep -i ipaddr
+error: no such object: manideepmadhu
+ubuntu@ip-172-31-0-31:~$ sudo docker inspect manideep | grep -i ipaddr
+                    "IPAddress": "172.17.0.7",
+ubuntu@ip-172-31-0-31:~$ echo "above is to get IP address of container named manideep"
+above is to get IP address of container named manideep
+ubuntu@ip-172-31-0-31:~$ curl "172.17.0.7"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>It works! Apache httpd</title>
+</head>
+<body>
+<p>It works!</p>
+</body>
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT    MEM %     NET I/O         BLOCK I/O         PIDS
+10933d59d7a4   manideep   0.01%     6.68MiB / 914.2MiB   0.73%     2.74kB / 899B   49.2kB / 12.3kB   82
+
+^Z
+[1]+  Stopped                 sudo docker stats manideep
+ubuntu@ip-172-31-0-31:~$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+ubuntu@ip-172-31-0-31:~$ sudo docker stop manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ echo "above is to stop docker"
+above is to stop docker
+ubuntu@ip-172-31-0-31:~$ sudo docker start manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ sudo docker ps -a | grep -i manideep
+10933d59d7a4   httpd:latest   "httpd-foreground"   9 minutes ago   Up 15 seconds               80/tcp    manideep
+ubuntu@ip-172-31-0-31:~$ echo "re created container again"
+re created container again
+ubuntu@ip-172-31-0-31:~$ sudo docker rm -f manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ echo "above is to delete containers"
+above is to delete containers
+ubuntu@ip-172-31-0-31:~$     history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+ubuntu@ip-172-31-0-31:~$    sudo docker run -d --name=ramesh1 -p 9090:80 kharatramesh/vadapavimages:vadapav
+d76d04bf7c87e698b6650076f8cc8333a858bd39690badf08d42d85a339b551e
+ubuntu@ip-172-31-0-31:~$ docker rm -f ramesh1
+ramesh1
+ubuntu@ip-172-31-0-31:~$ mkdir manideep
+ubuntu@ip-172-31-0-31:~$ cd manideep/
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+ubuntu@ip-172-31-0-31:~/manideep$ cd .
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+ubuntu@ip-172-31-0-31:~/manideep$ cd ..
+ubuntu@ip-172-31-0-31:~$ ls
+abinay  akshaya  goutham  manideep  raja  saikiran  tejaswi  vivek
+ubuntu@ip-172-31-0-31:~$ cd manideep/
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 8
+drwxrwxr-x  2 ubuntu ubuntu 4096 Mar 11 05:03 ./
+drwxr-x--- 14 ubuntu ubuntu 4096 Mar 11 05:04 ../
+ubuntu@ip-172-31-0-31:~/manideep$  touch web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+web.df
+ubuntu@ip-172-31-0-31:~/manideep$ vi web.df
+ubuntu@ip-172-31-0-31:~/manideep$ cat web.df
+FROM ubuntu
+MAINTAINER "vadapav@gmail.com"
+LABELS "peoject"="dbs"
+LABELS "env"="dev"
+
+WORKDIR /dosa/
+WORKDIR samosa/idli
+
+RUN apt update
+RUN apt install apache2 -y
+
+COPY index.html /var/www/html
+
+ADD 1.txt /dosa
+ADD 1.tar /dosa/samosa
+
+
+EXPOSE 80
+
+ENV a=10 # creates during container creation
+ARG b=20 # creates during
+
+CMD ["apace2ctl","-d","FOREGROUND"] # we can also use cmd or entry point
+
+ubuntu@ip-172-31-0-31:~/manideep$ vi index.html
+ubuntu@ip-172-31-0-31:~/manideep$ cat index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Web Page</title>
+</head>
+<body>
+
+    <h1>Hello World!</h1>
+    <p>This is my first paragraph on my first webpage.</p>
+
+</body>
+</html>
+
+ubuntu@ip-172-31-0-31:~/manideep$ touch 1.txt
+ubuntu@ip-172-31-0-31:~/manideep$ tar -cvf 1.tar *
+1.txt
+index.html
+web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+1.tar  1.txt  index.html  web.df
+ubuntu@ip-172-31-0-31:~/manideep$ docker build . -f web.df -t manideep/dbs:webserver1.0
+[+] Building 0.2s (1/1) FINISHED                                                                                docker:default
+ => [internal] load build definition from web.df                                                                          0.1s
+ => => transferring dockerfile: 430B                                                                                      0.0s
+web.df:20
+--------------------
+  18 |     EXPOSE 80
+  19 |
+  20 | >>> ENV a=10 # creates during container creation
+  21 |     ARG b=20 # creates during
+  22 |
+--------------------
+ERROR: failed to build: failed to solve: Syntax error - can't find = in "#". Must be of the form: name=value
+ubuntu@ip-172-31-0-31:~/manideep$ vi web.df
+ubuntu@ip-172-31-0-31:~/manideep$ docker build . -f web.df -t manideep/dbs:webserver1.0
+[+] Building 42.5s (13/13) FINISHED                                                                             docker:default
+ => [internal] load build definition from web.df                                                                          0.0s
+ => => transferring dockerfile: 338B                                                                                      0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                          0.2s
+ => [internal] load .dockerignore                                                                                         0.0s
+ => => transferring context: 2B                                                                                           0.0s
+ => [1/8] FROM docker.io/library/ubuntu:latest@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9    0.3s
+ => => resolve docker.io/library/ubuntu:latest@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9    0.2s
+ => [2/8] WORKDIR /dosa                                                                                                   0.1s
+ => [internal] load build context                                                                                         0.0s
+ => => transferring context: 10.64kB                                                                                      0.0s
+ => [3/8] WORKDIR samosa/idli                                                                                             0.5s
+ => [4/8] RUN apt update                                                                                                  7.3s
+ => [5/8] RUN apt install apache2 -y                                                                                     15.7s
+ => [6/8] COPY index.html /var/www/html                                                                                   0.4s
+ => [7/8] ADD 1.txt /dosa                                                                                                 0.1s
+ => [8/8] ADD 1.tar /dosa/samosa                                                                                          0.1s
+ => exporting to image                                                                                                   17.6s
+ => => exporting layers                                                                                                   9.6s
+ => => exporting manifest sha256:2bdf983281b7c8cc7cc05d421ef9e49bc3e029ff733bf7f28da2249242464401                         0.0s
+ => => exporting config sha256:c3f2ba4aefb1cd0054c3d83a080e192512a9006220aed24e46691efd1d211463                           0.0s
+ => => exporting attestation manifest sha256:153254e697603ebba9f078484e363546fb60aadc89dfa47cf0556bdb82aef6cf             0.1s
+ => => exporting manifest list sha256:99b4f0f9bd1293d11ceab8c5c17d2717fd2ce53610ea488234d10b7b6a45b2df                    0.0s
+ => => naming to docker.io/manideep/dbs:webserver1.0                                                                      0.0s
+ => => unpacking to docker.io/manideep/dbs:webserver1.0                                                                   7.7s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+ubuntu@ip-172-31-0-31:~/manideep$ cat web.df
+FROM ubuntu
+MAINTAINER "vadapav@gmail.com"
+LABEL "peoject"="dbs"
+LABEL "env"="dev"
+
+WORKDIR /dosa/
+WORKDIR samosa/idli
+
+RUN apt update
+RUN apt install apache2 -y
+
+COPY index.html /var/www/html
+
+ADD 1.txt /dosa
+ADD 1.tar /dosa/samosa
+
+
+EXPOSE 80
+
+ENV a=10
+ARG b=20
+
+CMD ["apace2ctl","-d","FOREGROUND"]
+
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 ./
+drwxr-x--- 18 ubuntu ubuntu  4096 Mar 11 05:32 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   303 Mar 11 05:30 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 ./
+drwxr-x--- 18 ubuntu ubuntu  4096 Mar 11 05:33 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   303 Mar 11 05:30 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 ./
+drwxr-x--- 18 ubuntu ubuntu  4096 Mar 11 05:33 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   303 Mar 11 05:30 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+1.tar  1.txt  index.html  web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:30 ./
+drwxr-x--- 18 ubuntu ubuntu  4096 Mar 11 05:33 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   303 Mar 11 05:30 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+1.tar  1.txt  index.html  web.df
+ubuntu@ip-172-31-0-31:~/manideep$ docker image ls
+                                                                                                           i Info →   U  In Use
+IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
+abinay/dbs:webserver1.0              b60379c3ff61        370MB          106MB
+akshaya/dbs:webserver1.0             b1b6988f4f2e        370MB          106MB
+goutham/dbs:webserver1.0             6b0f3b7a460a        370MB          106MB    U
+httpd:latest                         96b1e8f69ee3        177MB         47.6MB
+kharatramesh/vadapavimages:vadapav   c70ff5601c41        548MB          155MB    U
+manideep/dbs:webserver1.0            99b4f0f9bd12        370MB          106MB
+mariadb:latest                       b1cb255a9939        467MB          111MB
+mysql:latest                         e5dc14f6e01c       1.27GB          283MB
+python:latest                        7aea6827c878       1.63GB          432MB
+rajasekharc/dbs:webserver1.0         8ba0b0c82370        370MB          106MB
+saikiran/dbs:webserver1.0            1fbde4e29c45        370MB          106MB
+shakeelmundi/dsb:webserver1.0        eceb30711646        370MB          106MB
+virat/dbs:webserver1.0               6cf9157d1186        370MB          106MB
+vivek/dbs:webserver1.0               936eacfb0bd1        370MB          106MB
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+   63  ls
+   64  docker image ls
+   65  history
+ubuntu@ip-172-31-0-31:~/manideep$  sudo docker run -d --name=manideep-dbs manideep/dbs:webserver1.0
+2502add806f95fd847b2c33eef220a1a7799b7ae297e661078f30145775dd66f
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: exec: "apace2ctl": executable file not found in $PATH
+
+Run 'docker run --help' for more information
+ubuntu@ip-172-31-0-31:~/manideep$ docker rm -f manideep/dbs:webserver1.0
+Error response from daemon: No such container: manideep/dbs:webserver1.0
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+1.tar  1.txt  index.html  web.df
+ubuntu@ip-172-31-0-31:~/manideep$ vi web.df
+ubuntu@ip-172-31-0-31:~/manideep$ docker build . -f web.df -t manideep/dbs:webserver2.0
+[+] Building 0.7s (13/13) FINISHED                                                                              docker:default
+ => [internal] load build definition from web.df                                                                          0.0s
+ => => transferring dockerfile: 339B                                                                                      0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                          0.3s
+ => [internal] load .dockerignore                                                                                         0.0s
+ => => transferring context: 2B                                                                                           0.0s
+ => [1/8] FROM docker.io/library/ubuntu:latest@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9    0.0s
+ => => resolve docker.io/library/ubuntu:latest@sha256:d1e2e92c075e5ca139d51a140fff46f84315c0fdce203eab2807c7e495eff4f9    0.0s
+ => [internal] load build context                                                                                         0.0s
+ => => transferring context: 79B                                                                                          0.0s
+ => CACHED [2/8] WORKDIR /dosa/                                                                                           0.0s
+ => CACHED [3/8] WORKDIR samosa/idli                                                                                      0.0s
+ => CACHED [4/8] RUN apt update                                                                                           0.0s
+ => CACHED [5/8] RUN apt install apache2 -y                                                                               0.0s
+ => CACHED [6/8] COPY index.html /var/www/html                                                                            0.0s
+ => CACHED [7/8] ADD 1.txt /dosa                                                                                          0.0s
+ => CACHED [8/8] ADD 1.tar /dosa/samosa                                                                                   0.0s
+ => exporting to image                                                                                                    0.1s
+ => => exporting layers                                                                                                   0.0s
+ => => exporting manifest sha256:5ec2220e6dfd4f2a5a5ea16c4d9115eeb23facbb74504e306ae936f8212aec55                         0.0s
+ => => exporting config sha256:d5dd84773ffb803ba1e859f5b15534f2c111cdf5a3eee41148357d07e71c592e                           0.0s
+ => => exporting attestation manifest sha256:ec41372101effbf9144c038ff61e2ceedd3b3f142b616a680d2b98b06fc11a27             0.0s
+ => => exporting manifest list sha256:d52144bcacfc195425848179904ee0e3835eafceaf92a7568c27402b9f9e1d89                    0.0s
+ => => naming to docker.io/manideep/dbs:webserver2.0                                                                      0.0s
+ => => unpacking to docker.io/manideep/dbs:webserver2.0                                                                   0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+ubuntu@ip-172-31-0-31:~/manideep$ lsll
+l
+lsll: command not found
+ubuntu@ip-172-31-0-31:~/manideep$ lll
+Command 'lll' not found, did you mean:
+  command 'dll' from deb brickos (0.9.0.dfsg-12.2)
+  command 'llc' from deb llvm (1:17.0-58~exp1)
+  command 'llt' from deb storebackup (3.2.1-2)
+  command 'lli' from deb llvm-runtime (1:17.0-58~exp1)
+  command 'lld' from deb lld (1:17.0-58~exp1)
+Try: sudo apt install <deb name>
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:39 ./
+drwxr-x--- 18 ubuntu ubuntu  4096 Mar 11 05:39 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 05:39 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+   63  ls
+   64  docker image ls
+   65  history
+   66  docker rm -f manideep/dbs:webserver1.0
+   67  ls
+   68  vi web.df
+   69  docker build . -f web.df -t manideep/dbs:webserver2.0
+   70  lsll
+   71  lll
+   72  ll
+   73  history
+ubuntu@ip-172-31-0-31:~/manideep$  sudo docker run -d --name=manideep-dbs  manideep/dbs:webserver2.0
+docker: Error response from daemon: Conflict. The container name "/manideep-dbs" is already in use by container "2502add806f95fd847b2c33eef220a1a7799b7ae297e661078f30145775dd66f". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+ubuntu@ip-172-31-0-31:~/manideep$  sudo docker run -d --name=manideep-madhu manideep/dbs:webserver2.0
+945dffa8f20110d2943bf80d7e27535dce6a46866f59dba3687fb85b80254d23
+ubuntu@ip-172-31-0-31:~/manideep$ sudo docker start manideep-madhu
+manideep-madhu
+ubuntu@ip-172-31-0-31:~/manideep$ sudo docker ps -a | grep -i manideep-madhu
+945dffa8f201   manideep/dbs:webserver2.0            "apache2ctl -d FOREG…"   49 seconds ago       Exited (1) 20 seconds ago                                             manideep-madhu
+ubuntu@ip-172-31-0-31:~/manideep$ sudo docker ps -a | grep -i manideep-madhu
+945dffa8f201   manideep/dbs:webserver2.0            "apache2ctl -d FOREG…"   57 seconds ago       Exited (1) 27 seconds ago                                             manideep-madhu
+ubuntu@ip-172-31-0-31:~/manideep$ sudo docker ps -a | grep -i manideep-madhu
+945dffa8f201   manideep/dbs:webserver2.0            "apache2ctl -d FOREG…"   23 minutes ago      Exited (1) 23 minutes ago                                                      manideep-madhu
+ubuntu@ip-172-31-0-31:~/manideep$ cat web.df
+FROM ubuntu
+MAINTAINER "vadapav@gmail.com"
+LABEL "project"="dbs"
+LABEL "env"="dev"
+
+WORKDIR /dosa/
+WORKDIR samosa/idli
+
+RUN apt update
+RUN apt install apache2 -y
+
+COPY index.html /var/www/html
+
+ADD 1.txt /dosa
+ADD 1.tar /dosa/samosa
+
+
+EXPOSE 80
+
+ENV a=10
+ARG b=20
+
+CMD ["apache2ctl","-d","FOREGROUND"]
+
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+   63  ls
+   64  docker image ls
+   65  history
+   66  docker rm -f manideep/dbs:webserver1.0
+   67  ls
+   68  vi web.df
+   69  docker build . -f web.df -t manideep/dbs:webserver2.0
+   70  lsll
+   71  lll
+   72  ll
+   73  history
+   74  sudo docker start manideep-madhu
+   75  sudo docker ps -a | grep -i manideep-madhu
+   76  cat web.df
+   77  history
+ubuntu@ip-172-31-0-31:~/manideep$ history | grep log
+   22  echo "how to logoin into container"
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   78  history | grep log
+ubuntu@ip-172-31-0-31:~/manideep$  sudo docker logs manideep-madhu
+apache2: Could not open configuration file FOREGROUND/apache2.conf: No such file or directory
+apache2: Could not open configuration file FOREGROUND/apache2.conf: No such file or directory
+ubuntu@ip-172-31-0-31:~/manideep$ cat web.df
+FROM ubuntu
+MAINTAINER "vadapav@gmail.com"
+LABEL "project"="dbs"
+LABEL "env"="dev"
+
+WORKDIR /dosa/
+WORKDIR samosa/idli
+
+RUN apt update
+RUN apt install apache2 -y
+
+COPY index.html /var/www/html
+
+ADD 1.txt /dosa
+ADD 1.tar /dosa/samosa
+
+
+EXPOSE 80
+
+ENV a=10
+ARG b=20
+
+CMD ["apache2ctl","-d","FOREGROUND"]
+
+ubuntu@ip-172-31-0-31:~/manideep$ ls
+1.tar  1.txt  index.html  web.df
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 05:39 ./
+drwxr-x--- 19 ubuntu ubuntu  4096 Mar 11 06:06 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 05:39 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ vi web.df
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+   63  ls
+   64  docker image ls
+   65  history
+   66  docker rm -f manideep/dbs:webserver1.0
+   67  ls
+   68  vi web.df
+   69  docker build . -f web.df -t manideep/dbs:webserver2.0
+   70  lsll
+   71  lll
+   72  ll
+   73  history
+   74  sudo docker start manideep-madhu
+   75  sudo docker ps -a | grep -i manideep-madhu
+   76  cat web.df
+   77  history
+   78  history | grep log
+   79  cat web.df
+   80  ls
+   81  ll
+   82  vi web.df
+   83  history
+ubuntu@ip-172-31-0-31:~/manideep$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+   37  docker rm -f ramesh1
+   38  mkdir manideep
+   39  cd manideep/
+   40  ls
+   41  cd .
+   42  ls
+   43  cd ..
+   44  ls
+   45  cd manideep/
+   46  ll
+   47  ls
+   48  vi web.df
+   49  cat web.df
+   50  vi index.html
+   51  cat index.html
+   52  touch 1.txt
+   53  tar -cvf 1.tar *
+   54  ls
+   55  docker build . -f web.df -t manideep/dbs:webserver1.0
+   56  vi web.df
+   57  docker build . -f web.df -t manideep/dbs:webserver1.0
+   58  cat web.df
+   59  ll
+   60  ls
+   61  ll
+   62  history
+   63  ls
+   64  docker image ls
+   65  history
+   66  docker rm -f manideep/dbs:webserver1.0
+   67  ls
+   68  vi web.df
+   69  docker build . -f web.df -t manideep/dbs:webserver2.0
+   70  lsll
+   71  lll
+   72  ll
+   73  history
+   74  sudo docker start manideep-madhu
+   75  sudo docker ps -a | grep -i manideep-madhu
+   76  cat web.df
+   77  history
+   78  history | grep log
+   79  cat web.df
+   80  ls
+   81  ll
+   82  vi web.df
+   83  history
+ubuntu@ip-172-31-0-31:~/manideep$  docker image ls
+                                                                                                           i Info →   U  In Use
+IMAGE                                ID             DISK USAGE   CONTENT SIZE   EXTRA
+abinay/dbs:webserver1.0              b60379c3ff61        370MB          106MB    U
+akshaya/dbs:webserver1.0             0d37ab51d235        370MB          106MB    U
+goutham/dbs:webserver1.0             bf43783520f7        370MB          106MB    U
+httpd:latest                         96b1e8f69ee3        177MB         47.6MB
+kharatramesh/vadapavimages:vadapav   c70ff5601c41        548MB          155MB    U
+manideep/dbs:webserver1.0            99b4f0f9bd12        370MB          106MB    U
+manideep/dbs:webserver2.0            d52144bcacfc        370MB          106MB    U
+mariadb:latest                       b1cb255a9939        467MB          111MB
+mysql:latest                         e5dc14f6e01c       1.27GB          283MB
+pravalika/dbs:webserver1.0           d7c784f2ac18        370MB          106MB    U
+python:latest                        7aea6827c878       1.63GB          432MB
+rajasekharc/dbs:webserver1.0         db11c3712277        370MB          106MB
+rajasekharc/dbs:webserver1.1         679b29ef75e2        370MB          106MB
+sahithi/dbs:webserver1.0             8da90fc8fd67        370MB          106MB    U
+saikiran/dbs:webserver1.0            1fbde4e29c45        370MB          106MB    U
+shakeelmundi/dsb:webserver1.0        eceb30711646        370MB          106MB
+tejaswi/dbs:webserver1.0             48af3762ab14        370MB          106MB    U
+virat/dbs:webserver1.0               779374be6761        370MB          106MB    U
+vivek/dbs:webserver1.0               f139432cc082        370MB          106MB    U
+ubuntu@ip-172-31-0-31:~/manideep$

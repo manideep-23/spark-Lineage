@@ -1,0 +1,334 @@
+Using username "ubuntu".
+Authenticating with public key "imported-openssh-key"
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.14.0-1018-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Mar 11 04:29:37 UTC 2026
+
+  System load:  0.34              Temperature:           -273.1 C
+  Usage of /:   8.4% of 28.02GB   Processes:             142
+  Memory usage: 35%               Users logged in:       1
+  Swap usage:   0%                IPv4 address for ens5: 172.31.0.31
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+106 updates can be applied immediately.
+55 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Mar 11 04:29:38 2026 from 14.142.71.242
+ubuntu@ip-172-31-0-31:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ubuntu@ip-172-31-0-31:~$ docker info
+Client: Docker Engine - Community
+ Version:    29.3.0
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.31.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.1.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 29.3.0
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: dea7da592f5d1d2b7755e3a161be07f43fad8f75
+ runc version: v1.3.4-0-gd6d73eb8
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.14.0-1018-aws
+ Operating System: Ubuntu 24.04.3 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 914.2MiB
+ Name: ip-172-31-0-31
+ ID: 2c6d6069-9835-4461-bed7-20ce76c4178b
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+
+ubuntu@ip-172-31-0-31:~$ sudo docker pull httpd
+Using default tag: latest
+latest: Pulling from library/httpd
+47a6bbb8d6d8: Pull complete
+4f4fb700ef54: Pull complete
+206356c42440: Pull complete
+242bb693a1d3: Pull complete
+7079f4501db6: Pull complete
+80414dfb8f15: Pull complete
+44fabeaa234c: Download complete
+ea9cd2f459bd: Download complete
+Digest: sha256:96b1e8f69ee3adde956e819f7a7c3e706edef7ad88a26a491734015e5c595333
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+ubuntu@ip-172-31-0-31:~$ sudo dockers image
+sudo: dockers: command not found
+ubuntu@ip-172-31-0-31:~$ sudo docker images
+                                                            i Info →   U  In Use
+IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
+httpd:latest   96b1e8f69ee3        177MB         47.6MB
+ubuntu@ip-172-31-0-31:~$ sudo docker search openjdk
+NAME                      DESCRIPTION                                     STARS                                                    OFFICIAL
+openjdk                   Pre-release / non-production builds of OpenJ…   4109                                                     [OK]
+circleci/openjdk          CircleCI images for OpenJDK                     12                                                   
+cimg/openjdk              The CircleCI OpenJDK (Java) Docker Convenien…   8                                                    
+rootpublic/openjdk                                                        0                                                    
+jenkins4eval/openjdk      More information on https://github.com/jenki…   0                                                    
+jenkins/openjdk            Docker Images based on various AdoptOpenJDK…   1                                                    
+vulhub/openjdk            This image is deprecating.                      1                                                    
+clarinpl/openjdk                                                          0                                                    
+openeuler/openjdk                                                         0                                                    
+cfje/openjdk              OpenJDK Builder Image                           0                                                    
+amd64/openjdk             Pre-release / non-production builds of OpenJ…   18                                                   
+arm64v8/openjdk           Pre-release / non-production builds of OpenJ…   75                                                   
+winamd64/openjdk          Pre-release / non-production builds of OpenJ…   90                                                   
+arm32v7/openjdk           Pre-release / non-production builds of OpenJ…   18                                                   
+springcloud/openjdk       OpenJDK Docker image                            4                                                    
+shipilev/openjdk          OpenJDK development builds                      14                                                   
+ccitest/openjdk           CircleCI test images for OpenJDK                1                                                    
+colstrom/openjdk                                                          0                                                    
+i386/openjdk              Pre-release / non-production builds of OpenJ…   1                                                    
+titicacadev/openjdk       Triple Official OpenJDK Repository              0                                                    
+splatform/openjdk                                                         0                                                    
+s390x/openjdk             Pre-release / non-production builds of OpenJ…   0                                                    
+trollin/openjdk                                                           0                                                    
+ppc64le/openjdk           Pre-release / non-production builds of OpenJ…   0                                                    
+philipssoftware/openjdk   https://github.com/philips-software/docker-o…   1                                                    
+ubuntu@ip-172-31-0-31:~$ sudo docker search openjdk
+NAME                      DESCRIPTION                                     STARS     OFFICIAL
+openjdk                   Pre-release / non-production builds of OpenJ…   4109      [OK]
+circleci/openjdk          CircleCI images for OpenJDK                     12
+cimg/openjdk              The CircleCI OpenJDK (Java) Docker Convenien…   8
+rootpublic/openjdk                                                        0
+jenkins4eval/openjdk      More information on https://github.com/jenki…   0
+jenkins/openjdk            Docker Images based on various AdoptOpenJDK…   1
+vulhub/openjdk            This image is deprecating.                      1
+clarinpl/openjdk                                                          0
+openeuler/openjdk                                                         0
+cfje/openjdk              OpenJDK Builder Image                           0
+amd64/openjdk             Pre-release / non-production builds of OpenJ…   18
+arm64v8/openjdk           Pre-release / non-production builds of OpenJ…   75
+winamd64/openjdk          Pre-release / non-production builds of OpenJ…   90
+springcloud/openjdk       OpenJDK Docker image                            4
+arm32v7/openjdk           Pre-release / non-production builds of OpenJ…   18
+shipilev/openjdk          OpenJDK development builds                      14
+ccitest/openjdk           CircleCI test images for OpenJDK                1
+colstrom/openjdk                                                          0
+i386/openjdk              Pre-release / non-production builds of OpenJ…   1
+titicacadev/openjdk       Triple Official OpenJDK Repository              0
+splatform/openjdk                                                         0
+s390x/openjdk             Pre-release / non-production builds of OpenJ…   0
+ppc64le/openjdk           Pre-release / non-production builds of OpenJ…   0
+trollin/openjdk                                                           0
+philipssoftware/openjdk   https://github.com/philips-software/docker-o…   1
+ubuntu@ip-172-31-0-31:~$ sudo docker pull openjdk
+Using default tag: latest
+Error response from daemon: failed to resolve reference "docker.io/library/openjdk:latest": docker.io/library/openjdk:latest: not found
+ubuntu@ip-172-31-0-31:~$ sudo docker search mariadb
+NAME                                         DESCRIPTION                                     STARS     OFFICIAL
+mariadb                                      MariaDB Server is a high performing open sou…   6080      [OK]
+mariadb/maxscale                             MariaDB MaxScale - The world's most advanced…   38
+mariadb/columnstore                          MariaDB ColumnStore Engine for Analytics        4
+mariadb/mariadb-operator-enterprise          For use with MariaDB Operator https://github…   0
+mariadb/mariadb-prometheus-exporter-ubi      For use with MariaDB Operator https://github…   1
+mariadb/maxscale-prometheus-exporter-ubi                                                     0
+bitnami/mariadb                              Bitnami Secure Image for mariadb                208
+mariadb/mariadb-enterprise-operator-bundle                                                   0
+mariadb/mariadb-enterprise-operator-index                                                    0
+circleci/mariadb                             CircleCI images for MariaDB                     5
+bitnamicharts/mariadb                        Bitnami Helm chart for MariaDB                  0
+mariadb/cloud-native-runner                  Cloud Native Runner is used in the internal …   0
+linuxserver/mariadb                          A Mariadb container, brought to you by Linux…   412
+mariadb/developers                           Docker demo images to support sample code an…   0
+cimg/mariadb                                                                                 0
+elestio/mariadb                              Mariadb, verified and packaged by Elestio       2
+chainguard/mariadb                           Build, ship and run secure software with Cha…   0
+docksal/mariadb                              MariaDB service images for Docksal - https:/…   0
+uselagoon/mariadb                                                                            0
+islandora/mariadb                            Open source relational database.                0
+corpusops/mariadb                            https://github.com/corpusops/docker-images/     0
+alpinelinux/mariadb                                                                          0
+alpine/mariadb                                                                               4
+openeuler/mariadb                                                                            0
+webhippie/mariadb                            Docker image for MariaDB                        24
+ubuntu@ip-172-31-0-31:~$ sudo docker pull mariadb
+Using default tag: latest
+latest: Pulling from library/mariadb
+2d6698bfc424: Pull complete
+ab1b7f466f6e: Pull complete
+35c935f50ac0: Pull complete
+15bc38add3f6: Pull complete
+01d7766a2e4a: Pull complete
+899bae0d402d: Pull complete
+633047087aaf: Pull complete
+a4dd30b1fad7: Pull complete
+bd30ebc16046: Download complete
+80ccd992d3a2: Download complete
+Digest: sha256:b1cb255a9939d28a1856815f0de6046c20c28c21b92a9f2696bc782b247a47ee
+Status: Downloaded newer image for mariadb:latest
+docker.io/library/mariadb:latest
+ubuntu@ip-172-31-0-31:~$ sudo docker images
+                                                                                                           i Info →   U  In Use
+IMAGE            ID             DISK USAGE   CONTENT SIZE   EXTRA
+httpd:latest     96b1e8f69ee3        177MB         47.6MB
+mariadb:latest   b1cb255a9939        467MB          111MB
+mysql:latest     e5dc14f6e01c       1.27GB          283MB
+ubuntu@ip-172-31-0-31:~$ sudo docker run -d --name=manideep httpd:latest
+10933d59d7a43214bd6032d17f30565f8d7078a7d3db4322914a21104d18694e
+ubuntu@ip-172-31-0-31:~$ echo "above is container creation"
+above is container creation
+ubuntu@ip-172-31-0-31:~$ sudo docker ps
+CONTAINER ID   IMAGE          COMMAND              CREATED          STATUS          PORTS     NAMES
+c7baea2f9c0a   httpd:latest   "httpd-foreground"   12 seconds ago   Up 10 seconds   80/tcp    saikiran
+d137cdf7c827   httpd:latest   "httpd-foreground"   22 seconds ago   Up 21 seconds   80/tcp    akshaya
+14c123b66aa2   httpd:latest   "httpd-foreground"   24 seconds ago   Up 23 seconds   80/tcp    rajasekharc
+99f0d167ff16   httpd          "httpd-foreground"   26 seconds ago   Up 25 seconds   80/tcp    pravalika
+10933d59d7a4   httpd:latest   "httpd-foreground"   27 seconds ago   Up 26 seconds   80/tcp    manideep
+3101843b3fa6   httpd:latest   "httpd-foreground"   27 seconds ago   Up 26 seconds   80/tcp    shakeelmundi
+2db03adefd99   httpd:latest   "httpd-foreground"   28 seconds ago   Up 27 seconds   80/tcp    abinay
+755a285570d1   httpd:latest   "httpd-foreground"   30 seconds ago   Up 29 seconds   80/tcp    tejaswik
+39e20e59514a   httpd:latest   "httpd-foreground"   34 seconds ago   Up 33 seconds   80/tcp    dbs_test
+4edc783d0fee   httpd          "httpd-foreground"   34 seconds ago   Up 33 seconds   80/tcp    pushpak
+ubuntu@ip-172-31-0-31:~$ sudo docker inspect manideepmadhu | grep -i ipaddr
+error: no such object: manideepmadhu
+ubuntu@ip-172-31-0-31:~$ sudo docker inspect manideep | grep -i ipaddr
+                    "IPAddress": "172.17.0.7",
+ubuntu@ip-172-31-0-31:~$ echo "above is to get IP address of container named manideep"
+above is to get IP address of container named manideep
+ubuntu@ip-172-31-0-31:~$ curl "172.17.0.7"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>It works! Apache httpd</title>
+</head>
+<body>
+<p>It works!</p>
+</body>
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT    MEM %     NET I/O         BLOCK I/O         PIDS
+10933d59d7a4   manideep   0.01%     6.68MiB / 914.2MiB   0.73%     2.74kB / 899B   49.2kB / 12.3kB   82
+
+^Z
+[1]+  Stopped                 sudo docker stats manideep
+ubuntu@ip-172-31-0-31:~$ history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+ubuntu@ip-172-31-0-31:~$ sudo docker stop manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ echo "above is to stop docker"
+above is to stop docker
+ubuntu@ip-172-31-0-31:~$ sudo docker start manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ sudo docker ps -a | grep -i manideep
+10933d59d7a4   httpd:latest   "httpd-foreground"   9 minutes ago   Up 15 seconds               80/tcp    manideep
+ubuntu@ip-172-31-0-31:~$ echo "re created container again"
+re created container again
+ubuntu@ip-172-31-0-31:~$ sudo docker rm -f manideep
+manideep
+ubuntu@ip-172-31-0-31:~$ echo "above is to delete containers"
+above is to delete containers
+ubuntu@ip-172-31-0-31:~$     history
+    1  clear
+    2  cls
+    3  clear
+    4  docker ps
+    5  docker info
+    6  sudo docker pull httpd
+    7  sudo dockers image
+    8  sudo docker images
+    9  sudo docker search openjdk
+   10  sudo docker pull openjdk
+   11  sudo docker search mariadb
+   12  sudo docker pull mariadb
+   13  sudo docker images
+   14  sudo docker run -d --name=manideep httpd:latest
+   15  echo "above is container creation"
+   16  sudo docker ps
+   17  sudo docker inspect manideepmadhu | grep -i ipaddr
+   18  sudo docker inspect manideep | grep -i ipaddr
+   19  echo "above is to get IP address of container named manideep"
+   20  curl "172.17.0.7"
+   21  echo "above accessing the ip "
+   22  echo "how to logoin into container"
+   23  sudo docker exec -i manideep bash
+   24  sudo docker exec -it manideep bash
+   25  echo "exit command to logout from container"
+   26  sudo docker logs manideep
+   27  sudo dockers stats manideep
+   28  sudo docker stats manideep
+   29  history
+   30  sudo docker stop manideep
+   31  echo "above is to stop docker"
+   32  sudo docker start manideep
+   33  sudo docker ps -a | grep -i manideep
+   34  echo "re created container again"
+   35  sudo docker rm -f manideep
+   36  echo "above is to delete containers"
+ubuntu@ip-172-31-0-31:~$

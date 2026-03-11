@@ -1,0 +1,181 @@
+Using username "ubuntu".
+Authenticating with public key "imported-openssh-key"
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.17.0-1007-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Wed Mar 11 07:17:36 UTC 2026
+
+  System load:  0.14               Temperature:           -273.1 C
+  Usage of /:   34.1% of 28.02GB   Processes:             128
+  Memory usage: 5%                 Users logged in:       1
+  Swap usage:   0%                 IPv4 address for ens5: 172.31.0.31
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+Expanded Security Maintenance for Applications is not enabled.
+
+97 updates can be applied immediately.
+46 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Wed Mar 11 07:18:19 2026 from 14.142.71.242
+ubuntu@ip-172-31-0-31:~$ ls
+abinay   goutham  manideep   pushpak   raja     saikiran      snap     vivek
+akshaya  gsk      pravalika  radhikav  sahithi  shakeelmundi  tejaswi
+ubuntu@ip-172-31-0-31:~$ ls
+abinay   goutham  manideep   pushpak   raja     saikiran      snap     vivek
+akshaya  gsk      pravalika  radhikav  sahithi  shakeelmundi  tejaswi
+ubuntu@ip-172-31-0-31:~$ cd manideep/
+ubuntu@ip-172-31-0-31:~/manideep$ ll
+total 28
+drwxrwxr-x  2 ubuntu ubuntu  4096 Mar 11 06:07 ./
+drwxr-x--- 23 ubuntu ubuntu  4096 Mar 11 07:15 ../
+-rw-rw-r--  1 ubuntu ubuntu 10240 Mar 11 05:28 1.tar
+-rw-rw-r--  1 ubuntu ubuntu     0 Mar 11 05:28 1.txt
+-rw-rw-r--  1 ubuntu ubuntu   298 Mar 11 05:28 index.html
+-rw-rw-r--  1 ubuntu ubuntu   304 Mar 11 06:07 web.df
+ubuntu@ip-172-31-0-31:~/manideep$ cd ..
+ubuntu@ip-172-31-0-31:~$ kubectl create ns manideepns
+namespace/manideepns created
+ubuntu@ip-172-31-0-31:~$ kubectl run p1 --image=httpd -n maideepns
+Error from server (NotFound): namespaces "maideepns" not found
+ubuntu@ip-172-31-0-31:~$ kubectl run p1 --image=httpd -n manideepns
+pod/p1 created
+ubuntu@ip-172-31-0-31:~$ kubectl run p2 --image=nginx -n manideepns
+pod/p2 created
+ubuntu@ip-172-31-0-31:~$ kubectl get pods -o wide -n manideepns
+NAME   READY   STATUS              RESTARTS   AGE   IP             NODE                  NOMINATED NODE   READINESS GATES
+p1     1/1     Running             0          96s   172.31.17.56   i-098f8ea9dc01a7197   <none>           <none>
+p2     0/1     ContainerCreating   0          39s   <none>         i-091690815bef974f8   <none>           <none>
+ubuntu@ip-172-31-0-31:~$ kubectl get pods -o wide -n manideepns
+^[[ANAME   READY   STATUS              RESTARTS   AGE    IP             NODE                  NOMINATED NODE   READINESS GATES
+p1     1/1     Running             0          101s   172.31.17.56   i-098f8ea9dc01a7197   <none>           <none>
+p2     0/1     ContainerCreating   0          44s    <none>         i-091690815bef974f8   <none>           <none>
+ubuntu@ip-172-31-0-31:~$ kubectl run p2 --image=nginx -n manideepns
+Error from server (AlreadyExists): pods "p2" already exists
+ubuntu@ip-172-31-0-31:~$ kubectl get pods -o wide -n manideepns
+NAME   READY   STATUS    RESTARTS   AGE     IP              NODE                  NOMINATED NODE   READINESS GATES
+p1     1/1     Running   0          2m16s   172.31.17.56    i-098f8ea9dc01a7197   <none>           <none>
+p2     1/1     Running   0          79s     172.31.26.112   i-091690815bef974f8   <none>           <none>
+ubuntu@ip-172-31-0-31:~$ kubectl logs p1 -n manideepns
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.31.17.56. Set the 'ServerName' directive globally to suppress this message
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 172.31.17.56. Set the 'ServerName' directive globally to suppress this message
+[Wed Mar 11 07:20:36.665529 2026] [mpm_event:notice] [pid 1:tid 1] AH00489: Apache/2.4.66 (Unix) configured -- resuming normal operations
+[Wed Mar 11 07:20:36.665665 2026] [core:notice] [pid 1:tid 1] AH00094: Command line: 'httpd -D FOREGROUND'
+ubuntu@ip-172-31-0-31:~$ kubectl describe pod p1 -n manideepns
+Name:             p1
+Namespace:        manideepns
+Priority:         0
+Service Account:  default
+Node:             i-098f8ea9dc01a7197/172.31.24.221
+Start Time:       Wed, 11 Mar 2026 07:20:28 +0000
+Labels:           run=p1
+Annotations:      <none>
+Status:           Running
+IP:               172.31.17.56
+IPs:
+  IP:  172.31.17.56
+Containers:
+  p1:
+    Container ID:   containerd://b342cea7a3a62eb6cf5311e62065f6d2bfb62fc00c67ba74073b3c6200d9df01
+    Image:          httpd
+    Image ID:       docker.io/library/httpd@sha256:96b1e8f69ee3adde956e819f7a7c3e706edef7ad88a26a491734015e5c595333
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 11 Mar 2026 07:20:36 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-b8jjz (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-b8jjz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m12s  default-scheduler  Successfully assigned manideepns/p1 to i-098f8ea9dc01a7197
+  Normal  Pulling    3m4s   kubelet            Pulling image "httpd"
+  Normal  Pulled     3m4s   kubelet            Successfully pulled image "httpd" in 227ms (227ms including waiting). Image size: 45242947 bytes.
+  Normal  Created    3m4s   kubelet            Created container: p1
+  Normal  Started    3m4s   kubelet            Started container p1
+ubuntu@ip-172-31-0-31:~$ kubectl delete pod p1 -n manideepns
+pod "p1" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~$ kubectl delete pod p2 -n manideepns
+pod "p2" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~$ kubectl create deployment dbs1 --image=nginx -n manideepns
+deployment.apps/dbs1 created
+ubuntu@ip-172-31-0-31:~$ kubectl get events -n manideepns
+LAST SEEN   TYPE      REASON              OBJECT                       MESSAGE
+66s         Normal    Scheduled           pod/dbs1-654d4845fb-mstbs    Successfully assigned manideepns/dbs1-654d4845fb-mstbs to i-098f8ea9dc01a7197
+60s         Normal    Pulling             pod/dbs1-654d4845fb-mstbs    Pulling image "nginx"
+60s         Normal    Pulled              pod/dbs1-654d4845fb-mstbs    Successfully pulled image "nginx" in 204ms (204ms including waiting). Image size: 62960551 bytes.
+60s         Normal    Created             pod/dbs1-654d4845fb-mstbs    Created container: nginx
+59s         Normal    Started             pod/dbs1-654d4845fb-mstbs    Started container nginx
+66s         Normal    SuccessfulCreate    replicaset/dbs1-654d4845fb   Created pod: dbs1-654d4845fb-mstbs
+66s         Normal    ScalingReplicaSet   deployment/dbs1              Scaled up replica set dbs1-654d4845fb from 0 to 1
+7m53s       Normal    Scheduled           pod/p1                       Successfully assigned manideepns/p1 to i-098f8ea9dc01a7197
+7m45s       Normal    Pulling             pod/p1                       Pulling image "httpd"
+7m45s       Normal    Pulled              pod/p1                       Successfully pulled image "httpd" in 227ms (227ms including waiting). Image size: 45242947 bytes.
+7m45s       Normal    Created             pod/p1                       Created container: p1
+7m45s       Normal    Started             pod/p1                       Started container p1
+2m8s        Normal    Killing             pod/p1                       Stopping container p1
+6m56s       Warning   FailedScheduling    pod/p2                       0/2 nodes are available: 1 Too many pods, 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/2 nodes are available: 1 No preemption victims found for incoming pod, 1 Preemption is not helpful for scheduling.
+6m55s       Normal    Nominated           pod/p2                       Pod should schedule on: nodeclaim/general-purpose-w9579
+6m41s       Warning   FailedScheduling    pod/p2                       0/3 nodes are available: 1 Too many pods, 2 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/3 nodes are available: 1 No preemption victims found for incoming pod, 2 Preemption is not helpful for scheduling.
+6m40s       Warning   FailedScheduling    pod/p2                       0/3 nodes are available: 1 Too many pods, 2 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/3 nodes are available: 1 No preemption victims found for incoming pod, 2 Preemption is not helpful for scheduling.
+6m39s       Normal    Scheduled           pod/p2                       Successfully assigned manideepns/p2 to i-091690815bef974f8
+6m14s       Normal    Pulling             pod/p2                       Pulling image "nginx"
+6m11s       Normal    Pulled              pod/p2                       Successfully pulled image "nginx" in 3.274s (3.274s including waiting). Image size: 62960551 bytes.
+6m10s       Normal    Created             pod/p2                       Created container: p2
+6m10s       Normal    Started             pod/p2                       Started container p2
+92s         Normal    Killing             pod/p2                       Stopping container p2
+ubuntu@ip-172-31-0-31:~$ watch kubectl get pods -n manideepns
+ubuntu@ip-172-31-0-31:~$ dbs1-654d4845fb-mstbs
+dbs1-654d4845fb-mstbs: command not found
+ubuntu@ip-172-31-0-31:~$ kubectl delete pod dbs1-654d4845fb-mstbs -n manideepns
+pod "dbs1-654d4845fb-mstbs" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~$ watch kubectl get pods -n manideepns
+
+[1]+  Stopped                 watch kubectl get pods -n manideepns
+ubuntu@ip-172-31-0-31:~$ kubectl scale deployment/dbs1 --replicas=2 -n manideepns
+deployment.apps/dbs1 scaled
+ubuntu@ip-172-31-0-31:~$ watch kubectl get pods -n manideepns
+
+[2]+  Stopped                 watch kubectl get pods -n manideepns
+ubuntu@ip-172-31-0-31:~$ kubectl delete deploy dbs1 -n manideepns
+deployment.apps "dbs1" deleted from manideepns namespace
+ubuntu@ip-172-31-0-31:~$
+
+
+Node port service
+load balancer
+
+
+kubectl create deployment pavbhaji --image=kharatramesh/vadapavimages:pavbhaji --replicas=2 -n manideepns
