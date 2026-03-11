@@ -1,0 +1,37 @@
+ubuntu@ip-172-31-6-241:~$ cd ramesh
+ubuntu@ip-172-31-6-241:~/ramesh$ touch sts.com
+ubuntu@ip-172-31-6-241:~/ramesh$ kubectl create deployment db1 --image=mysql -n trainer --dry-run=client -o yaml > sts.com
+ubuntu@ip-172-31-6-241:~/ramesh$ kubectl create deployment db1 --image=mysql -n trainer --dry-run=client -o yaml > sts.yaml
+ubuntu@ip-172-31-6-241:~/ramesh$ vi sts.yaml
+ubuntu@ip-172-31-6-241:~/ramesh$ cat sts.
+cat: sts.: No such file or directory
+ubuntu@ip-172-31-6-241:~/ramesh$ cat sts.yaml
+
+
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: db1
+  name: db1
+  namespace: trainer
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db1
+
+  template:
+    metadata:
+      labels:
+        app: db1
+
+    spec:
+      containers:
+      - image: mysql
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "123"
