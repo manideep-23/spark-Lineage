@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+  namespace: trainer
+  labels:
+    app: dbs1
+    env: prod
+  annotations:
+    version: v1
+
+spec:
+  containers:
+    - name: c1
+      image: httpd
+      resources:
+        limits:
+          cpu: 20m
+          memory: 20M
+        requests:
+          cpu: 10m
+          memory: 10M
